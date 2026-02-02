@@ -30,7 +30,7 @@ public class Config
 	public static int enchPlateMaxUses;
 	public static boolean chairRedstone;
 	public static int mapUpdateRate;
-	public static boolean checkforupdate;
+
 	public static String additionalDiscs;
 	public static String[] discs;
 	public static String[] witcheryPotions = {"ingredient.brew", "ingredient.clayJar", "ingredient.foulFume", "ingredient.diamondVapour", "ingredient.oilOfVitriol", "ingredient.exhaleOfTheHornedOne", "ingredient.breathOfTheGoddess", "ingredient.hintOfRebirth", "ingredient.whiffOfMagic", "ingredient.reekOfMisfortune", "ingredient.odourOfPurity", "ingredient.tearOfTheGoddess", "ingredient.dropOfLuck", "ingredient.redstoneSoup", "ingredient.flyingOintment", "ingredient.ghostOfTheLight", "ingredient.soulOfTheWorld", "ingredient.spiritOfOtherwhere", "ingredient.infernalAnimus", "ingredient.enderDew", "ingredient.infernalblood", "ingredient.mysticunguent"};
@@ -205,15 +205,10 @@ public class Config
 		enchantmentMultiplyer = bConfig.get(Configuration.CATEGORY_GENERAL, "EnchantmentCostMultiplyer", 10, "This will multiply the cost of copying enchanted books on the typesetting table. Please enter a positive integer value. Default is 10. Setting this to 1 would make the enchatment cost 1/10 the level default cost.").getInt();
 		chairRedstone = bConfig.get(Configuration.CATEGORY_GENERAL, "ChairRedstone", true, "Setting this to false will deactivate the redstone signal output from seats when a player is sitting").getBoolean(true);
 		mapUpdateRate = bConfig.get(Configuration.CATEGORY_GENERAL, "MapUpdateRate", 10, "Default is 1 update per 10 ticks, just like Item Frames. The number indicates how many ticks before an update packet is sent to clients. Lower numbers means more, faster updates.").getInt();
-		checkforupdate = bConfig.get(Configuration.CATEGORY_GENERAL, "CheckForUpdates", true, "Setting this to false will permanently disable update checking").getBoolean(true);
 		
 		//useTextureSheet = bConfig.get(Configuration.CATEGORY_GENERAL, "UseTextureSheets", false, "If this is set to true, various models will use their own dedicated texture sheet, otherwise, models will use textures from vanilla planks. Supports Bookcase, Potion Shelf, Generic Shelf, Tool Rack, Display Case, and Label.").getBoolean(false);
 		defaultBigBookTextScale = bConfig.getInt(Configuration.CATEGORY_GENERAL, "DefaultBigBookTextScale", 0, 0, 7, "This value will set the default text scale of text in the Big Book. Choose a positive integer between 0 and 7. 0 is the smallest scale and 7 is the largest scale.");
-		if (checkforupdate)
-		{
-			bConfig.addCustomCategoryComment("Stored Variables", "These are the variables used by BiblioCraft to track if the player has already recieved an update message for a new version. These should not need to be edited.");
-			lastCheckedversion = bConfig.get("Stored Variables", "lastVersionChecked", VersionCheck.currentversion).getString();
-		}
+
 		
 		renderDistancePainting = bConfig.get(Configuration.CATEGORY_GENERAL, "PaintingRenderDistance", 64.0, "This will adjust the maximium render distance at which paintings can be seen. The default is 64.0 blocks.").getDouble();
 		

@@ -202,10 +202,6 @@ public class BiblioCraft
 	{
 		MinecraftForge.EVENT_BUS.register(new GuiBiblioOverlay(Minecraft.getMinecraft())); 
 		
-		boolean runningCurseClient = new File(Loader.instance().getConfigDir().getParentFile(), ".curseclient").exists();
-		if (!runningCurseClient)
-		{
-			MinecraftForge.EVENT_BUS.register(new VersionCheck());
-		}
+		
 	}
 }
