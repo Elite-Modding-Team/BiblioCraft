@@ -75,7 +75,7 @@ public class RecipeShapelessFramedWood extends ShapelessRecipes
 		for (int i = 0; i < registry.size(); i++)
 		{
 			WoodRegistryEntry entry = registry.get(i);
-			if (entry.hasMatch(stack.getUnlocalizedName()))
+			if (entry.hasMatch(stack.getTranslationKey()))
 			{
 				result = entry;
 				break;

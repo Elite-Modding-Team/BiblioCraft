@@ -862,7 +862,7 @@ public class TileEntityTypeMachine extends BiblioTileEntity implements ITickable
 		{
 			if (counter >= 2)
 			{
-				int power = getWorld().isBlockIndirectlyGettingPowered(getPos());
+				int power = getWorld().getRedstonePowerFromNeighbors(getPos());
 				if (power > redstone)
 				{
 					this.setPlate();

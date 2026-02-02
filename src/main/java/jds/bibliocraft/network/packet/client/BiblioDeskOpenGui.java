@@ -100,7 +100,7 @@ public class BiblioDeskOpenGui implements IMessage {
         if (Loader.isModLoaded("craftguide") && book.toString().contains("craftguide")) {
             signedtest.onItemRightClick(player.getEntityWorld(), player, EnumHand.MAIN_HAND);
         }
-        if (Loader.isModLoaded("botania") && book.getUnlocalizedName().contentEquals("item.lexicon")) {
+        if (Loader.isModLoaded("botania") && book.getTranslationKey().contentEquals("item.lexicon")) {
             // System.out.println(book.getUnlocalizedName());
             // signedtest.onItemRightClick(book, world, player);
             // doesnt work

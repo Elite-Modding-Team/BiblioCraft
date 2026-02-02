@@ -259,7 +259,7 @@ public class BlockCase extends BiblioWoodBlock
 			ItemStack stack = tile.getStackInSlot(0);
 			Item testItem = Item.getItemFromBlock(Blocks.REDSTONE_BLOCK);
 			
-			if (stack != ItemStack.EMPTY && stack.getUnlocalizedName().contains(testItem.getUnlocalizedName()))
+			if (stack != ItemStack.EMPTY && stack.getTranslationKey().contains(testItem.getTranslationKey()))
 			{
 				output = 15;
 			}

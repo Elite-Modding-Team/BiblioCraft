@@ -17,7 +17,7 @@ public class BiblioLightsTab extends CreativeTabs
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ItemStack getIconItem()
+	public ItemStack createIcon()
 	{
 		if (Config.enableLantern)
 		{

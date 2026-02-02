@@ -25,7 +25,7 @@ public class ItemDeathCompass extends Item
 	public ItemDeathCompass()
 	{
 		super();
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxDamage(1);
 		setRegistryName(name);
 	}

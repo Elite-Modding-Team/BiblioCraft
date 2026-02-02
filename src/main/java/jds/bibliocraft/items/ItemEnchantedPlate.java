@@ -22,7 +22,7 @@ public class ItemEnchantedPlate extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setMaxDamage(Config.enchPlateMaxUses);
 		setRegistryName(name);

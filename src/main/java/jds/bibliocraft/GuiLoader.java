@@ -125,7 +125,7 @@ public class GuiLoader implements IGuiHandler
 		if (id == 100)
 		{
 			ItemStack currentItem = player.inventory.getCurrentItem();
-			if (currentItem != null && currentItem.getUnlocalizedName().equals(ItemAtlas.instance.getUnlocalizedName()))
+			if (currentItem != null && currentItem.getTranslationKey().equals(ItemAtlas.instance.getTranslationKey()))
 			{
 				return new ContainerAtlas(player.inventory, world);
 			}
@@ -133,7 +133,7 @@ public class GuiLoader implements IGuiHandler
 		if (id == 101)
 		{
 			ItemStack currentItem = player.inventory.getCurrentItem();
-			if (currentItem != null && currentItem.getUnlocalizedName().equals(ItemSlottedBook.instance.getUnlocalizedName()))
+			if (currentItem != null && currentItem.getTranslationKey().equals(ItemSlottedBook.instance.getTranslationKey()))
 			{
 				return new ContainerSlottedBook(player.inventory);
 			}
@@ -384,7 +384,7 @@ public class GuiLoader implements IGuiHandler
 		if (id == 100)
 		{
 			ItemStack currentItem = player.inventory.getCurrentItem();
-			if (currentItem != null && currentItem.getUnlocalizedName().equals(ItemAtlas.instance.getUnlocalizedName()))
+			if (currentItem != null && currentItem.getTranslationKey().equals(ItemAtlas.instance.getTranslationKey()))
 			{
 				return new GuiAtlas(player.inventory, world, player);
 			}
@@ -399,7 +399,7 @@ public class GuiLoader implements IGuiHandler
 			else
 			{
 				ItemStack currentItem = player.inventory.getCurrentItem();
-				if (currentItem != null && currentItem.getUnlocalizedName().equals(ItemSlottedBook.instance.getUnlocalizedName()))
+				if (currentItem != null && currentItem.getTranslationKey().equals(ItemSlottedBook.instance.getTranslationKey()))
 				{
 					return new GuiSlottedBook(player.inventory, player.getHeldItem(EnumHand.MAIN_HAND), true, 0, 0, 0);
 				}

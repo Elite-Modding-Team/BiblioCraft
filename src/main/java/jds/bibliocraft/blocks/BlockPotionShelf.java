@@ -50,7 +50,7 @@ public class BlockPotionShelf  extends BiblioWoodBlock
 					return true;
 				}
 				
-				if (potionSlot >= 0 && playerhand != ItemStack.EMPTY && Config.testPotionValidity(playerhand.getUnlocalizedName(), playerhand.getDisplayName(), playerhand.getItem()))
+				if (potionSlot >= 0 && playerhand != ItemStack.EMPTY && Config.testPotionValidity(playerhand.getTranslationKey(), playerhand.getDisplayName(), playerhand.getItem()))
 				{
 					// add item
 					if (tile.addStackToInventoryFromWorld(playerhand, potionSlot, player))

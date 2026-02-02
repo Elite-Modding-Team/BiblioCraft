@@ -74,7 +74,7 @@ public abstract class BiblioBlock extends BlockContainer
 			setCreativeTab(tab);
 		}
 
-		setUnlocalizedName("BiblioCraft:" + name);
+		setTranslationKey("BiblioCraft:" + name);
 		setRegistryName(name);
 		//setRegistryName("bibliocraft:" + name);
 	}

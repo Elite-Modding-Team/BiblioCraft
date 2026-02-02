@@ -49,7 +49,7 @@ public class BiblioMeasure implements IMessage {
         public IMessage onMessage(BiblioMeasure message, MessageContext ctx) {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayerMP player = ctx.getServerHandler().player;
-                EnumFacing facing = EnumFacing.getFront(message.direction);
+                EnumFacing facing = EnumFacing.byIndex(message.direction);
                 World world = player.world;
                 int iadj = 0;
                 int jadj = 0;

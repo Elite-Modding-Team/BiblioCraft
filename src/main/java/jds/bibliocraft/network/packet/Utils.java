@@ -88,7 +88,7 @@ public class Utils {
                 int count = 0;
                 for (int n = 0; n < playerIngredients.size(); n++) {
                     ItemStack subThing = playerIngredients.get(n);
-                    if (subThing.getUnlocalizedName().equals(thing.getUnlocalizedName())) {
+                    if (subThing.getTranslationKey().equals(thing.getTranslationKey())) {
                         count++;
                         playerIngredients.set(n, ItemStack.EMPTY);
                     }
@@ -100,11 +100,11 @@ public class Utils {
         for (int i = 0; i < countedIngredients.size(); i++) {
             ItemStack ingredientItem = countedIngredients.get(i);
             if (ingredientItem != ItemStack.EMPTY
-                    && !ingredientItem.getUnlocalizedName().contentEquals(ItemStack.EMPTY.getUnlocalizedName())) {
+                    && !ingredientItem.getTranslationKey().contentEquals(ItemStack.EMPTY.getTranslationKey())) {
                 for (int n = 0; n < playerInventory.size(); n++) {
                     ItemStack inventoryItem = playerInventory.get(n);
                     if (inventoryItem != ItemStack.EMPTY
-                            && inventoryItem.getUnlocalizedName().equals(ingredientItem.getUnlocalizedName())) {
+                            && inventoryItem.getTranslationKey().equals(ingredientItem.getTranslationKey())) {
                         if (inventoryItem.getCount() >= ingredientItem.getCount()) {
                             if (remove) {
                                 inventoryItem.setCount(inventoryItem.getCount() - ingredientItem.getCount());

@@ -22,7 +22,7 @@ public class ItemSlottedBook extends Item {
 	public ItemSlottedBook() {
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setRegistryName(name);
 	}

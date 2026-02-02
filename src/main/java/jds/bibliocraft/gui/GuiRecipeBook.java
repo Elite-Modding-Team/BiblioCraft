@@ -149,7 +149,7 @@ public class GuiRecipeBook extends GuiScreen
 				if (slot >= 0 && slot < 9)
 				{
 					ItemStack nbtStack = new ItemStack(tag);
-					if (nbtStack != ItemStack.EMPTY && !nbtStack.getUnlocalizedName().contentEquals(ItemStack.EMPTY.getUnlocalizedName()))
+					if (nbtStack != ItemStack.EMPTY && !nbtStack.getTranslationKey().contentEquals(ItemStack.EMPTY.getTranslationKey()))
 					{
 						int n = 0;
 						boolean complete = false;

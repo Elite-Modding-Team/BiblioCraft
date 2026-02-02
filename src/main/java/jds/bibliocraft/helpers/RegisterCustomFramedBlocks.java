@@ -123,7 +123,7 @@ public class RegisterCustomFramedBlocks
 	
 	public void registerRecipies(ItemStack plank, ItemStack slab)
 	{
-		WoodRegistryEntry recipeStrings = new WoodRegistryEntry(slab.getUnlocalizedName(), plank.getUnlocalizedName(), this.textureString, true); 
+		WoodRegistryEntry recipeStrings = new WoodRegistryEntry(slab.getTranslationKey(), plank.getTranslationKey(), this.textureString, true);
 		
 		ItemStack stick = new ItemStack(Items.STICK, 1, 0);
 		ItemStack whiteWool = new ItemStack(Blocks.WOOL, 1, 0);

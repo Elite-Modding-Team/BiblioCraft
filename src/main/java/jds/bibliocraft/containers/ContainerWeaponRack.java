@@ -104,7 +104,7 @@ public ItemStack transferStackInSlot(EntityPlayer player, int slot)
 public static boolean isItemTool(Item tool, ItemStack stack)
 {
 	String toolName = tool.getItemStackDisplayName(stack);
-	String toolcodeName = stack.getUnlocalizedName().toLowerCase();
+	String toolcodeName = stack.getTranslationKey().toLowerCase();
 	if (tool instanceof ItemTool || tool instanceof ItemSword || tool instanceof ItemBow || tool instanceof ItemHoe || tool instanceof ItemFishingRod || tool instanceof ItemShears || tool instanceof ItemFlintAndSteel || Config.testToolValidity(toolName, toolcodeName))
 	{
 		return true;

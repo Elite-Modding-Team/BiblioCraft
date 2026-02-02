@@ -210,7 +210,7 @@ public abstract class TileEntityBiblioRenderer extends TileEntitySpecialRenderer
 			GlStateManager.rotate(degreeAngle+180.0F, 0.0F, 1.0F, 0.0F);
 			additionalGLStuffForItemStack();
 			Block testBlock = Block.getBlockFromItem(stack.getItem());
-			if (isRotatedBlock(stack.getUnlocalizedName()))
+			if (isRotatedBlock(stack.getTranslationKey()))
 			{
 				GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 			}

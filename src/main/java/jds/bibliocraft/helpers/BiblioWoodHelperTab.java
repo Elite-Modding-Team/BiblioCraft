@@ -19,7 +19,7 @@ public class BiblioWoodHelperTab  extends CreativeTabs
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ItemStack getTabIconItem() 
+	public ItemStack createIcon()
 	{
 		return this.icon;
 		

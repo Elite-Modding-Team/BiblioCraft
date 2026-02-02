@@ -30,7 +30,7 @@ public class BlockItemSwordPedestal extends ItemBlock
 	}
 	
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
+    public String getTranslationKey(ItemStack itemstack)
     {
         return "swordpedestal";//_"+colors[itemstack.getItemDamage()];
     }

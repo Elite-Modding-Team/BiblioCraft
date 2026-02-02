@@ -51,7 +51,7 @@ public class ItemAtlas extends ItemMap
 	public ItemAtlas()
 	{
 		super();
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setCreativeTab(BlockLoader.biblioTab);
 		setRegistryName(name);

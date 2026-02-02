@@ -88,7 +88,7 @@ public class BlockFurniturePaneler extends BiblioWoodBlock
 							if (Config.isBlock(playerHand))
 							{
 								Block thing = Block.getBlockFromItem(playerHand.getItem());
-								boolean thaumcraftException = playerHand.getUnlocalizedName().contains("tile.blockWoodenDevice");
+								boolean thaumcraftException = playerHand.getTranslationKey().contains("tile.blockWoodenDevice");
 								if ((thing.isOpaqueCube(thing.getDefaultState())) || thaumcraftException) 
 								{
 									if (paneler.addItemsToBlock(playerHand, 0, player))

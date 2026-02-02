@@ -340,7 +340,7 @@ public class FileUtil {
 		File storage;
 		if (FMLCommonHandler.instance().getMinecraftServerInstance().toString().contains("integrated")) {
 			// Client / Integrated server
-			storage = new File(Minecraft.getMinecraft().mcDataDir, "config");
+			storage = new File(Minecraft.getMinecraft().gameDir, "config");
 		} else {
 			// Dedicated Server
 			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
@@ -505,7 +505,7 @@ public class FileUtil {
 		File storage;
 		if (isclient) {
 			// Client
-			storage = new File(Minecraft.getMinecraft().mcDataDir, "config");
+			storage = new File(Minecraft.getMinecraft().gameDir, "config");
 		} else {
 			// Server
 			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();

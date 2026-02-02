@@ -74,7 +74,7 @@ public class BlockItemLantern extends ItemBlock
 	}
 	
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
+    public String getTranslationKey(ItemStack itemstack)
     {
         return lanternNames[itemstack.getItemDamage()];
     }

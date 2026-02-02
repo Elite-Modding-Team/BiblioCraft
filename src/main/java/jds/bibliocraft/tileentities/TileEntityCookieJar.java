@@ -43,7 +43,7 @@ public class TileEntityCookieJar extends BiblioTileEntity implements ITickable
 			if (getStackInSlot(x) != ItemStack.EMPTY)
 			{
 				cookies++;
-				names.add(getStackInSlot(x).getUnlocalizedName());
+				names.add(getStackInSlot(x).getTranslationKey());
 			}
 		}
 		cookiecount = cookies;

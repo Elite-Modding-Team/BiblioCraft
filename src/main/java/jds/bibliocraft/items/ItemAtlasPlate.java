@@ -19,7 +19,7 @@ public class ItemAtlasPlate extends Item
 	{
 		super();
 		setMaxStackSize(1);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setCreativeTab(BlockLoader.biblioTab);
 		setRegistryName(name);
 	}

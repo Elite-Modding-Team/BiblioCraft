@@ -49,7 +49,7 @@ public class BlockSwordPedestal extends BiblioColorBlock
 				if (swordtest != ItemStack.EMPTY)
 				{
 	
-					if (swordtest.getItem() instanceof ItemSword || swordtest.getUnlocalizedName().toLowerCase().contains("sword") || swordtest.getUnlocalizedName().toLowerCase().contains("gt.metatool.01.0"))
+					if (swordtest.getItem() instanceof ItemSword || swordtest.getTranslationKey().toLowerCase().contains("sword") || swordtest.getTranslationKey().toLowerCase().contains("gt.metatool.01.0"))
 					{
 						if (swordtest.getItem() == Item.getItemFromBlock(this.instance))
 						{

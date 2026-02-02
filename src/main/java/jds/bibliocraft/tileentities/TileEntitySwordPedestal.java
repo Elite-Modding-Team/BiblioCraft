@@ -38,7 +38,7 @@ public class TileEntitySwordPedestal extends BiblioTileEntity
 		// for use with pipes and hoppers and such
 		if (itemstack != ItemStack.EMPTY)
 		{
-			if (itemstack.getItem() instanceof ItemSword || itemstack.getUnlocalizedName().toLowerCase().contains("sword") || itemstack.getUnlocalizedName().toLowerCase().contains("gt.metatool.01.0"))
+			if (itemstack.getItem() instanceof ItemSword || itemstack.getTranslationKey().toLowerCase().contains("sword") || itemstack.getTranslationKey().toLowerCase().contains("gt.metatool.01.0"))
 			{
 				if (itemstack.getItem() == Item.getItemFromBlock(BlockSwordPedestal.instance))
 				{

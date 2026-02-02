@@ -254,7 +254,7 @@ public class Config
 		if (stack != ItemStack.EMPTY)
 		{
 			//System.out.println(itemName); // turn this off before release
-			String testName = stack.getUnlocalizedName().toLowerCase();
+			String testName = stack.getTranslationKey().toLowerCase();
 			String displayName = stack.getDisplayName().trim().toLowerCase();
 			
 			//System.out.println(testName);
@@ -359,7 +359,7 @@ public class Config
 	{
 		if (stack != ItemStack.EMPTY)
 		{
-			String itemName = stack.getUnlocalizedName().toLowerCase();
+			String itemName = stack.getTranslationKey().toLowerCase();
 			//System.out.println("Item Test Name: "+itemName);
 			if (stack.getItem() instanceof ItemBlock || !(itemName.contains("item")) || !(stack.getItem() instanceof Item) || Block.getBlockFromItem(stack.getItem()) != Block.getBlockFromItem(ItemStack.EMPTY.getItem()))
 			{

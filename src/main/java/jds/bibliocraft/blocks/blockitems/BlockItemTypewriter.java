@@ -43,7 +43,7 @@ public class BlockItemTypewriter extends ItemBlock
 	}
 	
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
+    public String getTranslationKey(ItemStack itemstack)
     {
         return subName[itemstack.getItemDamage()];
     }

@@ -63,7 +63,7 @@ public class GuiNameTester extends GuiContainer
 			
 			this.fontRenderer.drawString(this.currentStack.getDisplayName(), w+42, h+72, 0x00AA00, false); 
 			
-			this.fontRenderer.drawString(this.currentStack.getUnlocalizedName(), w+42, h+92, 0x00AA00, false);
+			this.fontRenderer.drawString(this.currentStack.getTranslationKey(), w+42, h+92, 0x00AA00, false);
 			
 			this.fontRenderer.drawString(this.currentStack.getItemDamage()+"", w+92, h+102, 0x00AA00, false);
 			

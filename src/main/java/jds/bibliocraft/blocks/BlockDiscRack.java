@@ -51,7 +51,7 @@ public class BlockDiscRack extends BiblioSimpleBlock
 				int discSlot = getDiscSlot(hitX, hitY, hitZ, angle, vertAngle, isRotated);
 				if (playerStack != ItemStack.EMPTY)
 				{
-					String discName = playerStack.getUnlocalizedName().toLowerCase();
+					String discName = playerStack.getTranslationKey().toLowerCase();
 					if (playerStack.getItem() instanceof ItemRecord || Config.testDiscValidity(discName))
 					{
 						if (rackTile.addStackToInventoryFromWorld(playerStack, discSlot, player))

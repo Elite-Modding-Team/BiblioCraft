@@ -55,7 +55,7 @@ public class TileEntityBell extends BiblioTileEntity implements ITickable
 	{
 		if (counter >= 2)
 		{
-			int power = getWorld().isBlockIndirectlyGettingPowered(getPos());
+			int power = getWorld().getRedstonePowerFromNeighbors(getPos());
 			if (power > redstone)
 			{
 				getWorld().playSound(null, pos.getX(), pos.getY(), pos.getZ(), CommonProxy.SOUND_DING, SoundCategory.BLOCKS, 1.0F, 1.0F);

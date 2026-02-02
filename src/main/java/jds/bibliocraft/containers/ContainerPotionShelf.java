@@ -69,7 +69,7 @@ public class ContainerPotionShelf extends Container
 			stack = stackInSlot.copy();
 			Item potionTest = stack.getItem();
 			String potDisplayName = stack.getDisplayName();
-			String potName =stack.getUnlocalizedName();
+			String potName =stack.getTranslationKey();
 		    //potName = potionTest.toString();
 
 

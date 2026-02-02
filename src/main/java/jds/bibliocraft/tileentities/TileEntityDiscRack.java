@@ -60,7 +60,7 @@ public class TileEntityDiscRack extends BiblioTileEntity
 		//    this has to do with buildcraft pipes / hoppers
 		if (itemstack != ItemStack.EMPTY)
 		{
-			if (itemstack.getItem() instanceof ItemRecord || itemstack.getUnlocalizedName().contains("disc") || itemstack.getUnlocalizedName().contains("disk"))
+			if (itemstack.getItem() instanceof ItemRecord || itemstack.getTranslationKey().contains("disc") || itemstack.getTranslationKey().contains("disk"))
 			{
 				return true;
 			}
