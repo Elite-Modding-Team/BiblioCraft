@@ -1,13 +1,7 @@
 package jds.bibliocraft.rendering;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
-
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.helpers.EnumColor;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntityTypewriter;
@@ -24,6 +18,10 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.client.model.pipeline.LightUtil;
+import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityTypeWriterRenderer extends TileEntityBiblioRenderer
 {

@@ -1,14 +1,13 @@
 package jds.bibliocraft.statemappers;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import jds.bibliocraft.blocks.BlockClipboard;
 import jds.bibliocraft.models.ModelClipboard;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+
+import java.util.Map;
 
 public class ClipboardStateMapper extends DefaultStateMapper
 {

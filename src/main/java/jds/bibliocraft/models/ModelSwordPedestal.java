@@ -1,18 +1,16 @@
 package jds.bibliocraft.models;
 
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import com.google.common.collect.Lists;
-
 import jds.bibliocraft.blocks.BlockSwordPedestal;
 import jds.bibliocraft.helpers.EnumColor;
 import jds.bibliocraft.helpers.EnumMetalType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.List;
 
 public class ModelSwordPedestal extends BiblioModelColor
 {

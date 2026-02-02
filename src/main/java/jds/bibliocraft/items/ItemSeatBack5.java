@@ -1,7 +1,5 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-
 import jds.bibliocraft.BiblioTab;
 import jds.bibliocraft.BlockLoader;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,6 +13,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class ItemSeatBack5 extends Item
 {
 	private static final String[] subNames = {"OakSeatBack", "SpruceSeatBack", "BirchSeatBack", "JungleSeatBack", "AcaciaSeatBack", "OldOakSeatBack", "FramedSeatBack"};
@@ -25,7 +25,7 @@ public class ItemSeatBack5 extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setHasSubtypes(true);
 		maxStackSize = 64;
 		setRegistryName(name);
@@ -48,9 +48,9 @@ public class ItemSeatBack5 extends Item
      }
     
 	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
+	public String getTranslationKey(ItemStack itemStack)
 	{
-		return getUnlocalizedName()+"."+subNames[itemStack.getItemDamage()];
+		return getTranslationKey()+"."+subNames[itemStack.getItemDamage()];
 	}
 
     @SideOnly(Side.CLIENT)

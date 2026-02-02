@@ -1,7 +1,5 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.BlockLoader;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,6 +12,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class ItemSlottedBook extends Item {
 	public String playername;
 	public static final String name = "SlottedBook";
@@ -22,7 +22,7 @@ public class ItemSlottedBook extends Item {
 	public ItemSlottedBook() {
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setRegistryName(name);
 	}

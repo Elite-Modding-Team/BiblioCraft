@@ -1,14 +1,13 @@
 package jds.bibliocraft.models;
 
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.items.ItemSeatBack4;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.List;
 
 public class ModelSeatBack4 extends ModelSeatBacks
 {

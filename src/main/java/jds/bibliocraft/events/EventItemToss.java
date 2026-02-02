@@ -20,12 +20,12 @@ public class EventItemToss
 			ItemStack thing = event.getEntityItem().getItem();
 			if (thing != ItemStack.EMPTY)
 			{
-				if (checkIfValidPacketItem(thing.getUnlocalizedName()))
+				if (checkIfValidPacketItem(thing.getTranslationKey()))
 				{
 					Container testContainer = player.openContainer;
 					if (testContainer != null)
 					{
-						if (hasProperContainer(thing.getUnlocalizedName(), testContainer))
+						if (hasProperContainer(thing.getTranslationKey(), testContainer))
 						{
 							player.closeScreen();
 						}

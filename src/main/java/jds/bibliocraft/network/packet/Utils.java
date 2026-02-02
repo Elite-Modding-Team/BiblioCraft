@@ -1,15 +1,7 @@
 package jds.bibliocraft.network.packet;
 
-import java.util.ArrayList;
-
 import jds.bibliocraft.BiblioCraft;
-import jds.bibliocraft.gui.GuiAtlasMap;
-import jds.bibliocraft.gui.GuiAtlasWaypointTransfer;
-import jds.bibliocraft.gui.GuiBigBook;
-import jds.bibliocraft.gui.GuiClipboard;
-import jds.bibliocraft.gui.GuiRecipeBook;
-import jds.bibliocraft.gui.GuiScreenBookDesk;
-import jds.bibliocraft.gui.GuiStockCatalog;
+import jds.bibliocraft.gui.*;
 import jds.bibliocraft.helpers.EnumVertPosition;
 import jds.bibliocraft.helpers.SortedListItem;
 import jds.bibliocraft.items.ItemRecipeBook;
@@ -35,6 +27,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
 
 public class Utils {
     @SideOnly(Side.CLIENT)
@@ -88,7 +82,7 @@ public class Utils {
                 int count = 0;
                 for (int n = 0; n < playerIngredients.size(); n++) {
                     ItemStack subThing = playerIngredients.get(n);
-                    if (subThing.getUnlocalizedName().equals(thing.getUnlocalizedName())) {
+                    if (subThing.getTranslationKey().equals(thing.getTranslationKey())) {
                         count++;
                         playerIngredients.set(n, ItemStack.EMPTY);
                     }
@@ -100,11 +94,11 @@ public class Utils {
         for (int i = 0; i < countedIngredients.size(); i++) {
             ItemStack ingredientItem = countedIngredients.get(i);
             if (ingredientItem != ItemStack.EMPTY
-                    && !ingredientItem.getUnlocalizedName().contentEquals(ItemStack.EMPTY.getUnlocalizedName())) {
+                    && !ingredientItem.getTranslationKey().contentEquals(ItemStack.EMPTY.getTranslationKey())) {
                 for (int n = 0; n < playerInventory.size(); n++) {
                     ItemStack inventoryItem = playerInventory.get(n);
                     if (inventoryItem != ItemStack.EMPTY
-                            && inventoryItem.getUnlocalizedName().equals(ingredientItem.getUnlocalizedName())) {
+                            && inventoryItem.getTranslationKey().equals(ingredientItem.getTranslationKey())) {
                         if (inventoryItem.getCount() >= ingredientItem.getCount()) {
                             if (remove) {
                                 inventoryItem.setCount(inventoryItem.getCount() - ingredientItem.getCount());

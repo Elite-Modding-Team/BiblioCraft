@@ -1,7 +1,5 @@
 package jds.bibliocraft.blocks.blockitems;
 
-import java.util.List;
-
 import jds.bibliocraft.blocks.BiblioWoodBlock.EnumWoodType;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -12,6 +10,8 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BiblioWoodBlockItem extends ItemBlock
 {
@@ -31,7 +31,7 @@ public class BiblioWoodBlockItem extends ItemBlock
 	}
 	
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
+    public String getTranslationKey(ItemStack itemstack)
     {
         return names[itemstack.getItemDamage()];
     }

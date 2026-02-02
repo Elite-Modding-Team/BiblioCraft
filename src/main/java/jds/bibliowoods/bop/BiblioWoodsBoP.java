@@ -2,13 +2,9 @@ package jds.bibliowoods.bop;
 
 import jds.bibliocraft.blocks.BlockBookcase;
 import jds.bibliocraft.helpers.BiblioWoodHelperTab;
-import jds.bibliocraft.helpers.RecipeBiblioFramedWood;
 import jds.bibliocraft.helpers.RegisterCustomFramedBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -16,8 +12,6 @@ import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(modid=BiblioWoodsBoP.MODID, name="BiblioWoodBoP", version=BiblioWoodsBoP.VERSION, dependencies="after:bibliocraft; after:biomesoplenty")
 

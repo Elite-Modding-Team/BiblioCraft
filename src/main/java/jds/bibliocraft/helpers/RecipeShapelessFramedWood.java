@@ -1,7 +1,5 @@
 package jds.bibliocraft.helpers;
 
-import java.util.ArrayList;
-
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -9,6 +7,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+
+import java.util.ArrayList;
 
 public class RecipeShapelessFramedWood extends ShapelessRecipes
 {
@@ -75,7 +75,7 @@ public class RecipeShapelessFramedWood extends ShapelessRecipes
 		for (int i = 0; i < registry.size(); i++)
 		{
 			WoodRegistryEntry entry = registry.get(i);
-			if (entry.hasMatch(stack.getUnlocalizedName()))
+			if (entry.hasMatch(stack.getTranslationKey()))
 			{
 				result = entry;
 				break;

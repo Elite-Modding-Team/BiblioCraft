@@ -3,14 +3,7 @@ package jds.bibliocraft.tileentities;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.blocks.BlockTypesettingTable;
 import jds.bibliocraft.helpers.FileUtil;
-import jds.bibliocraft.items.ItemAtlas;
-import jds.bibliocraft.items.ItemAtlasPlate;
-import jds.bibliocraft.items.ItemBigBook;
-import jds.bibliocraft.items.ItemChase;
-import jds.bibliocraft.items.ItemEnchantedPlate;
-import jds.bibliocraft.items.ItemPlate;
-import jds.bibliocraft.items.ItemRecipeBook;
-import jds.bibliocraft.items.ItemStockroomCatalog;
+import jds.bibliocraft.items.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -862,7 +855,7 @@ public class TileEntityTypeMachine extends BiblioTileEntity implements ITickable
 		{
 			if (counter >= 2)
 			{
-				int power = getWorld().isBlockIndirectlyGettingPowered(getPos());
+				int power = getWorld().getRedstonePowerFromNeighbors(getPos());
 				if (power > redstone)
 				{
 					this.setPlate();

@@ -1,11 +1,10 @@
 package jds.bibliocraft.entity;
 
-import java.util.UUID;
-
 import com.mojang.authlib.GameProfile;
-
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.world.World;
+
+import java.util.UUID;
 
 public class AbtractSteve extends AbstractClientPlayer
 {

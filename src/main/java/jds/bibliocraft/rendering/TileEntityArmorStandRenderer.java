@@ -1,7 +1,5 @@
 package jds.bibliocraft.rendering;
 
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.entity.AbtractSteve;
 import jds.bibliocraft.entity.ModelDummy;
@@ -12,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
 
 public class TileEntityArmorStandRenderer extends TileEntitySpecialRenderer
 {

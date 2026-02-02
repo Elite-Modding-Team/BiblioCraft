@@ -1,12 +1,6 @@
 package jds.bibliocraft.blocks;
 
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import com.google.common.collect.Lists;
-
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntitySwordPedestal;
 import net.minecraft.block.SoundType;
@@ -25,6 +19,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.List;
 
 public class BlockSwordPedestal extends BiblioColorBlock
 {
@@ -49,7 +47,7 @@ public class BlockSwordPedestal extends BiblioColorBlock
 				if (swordtest != ItemStack.EMPTY)
 				{
 	
-					if (swordtest.getItem() instanceof ItemSword || swordtest.getUnlocalizedName().toLowerCase().contains("sword") || swordtest.getUnlocalizedName().toLowerCase().contains("gt.metatool.01.0"))
+					if (swordtest.getItem() instanceof ItemSword || swordtest.getTranslationKey().toLowerCase().contains("sword") || swordtest.getTranslationKey().toLowerCase().contains("gt.metatool.01.0"))
 					{
 						if (swordtest.getItem() == Item.getItemFromBlock(this.instance))
 						{

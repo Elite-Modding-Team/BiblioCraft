@@ -1,9 +1,5 @@
 package jds.bibliocraft.tileentities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import jds.bibliocraft.Config;
 import jds.bibliocraft.blocks.BlockMapFrame;
 import jds.bibliocraft.helpers.EnumVertPosition;
@@ -23,6 +19,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapData;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TileEntityMapFrame extends BiblioTileEntity implements ITickable//TileEntity implements ISidedInventory
 {

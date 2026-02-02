@@ -1,10 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.BlockLoader;
 import jds.bibliocraft.helpers.EnumColor;
 import jds.bibliocraft.helpers.EnumMetalType;
@@ -34,6 +29,10 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.List;
 
 public abstract class BiblioLightBlock extends BiblioBlock
 {

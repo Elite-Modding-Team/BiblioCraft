@@ -1,10 +1,5 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.BlockLoader;
 import jds.bibliocraft.gui.GuiAtlasMap;
@@ -42,6 +37,10 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 public class ItemAtlas extends ItemMap
 {
 	
@@ -51,7 +50,7 @@ public class ItemAtlas extends ItemMap
 	public ItemAtlas()
 	{
 		super();
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setCreativeTab(BlockLoader.biblioTab);
 		setRegistryName(name);

@@ -1,17 +1,16 @@
 package jds.bibliocraft.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.blocks.BlockLampGold;
 import jds.bibliocraft.blocks.BlockLampIron;
 import jds.bibliocraft.helpers.EnumColor;
 import jds.bibliocraft.helpers.EnumMetalType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModelLamp extends BiblioModelColor
 {

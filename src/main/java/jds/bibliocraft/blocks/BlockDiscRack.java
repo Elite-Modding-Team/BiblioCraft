@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.helpers.EnumVertPosition;
@@ -24,6 +21,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 
 public class BlockDiscRack extends BiblioSimpleBlock
 {
@@ -51,7 +51,7 @@ public class BlockDiscRack extends BiblioSimpleBlock
 				int discSlot = getDiscSlot(hitX, hitY, hitZ, angle, vertAngle, isRotated);
 				if (playerStack != ItemStack.EMPTY)
 				{
-					String discName = playerStack.getUnlocalizedName().toLowerCase();
+					String discName = playerStack.getTranslationKey().toLowerCase();
 					if (playerStack.getItem() instanceof ItemRecord || Config.testDiscValidity(discName))
 					{
 						if (rackTile.addStackToInventoryFromWorld(playerStack, discSlot, player))

@@ -1,8 +1,8 @@
 package jds.bibliocraft.helpers;
 
-import java.util.ArrayList;
-
 import net.minecraft.client.renderer.block.model.IBakedModel;
+
+import java.util.ArrayList;
 
 public class ModelCache 
 {

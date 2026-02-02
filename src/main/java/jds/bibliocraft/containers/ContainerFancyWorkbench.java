@@ -7,12 +7,7 @@ import jds.bibliocraft.tileentities.TileEntityBookcase;
 import jds.bibliocraft.tileentities.TileEntityFancyWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCraftResult;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.inventory.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
@@ -140,7 +135,7 @@ public class ContainerFancyWorkbench extends Container
     				invStack = playerInventory.mainInventory.get(m);	
     				if (invStack != ItemStack.EMPTY)
 					{
-    					if (slotStack.getUnlocalizedName().matches(invStack.getUnlocalizedName()))
+    					if (slotStack.getTranslationKey().matches(invStack.getTranslationKey()))
     					{
     						stackcount += invStack.getCount();
     						slotStack = invStack.copy();
@@ -149,7 +144,7 @@ public class ContainerFancyWorkbench extends Container
     			}
     			for (int m = 0; m<9; m++)
     			{
-    				if (slotStack.getUnlocalizedName().matches(this.ingredientNames[m]))
+    				if (slotStack.getTranslationKey().matches(this.ingredientNames[m]))
 					{
     					totalStackCount = stackcount;
     					stackcount = stackcount / this.ingredientCounts[m];
@@ -165,7 +160,7 @@ public class ContainerFancyWorkbench extends Container
     						if (matrixStack != ItemStack.EMPTY)
     						{
     							matrixSizes[n] = matrixStack.getCount();
-    							if (matrixStack.getUnlocalizedName().matches(slotStack.getUnlocalizedName()))
+    							if (matrixStack.getTranslationKey().matches(slotStack.getTranslationKey()))
     							{
     								if (matrixSizes[n] + stackcount >= maxStackSize)
     								{
@@ -213,7 +208,7 @@ public class ContainerFancyWorkbench extends Container
 		    			invStack = this.playerInventory.mainInventory.get(m);
 		    			if (invStack != ItemStack.EMPTY)
 		    			{
-		    				if (invStack.getUnlocalizedName().matches(slotStack.getUnlocalizedName()))
+		    				if (invStack.getTranslationKey().matches(slotStack.getTranslationKey()))
 		    				{
 		    					// so I have a matching item in the player inventory as I added to my player crafting matrix.
 		    					if (invStack.getCount() > stackcount)
@@ -259,7 +254,7 @@ public class ContainerFancyWorkbench extends Container
 				{
 					if (this.ingredientNames[m] != null)
 					{
-						if (this.ingredientNames[m].matches(nbtStack.getUnlocalizedName()))
+						if (this.ingredientNames[m].matches(nbtStack.getTranslationKey()))
 						{
 							n = m;
 							havematch = true;
@@ -278,7 +273,7 @@ public class ContainerFancyWorkbench extends Container
 							if (this.ingredientCounts[n] == 0)
 							{
 								this.ingredientCounts[n] += 1;
-								this.ingredientNames[n] = nbtStack.getUnlocalizedName();
+								this.ingredientNames[n] = nbtStack.getTranslationKey();
 								complete = true;
 							}
 							else

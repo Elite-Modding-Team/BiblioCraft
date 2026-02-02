@@ -12,7 +12,6 @@ import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -65,7 +64,7 @@ public class BiblioUpdateInv implements IMessage {
                             {
                             	ItemStack testStack = new ItemStack(list.getCompoundTagAt(i));
                             	Item testItem =  testStack.getItem();
-                            	System.out.println(testItem.getUnlocalizedName());
+                            	System.out.println(testItem.getTranslationKey());
                             	if (!testStack.isEmpty() && !(testItem instanceof ItemEmptyMap || testItem instanceof ItemMap || testItem instanceof ItemWaypointCompass))
                             	{
                             		safe = false;
@@ -84,11 +83,11 @@ public class BiblioUpdateInv implements IMessage {
                         ItemStack currentPlayerSlot = player.getHeldItem(EnumHand.MAIN_HAND);
                         if (currentPlayerSlot != ItemStack.EMPTY) 
                         {
-                            if (currentPlayerSlot.getUnlocalizedName().equals(stackostuff.getUnlocalizedName()) && Utils.checkIfValidPacketItem(currentPlayerSlot.getUnlocalizedName())) 
+                            if (currentPlayerSlot.getTranslationKey().equals(stackostuff.getTranslationKey()) && Utils.checkIfValidPacketItem(currentPlayerSlot.getTranslationKey()))
                             {
                                 NBTTagCompound currentTags = currentPlayerSlot.getTagCompound();
                                 NBTTagCompound newTags = stackostuff.getTagCompound();
-                                if (!currentPlayerSlot.getUnlocalizedName().contains("item.AtlasBook")) 
+                                if (!currentPlayerSlot.getTranslationKey().contains("item.AtlasBook"))
                                 {
                                     if (currentTags != null && currentTags.hasKey("Inventory") && newTags != null) 
                                     {

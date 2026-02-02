@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.helpers.EnumColor;
@@ -28,6 +25,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockDesk extends BiblioWoodBlock
 {

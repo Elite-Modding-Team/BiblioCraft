@@ -1,7 +1,5 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-
 import jds.bibliocraft.BlockLoader;
 import jds.bibliocraft.gui.GuiBigBook;
 import net.minecraft.client.Minecraft;
@@ -18,6 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class ItemBigBook extends Item
 {
 	public String playername;
@@ -28,7 +28,7 @@ public class ItemBigBook extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setRegistryName(name);
 	}

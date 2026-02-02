@@ -1,8 +1,8 @@
 package jds.bibliocraft.storygen;
 
-import java.util.Random;
-
 import net.minecraftforge.common.config.Configuration;
+
+import java.util.Random;
 
 public class BookGenWordLists
 {

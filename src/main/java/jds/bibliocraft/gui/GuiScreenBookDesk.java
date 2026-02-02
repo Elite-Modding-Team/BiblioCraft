@@ -1,12 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.network.BiblioNetworking;
 import jds.bibliocraft.network.packet.server.BiblioMCBEdit;
 import jds.bibliocraft.network.packet.server.BiblioMCBPage;
@@ -22,11 +15,16 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.ResourceLocation;
-//import net.minecraft.network.play.client.C17PacketCustomPayload;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 public class GuiScreenBookDesk extends GuiScreen
 {
@@ -62,7 +60,7 @@ public class GuiScreenBookDesk extends GuiScreen
     private GuiButton buttonSign;
     private GuiButton buttonFinalize;
     private GuiButton buttonCancel;
-    private static final String __OBFID = "CL_00000744";
+
     
     private int i;
     private int j;
@@ -511,7 +509,7 @@ public class GuiScreenBookDesk extends GuiScreen
     static class NextPageButton extends GuiButton
         {
             private final boolean field_146151_o;
-            private static final String __OBFID = "CL_00000745";
+
 
             public NextPageButton(int par1, int par2, int par3, boolean par4)
             {

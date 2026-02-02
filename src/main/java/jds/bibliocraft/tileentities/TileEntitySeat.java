@@ -1,48 +1,10 @@
 package jds.bibliocraft.tileentities;
 
-import java.util.List;
-
 import jds.bibliocraft.blocks.BiblioWoodBlock.EnumWoodType;
 import jds.bibliocraft.blocks.BlockSeat;
 import jds.bibliocraft.entity.EntitySeat;
 import jds.bibliocraft.helpers.EnumColor;
-import jds.bibliocraft.items.ItemSeatBack;
-import jds.bibliocraft.items.ItemSeatBack2;
-import jds.bibliocraft.items.ItemSeatBack3;
-import jds.bibliocraft.items.ItemSeatBack4;
-import jds.bibliocraft.items.ItemSeatBack5;
-/*
-import jds.bibliowood.bopwood.items.ItemSeatBackB1;
-import jds.bibliowood.bopwood.items.ItemSeatBackB2;
-import jds.bibliowood.bopwood.items.ItemSeatBackB3;
-import jds.bibliowood.bopwood.items.ItemSeatBackB4;
-import jds.bibliowood.bopwood.items.ItemSeatBackB5;
-import jds.bibliowood.ebxlwood.items.ItemSeatBackE1;
-import jds.bibliowood.ebxlwood.items.ItemSeatBackE2;
-import jds.bibliowood.ebxlwood.items.ItemSeatBackE3;
-import jds.bibliowood.ebxlwood.items.ItemSeatBackE4;
-import jds.bibliowood.ebxlwood.items.ItemSeatBackE5;
-import jds.bibliowood.forestrywood.items.ItemSeatBackF1;
-import jds.bibliowood.forestrywood.items.ItemSeatBackF2;
-import jds.bibliowood.forestrywood.items.ItemSeatBackF3;
-import jds.bibliowood.forestrywood.items.ItemSeatBackF4;
-import jds.bibliowood.forestrywood.items.ItemSeatBackF5;
-import jds.bibliowood.highlandwood.items.ItemSeatBackH1;
-import jds.bibliowood.highlandwood.items.ItemSeatBackH2;
-import jds.bibliowood.highlandwood.items.ItemSeatBackH3;
-import jds.bibliowood.highlandwood.items.ItemSeatBackH4;
-import jds.bibliowood.highlandwood.items.ItemSeatBackH5;
-import jds.bibliowood.naturawood.items.ItemSeatBackN1;
-import jds.bibliowood.naturawood.items.ItemSeatBackN2;
-import jds.bibliowood.naturawood.items.ItemSeatBackN3;
-import jds.bibliowood.naturawood.items.ItemSeatBackN4;
-import jds.bibliowood.naturawood.items.ItemSeatBackN5;
-import jds.bibliowood.tfcwood.items.ItemSeatBackT1;
-import jds.bibliowood.tfcwood.items.ItemSeatBackT2;
-import jds.bibliowood.tfcwood.items.ItemSeatBackT3;
-import jds.bibliowood.tfcwood.items.ItemSeatBackT4;
-import jds.bibliowood.tfcwood.items.ItemSeatBackT5;
-*/
+import jds.bibliocraft.items.*;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
@@ -53,6 +15,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+
+import java.util.List;
 
 public class TileEntitySeat extends BiblioTileEntity implements ITickable
 {

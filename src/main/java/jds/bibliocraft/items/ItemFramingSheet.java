@@ -13,7 +13,7 @@ public class ItemFramingSheet extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(64);
 		setRegistryName(name);
 	}

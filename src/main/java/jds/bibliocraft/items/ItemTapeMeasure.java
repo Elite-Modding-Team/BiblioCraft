@@ -19,12 +19,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-//import net.minecraft.network.packet.Packet;
-//import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTapeMeasure extends Item
@@ -48,7 +45,7 @@ public class ItemTapeMeasure extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setRegistryName(name);
 	}

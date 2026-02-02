@@ -1,8 +1,5 @@
 package jds.bibliocraft.tileentities;
 
-import java.util.Iterator;
-import java.util.List;
-
 import jds.bibliocraft.blocks.BlockFramedChest;
 import jds.bibliocraft.containers.ContainerFramedChest;
 import jds.bibliocraft.helpers.BiblioSortingHelper;
@@ -16,6 +13,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class TileEntityFramedChest extends BiblioTileEntity implements ITickable
 {

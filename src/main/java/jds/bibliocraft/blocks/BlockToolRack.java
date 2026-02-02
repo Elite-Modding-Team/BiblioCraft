@@ -1,9 +1,6 @@
 package jds.bibliocraft.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.containers.ContainerWeaponRack;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
@@ -19,6 +16,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import java.util.List;
 
 public class BlockToolRack extends BiblioWoodBlock
 {

@@ -1,12 +1,6 @@
 package jds.bibliocraft.blocks;
 
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import com.google.common.collect.Lists;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
@@ -22,6 +16,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.List;
 
 public class BlockPotionShelf  extends BiblioWoodBlock
 {
@@ -50,7 +48,7 @@ public class BlockPotionShelf  extends BiblioWoodBlock
 					return true;
 				}
 				
-				if (potionSlot >= 0 && playerhand != ItemStack.EMPTY && Config.testPotionValidity(playerhand.getUnlocalizedName(), playerhand.getDisplayName(), playerhand.getItem()))
+				if (potionSlot >= 0 && playerhand != ItemStack.EMPTY && Config.testPotionValidity(playerhand.getTranslationKey(), playerhand.getDisplayName(), playerhand.getItem()))
 				{
 					// add item
 					if (tile.addStackToInventoryFromWorld(playerhand, potionSlot, player))

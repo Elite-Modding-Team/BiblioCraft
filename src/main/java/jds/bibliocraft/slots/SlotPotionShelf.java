@@ -23,7 +23,7 @@ public class SlotPotionShelf extends Slot
 		Item potionTest = stack.getItem();
 		String potDisplayName = potionTest.getItemStackDisplayName(stack);
 				//getItemDisplayName(stack);
-		String potName = stack.getUnlocalizedName();
+		String potName = stack.getTranslationKey();
 
 		if (Config.testPotionValidity(potName, potDisplayName, potionTest))
 		{

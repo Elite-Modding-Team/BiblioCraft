@@ -1,7 +1,5 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-
 import jds.bibliocraft.BlockLoader;
 import jds.bibliocraft.Config;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,6 +11,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class ItemEnchantedPlate extends Item
 {
 	public static final String name = "EnchantedPlate";
@@ -22,7 +22,7 @@ public class ItemEnchantedPlate extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setMaxDamage(Config.enchPlateMaxUses);
 		setRegistryName(name);

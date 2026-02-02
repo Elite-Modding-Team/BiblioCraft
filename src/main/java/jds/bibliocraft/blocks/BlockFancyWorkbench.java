@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.items.ItemRecipeBook;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
@@ -18,6 +15,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockFancyWorkbench extends BiblioWoodBlock
 {

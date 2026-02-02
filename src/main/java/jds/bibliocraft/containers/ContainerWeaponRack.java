@@ -7,15 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemFishingRod;
-import net.minecraft.item.ItemFlintAndSteel;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.*;
 
 public class ContainerWeaponRack extends Container
 {
@@ -104,7 +96,7 @@ public ItemStack transferStackInSlot(EntityPlayer player, int slot)
 public static boolean isItemTool(Item tool, ItemStack stack)
 {
 	String toolName = tool.getItemStackDisplayName(stack);
-	String toolcodeName = stack.getUnlocalizedName().toLowerCase();
+	String toolcodeName = stack.getTranslationKey().toLowerCase();
 	if (tool instanceof ItemTool || tool instanceof ItemSword || tool instanceof ItemBow || tool instanceof ItemHoe || tool instanceof ItemFishingRod || tool instanceof ItemShears || tool instanceof ItemFlintAndSteel || Config.testToolValidity(toolName, toolcodeName))
 	{
 		return true;

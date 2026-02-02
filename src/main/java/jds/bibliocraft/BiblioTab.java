@@ -18,7 +18,7 @@ public class BiblioTab extends CreativeTabs
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ItemStack getTabIconItem() 
+	public ItemStack createIcon()
 	{
 		
 		if (Config.enableBookcase)

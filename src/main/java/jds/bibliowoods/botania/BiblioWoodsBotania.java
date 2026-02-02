@@ -57,7 +57,7 @@ public class BiblioWoodsBotania
 			{
 				ItemStack stack = new ItemStack(block, 1, i);
 				if (stack != ItemStack.EMPTY)
-					System.out.println("stack " + i + "   = " + stack.getDisplayName() + "   unlocalized = " + stack.getUnlocalizedName());
+					System.out.println("stack " + i + "   = " + stack.getDisplayName() + "   translationKey = " + stack.getTranslationKey());
 			}
 		}
 	}

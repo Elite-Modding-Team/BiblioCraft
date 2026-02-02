@@ -14,7 +14,7 @@ public class ItemFramingSaw extends Item
 		super();
 		setContainerItem(this);
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setRegistryName(name);
 	}

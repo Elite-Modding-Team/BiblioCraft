@@ -1,15 +1,6 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import com.google.common.collect.Lists;
-
 import jds.bibliocraft.helpers.CustomBlockItemDataPack;
 import jds.bibliocraft.items.ItemDrill;
 import jds.bibliocraft.items.ItemLock;
@@ -21,7 +12,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
-//import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -44,8 +34,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
-//import net.minecraft.util.math.MathHelper;
-//import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
@@ -55,6 +43,13 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public abstract class BiblioBlock extends BlockContainer 
 {
@@ -74,7 +69,7 @@ public abstract class BiblioBlock extends BlockContainer
 			setCreativeTab(tab);
 		}
 
-		setUnlocalizedName("BiblioCraft:" + name);
+		setTranslationKey("BiblioCraft:" + name);
 		setRegistryName(name);
 		//setRegistryName("bibliocraft:" + name);
 	}

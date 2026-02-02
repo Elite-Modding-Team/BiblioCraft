@@ -1,7 +1,5 @@
 package jds.bibliocraft.blocks.blockitems;
 
-import java.util.List;
-
 import jds.bibliocraft.blocks.BlockLanternGold;
 import jds.bibliocraft.blocks.BlockLanternIron;
 import net.minecraft.block.Block;
@@ -13,6 +11,8 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BlockItemLantern extends ItemBlock
 {
@@ -74,7 +74,7 @@ public class BlockItemLantern extends ItemBlock
 	}
 	
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
+    public String getTranslationKey(ItemStack itemstack)
     {
         return lanternNames[itemstack.getItemDamage()];
     }

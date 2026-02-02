@@ -1,13 +1,12 @@
 package jds.bibliocraft.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.containers.ContainerFramedChest;
 import jds.bibliocraft.tileentities.TileEntityFramedChest;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import org.lwjgl.opengl.GL11;
 
 public class GuiFramedChest extends GuiContainer
 {

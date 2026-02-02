@@ -1,8 +1,5 @@
 package jds.bibliocraft.tileentities;
 
-import java.util.Iterator;
-import java.util.List;
-
 import jds.bibliocraft.Config;
 import jds.bibliocraft.blocks.BlockDesk;
 import jds.bibliocraft.helpers.EnumRelativeLocation;
@@ -20,6 +17,9 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapData;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class TileEntityDesk extends BiblioTileEntity implements ITickable, ISidedInventory 
 {

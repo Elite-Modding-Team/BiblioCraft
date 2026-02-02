@@ -26,7 +26,7 @@ public class SlotDisc extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		String discName = stack.getUnlocalizedName().toLowerCase();
+		String discName = stack.getTranslationKey().toLowerCase();
 		if (stack.getItem() instanceof ItemRecord || Config.testDiscValidity(discName))
 		{
 			return true;

@@ -1,9 +1,5 @@
 package jds.bibliocraft.helpers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +13,10 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BiblioSortingHelper 
 {
@@ -342,12 +342,12 @@ public class BiblioSortingHelper
 					ItemStack stack = inv.get(j);
 					if (stack != ItemStack.EMPTY)
 					{
-						InventoryListItem newInvListItem = new InventoryListItem(stack.getUnlocalizedName(), stack.getCount(), invSet.inventoryName, invSet.tileX, invSet.tileY, invSet.tileZ);
+						InventoryListItem newInvListItem = new InventoryListItem(stack.getTranslationKey(), stack.getCount(), invSet.inventoryName, invSet.tileX, invSet.tileY, invSet.tileZ);
 						boolean listHasItem = false;
 						for (int k = 0; k < itemList.size(); k++)
 						{
 							SortedListItem item = itemList.get(k);
-							if (item.itemName.contentEquals(stack.getUnlocalizedName()))
+							if (item.itemName.contentEquals(stack.getTranslationKey()))
 							{
 								ArrayList<InventoryListItem> listOfInventories = item.inventoryList;
 								boolean alreadyHasCurrentInventory = false;
@@ -377,7 +377,7 @@ public class BiblioSortingHelper
 						{
 							ArrayList<InventoryListItem> listOfInventories = new ArrayList<InventoryListItem>();
 							listOfInventories.add(newInvListItem);
-							itemList.add(new SortedListItem(stack.getUnlocalizedName(), stack.getCount(), listOfInventories));
+							itemList.add(new SortedListItem(stack.getTranslationKey(), stack.getCount(), listOfInventories));
 						}
 					}
 				}

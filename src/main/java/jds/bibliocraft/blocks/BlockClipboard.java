@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jds.bibliocraft.network.BiblioNetworking;
 import jds.bibliocraft.network.packet.server.BiblioClipboard;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
@@ -22,6 +19,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockClipboard extends BiblioBlock
 {

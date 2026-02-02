@@ -1,11 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntityArmorStand;
@@ -24,6 +18,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockArmorStand extends BiblioWoodBlock {
 	public static final BlockArmorStand instance = new BlockArmorStand();
@@ -47,14 +46,14 @@ public class BlockArmorStand extends BiblioWoodBlock {
 				tile = (TileEntityArmorStand) world.getTileEntity(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
 				if (tile == null)
 					return false;
-				isPowerTop = world.isBlockIndirectlyGettingPowered(pos) > 0;
+				isPowerTop = world.getRedstonePowerFromNeighbors(pos) > 0;
 				isPoweredBottom = world
-						.isBlockIndirectlyGettingPowered(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) > 0;
+						.getRedstonePowerFromNeighbors(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) > 0;
 				yCheck += 2;
 			} else {
-				isPoweredBottom = world.isBlockIndirectlyGettingPowered(pos) > 0;
+				isPoweredBottom = world.getRedstonePowerFromNeighbors(pos) > 0;
 				isPowerTop = world
-						.isBlockIndirectlyGettingPowered(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())) > 0;
+						.getRedstonePowerFromNeighbors(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())) > 0;
 			}
 
 			if (player.isSneaking()) {

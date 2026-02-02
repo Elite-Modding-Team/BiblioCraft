@@ -1,40 +1,14 @@
 package jds.bibliocraft.helpers;
 
-import java.util.ArrayList;
-
 import jds.bibliocraft.Config;
-import jds.bibliocraft.blocks.BlockArmorStand;
-import jds.bibliocraft.blocks.BlockBookcase;
-import jds.bibliocraft.blocks.BlockBookcaseCreative;
-import jds.bibliocraft.blocks.BlockCase;
-import jds.bibliocraft.blocks.BlockClock;
-import jds.bibliocraft.blocks.BlockDesk;
-import jds.bibliocraft.blocks.BlockFancySign;
-import jds.bibliocraft.blocks.BlockFancyWorkbench;
-import jds.bibliocraft.blocks.BlockFramedChest;
-import jds.bibliocraft.blocks.BlockFurniturePaneler;
-import jds.bibliocraft.blocks.BlockLabel;
-import jds.bibliocraft.blocks.BlockMapFrame;
-import jds.bibliocraft.blocks.BlockPaintingFrameBorderless;
-import jds.bibliocraft.blocks.BlockPaintingFrameFancy;
-import jds.bibliocraft.blocks.BlockPaintingFrameFlat;
-import jds.bibliocraft.blocks.BlockPaintingFrameMiddle;
-import jds.bibliocraft.blocks.BlockPaintingFrameSimple;
-import jds.bibliocraft.blocks.BlockPotionShelf;
-import jds.bibliocraft.blocks.BlockSeat;
-import jds.bibliocraft.blocks.BlockShelf;
-import jds.bibliocraft.blocks.BlockTable;
-import jds.bibliocraft.blocks.BlockToolRack;
-import jds.bibliocraft.items.ItemFramingSaw;
-import jds.bibliocraft.items.ItemSeatBack;
-import jds.bibliocraft.items.ItemSeatBack2;
-import jds.bibliocraft.items.ItemSeatBack3;
-import jds.bibliocraft.items.ItemSeatBack4;
-import jds.bibliocraft.items.ItemSeatBack5;
+import jds.bibliocraft.blocks.*;
+import jds.bibliocraft.items.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.ArrayList;
 
 public class RegisterCustomFramedBlocks 
 {
@@ -123,7 +97,7 @@ public class RegisterCustomFramedBlocks
 	
 	public void registerRecipies(ItemStack plank, ItemStack slab)
 	{
-		WoodRegistryEntry recipeStrings = new WoodRegistryEntry(slab.getUnlocalizedName(), plank.getUnlocalizedName(), this.textureString, true); 
+		WoodRegistryEntry recipeStrings = new WoodRegistryEntry(slab.getTranslationKey(), plank.getTranslationKey(), this.textureString, true);
 		
 		ItemStack stick = new ItemStack(Items.STICK, 1, 0);
 		ItemStack whiteWool = new ItemStack(Blocks.WOOL, 1, 0);

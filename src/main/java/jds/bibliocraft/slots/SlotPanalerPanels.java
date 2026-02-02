@@ -27,7 +27,7 @@ public class SlotPanalerPanels extends Slot
 			if (Config.isBlock(stack))
 			{
 				Block thing = Block.getBlockFromItem(stack.getItem());
-				boolean thaumcraftException = stack.getUnlocalizedName().contains("tile.blockWoodenDevice");
+				boolean thaumcraftException = stack.getTranslationKey().contains("tile.blockWoodenDevice");
 				if ((thing.isOpaqueCube(thing.getDefaultState())) || thaumcraftException) 
 				{
 					return true;

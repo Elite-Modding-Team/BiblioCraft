@@ -1,38 +1,12 @@
 package jds.bibliocraft.events;
 
-import java.util.ArrayList;
-
 import jds.bibliocraft.BiblioCraft;
-import jds.bibliocraft.blocks.BiblioBlock;
-import jds.bibliocraft.blocks.BlockBookcase;
-import jds.bibliocraft.blocks.BlockDiscRack;
-import jds.bibliocraft.blocks.BlockFurniturePaneler;
-import jds.bibliocraft.blocks.BlockPotionShelf;
-import jds.bibliocraft.blocks.BlockPrintingPress;
-import jds.bibliocraft.blocks.BlockTypesettingTable;
+import jds.bibliocraft.blocks.*;
 import jds.bibliocraft.entity.EntityCatalogFX;
 import jds.bibliocraft.helpers.BiblioSortingHelper;
 import jds.bibliocraft.items.ItemReadingGlasses;
 import jds.bibliocraft.items.ItemStockroomCatalog;
-import jds.bibliocraft.tileentities.BiblioTileEntity;
-import jds.bibliocraft.tileentities.TileEntityArmorStand;
-import jds.bibliocraft.tileentities.TileEntityBookcase;
-import jds.bibliocraft.tileentities.TileEntityCase;
-import jds.bibliocraft.tileentities.TileEntityDesk;
-import jds.bibliocraft.tileentities.TileEntityDinnerPlate;
-import jds.bibliocraft.tileentities.TileEntityDiscRack;
-import jds.bibliocraft.tileentities.TileEntityFancyWorkbench;
-import jds.bibliocraft.tileentities.TileEntityFramedChest;
-import jds.bibliocraft.tileentities.TileEntityFurniturePaneler;
-import jds.bibliocraft.tileentities.TileEntityLabel;
-import jds.bibliocraft.tileentities.TileEntityPotionShelf;
-import jds.bibliocraft.tileentities.TileEntityPrintPress;
-import jds.bibliocraft.tileentities.TileEntityShelf;
-import jds.bibliocraft.tileentities.TileEntitySwordPedestal;
-import jds.bibliocraft.tileentities.TileEntityTable;
-import jds.bibliocraft.tileentities.TileEntityToolRack;
-import jds.bibliocraft.tileentities.TileEntityTypeMachine;
-import jds.bibliocraft.tileentities.TileEntityTypewriter;
+import jds.bibliocraft.tileentities.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
@@ -51,6 +25,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
 
 public class EventBlockMarkerHighlight 
 {

@@ -18,7 +18,7 @@ public class BiblioRenderHelper
     	{
     		Block stackBlock = Block.getBlockFromItem(stack.getItem());
     		IBlockState state = stackBlock.getDefaultState();
-    		ResourceLocation reloc = new ResourceLocation(stackBlock.getUnlocalizedName());
+    		ResourceLocation reloc = new ResourceLocation(stackBlock.getTranslationKey());
     		IBakedModel test = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack); 
     		returnValue = test.getParticleTexture().getIconName();
     	}

@@ -1,10 +1,5 @@
 package jds.bibliocraft.rendering;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.helpers.BiblioEnums.EnumBiblioPaintings;
 import jds.bibliocraft.helpers.PaintingUtil;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
@@ -20,6 +15,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.Attributes;
 import net.minecraftforge.client.model.pipeline.LightUtil;
+import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityPaintPressRenderer extends TileEntityBiblioRenderer
 {

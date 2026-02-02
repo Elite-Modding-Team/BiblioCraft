@@ -1,11 +1,11 @@
 package jds.bibliocraft.models;
 
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.blocks.BlockMapFrame;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 
 public class ModelMapFrame extends BiblioModelWood
 {
