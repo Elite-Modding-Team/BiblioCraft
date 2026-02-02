@@ -22,7 +22,7 @@ public class ItemNameTester extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setRegistryName(name);
 	}

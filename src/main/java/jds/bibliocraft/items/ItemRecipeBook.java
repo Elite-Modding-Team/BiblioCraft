@@ -36,7 +36,7 @@ public class ItemRecipeBook extends Item
 	public ItemRecipeBook()
 	{
 		super();
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setRegistryName(name);
 	}

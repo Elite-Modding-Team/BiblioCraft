@@ -39,13 +39,13 @@ public class EventDeathDrop
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			ItemStack mainhand = player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offhand = player.getHeldItem(EnumHand.OFF_HAND);
-			if (mainhand != ItemStack.EMPTY && EventItemToss.checkIfValidPacketItem(mainhand.getUnlocalizedName()))
+			if (mainhand != ItemStack.EMPTY && EventItemToss.checkIfValidPacketItem(mainhand.getTranslationKey()))
 			{
 				Container testContainer = player.openContainer;
 				System.out.println("not today sucker!");
 				if (testContainer != null)
 				{
-					if (EventItemToss.hasProperContainer(mainhand.getUnlocalizedName(), testContainer))
+					if (EventItemToss.hasProperContainer(mainhand.getTranslationKey(), testContainer))
 					{
 						player.closeScreen();
 					}
@@ -55,12 +55,12 @@ public class EventDeathDrop
 					player.closeScreen();
 				}
 			}
-			if (offhand != ItemStack.EMPTY && EventItemToss.checkIfValidPacketItem(offhand.getUnlocalizedName()))
+			if (offhand != ItemStack.EMPTY && EventItemToss.checkIfValidPacketItem(offhand.getTranslationKey()))
 			{
 				Container testContainer = player.openContainer;
 				if (testContainer != null)
 				{
-					if (EventItemToss.hasProperContainer(offhand.getUnlocalizedName(), testContainer))
+					if (EventItemToss.hasProperContainer(offhand.getTranslationKey(), testContainer))
 					{
 						player.closeScreen();
 					}

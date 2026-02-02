@@ -25,7 +25,7 @@ public class ItemSeatBack extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setHasSubtypes(true);
 		maxStackSize = 64;
 		setRegistryName(name);
@@ -50,9 +50,9 @@ public class ItemSeatBack extends Item
     
     
 	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
+	public String getTranslationKey(ItemStack itemStack)
 	{
-		return getUnlocalizedName()+"."+subNames[itemStack.getItemDamage()];
+		return getTranslationKey()+"."+subNames[itemStack.getItemDamage()];
 	}
 
     @SideOnly(Side.CLIENT)

@@ -20,7 +20,7 @@ public class ItemPaintingCanvas extends Item
 		super();
 		setMaxStackSize(64);
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setRegistryName(name);
 	}
 

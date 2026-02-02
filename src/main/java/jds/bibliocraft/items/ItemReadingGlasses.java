@@ -24,7 +24,7 @@ public class ItemReadingGlasses extends ItemArmor //implements IArmorTextureProv
 	{
 		super(BIBLIO_ARMOR_MATERIAL, 0, EntityEquipmentSlot.HEAD);
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 		setHasSubtypes(true);
 		setMaxDamage(0);
@@ -49,9 +49,9 @@ public class ItemReadingGlasses extends ItemArmor //implements IArmorTextureProv
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
+	public String getTranslationKey(ItemStack itemStack)
 	{
-		return getUnlocalizedName()+"."+subName[itemStack.getItemDamage()];
+		return getTranslationKey()+"."+subName[itemStack.getItemDamage()];
 	}
 
     @Override

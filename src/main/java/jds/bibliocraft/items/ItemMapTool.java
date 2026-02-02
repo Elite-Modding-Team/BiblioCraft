@@ -26,7 +26,7 @@ public class ItemMapTool extends Item
 	{
 		super();
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		maxStackSize = 1;
 		setRegistryName(name);
 	}

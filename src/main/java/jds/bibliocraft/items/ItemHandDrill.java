@@ -13,7 +13,7 @@ public class ItemHandDrill extends ItemDrill
 	{
 		super(name);
 		setCreativeTab(BlockLoader.biblioTab);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(1);
 	}
 	
