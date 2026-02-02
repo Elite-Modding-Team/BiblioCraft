@@ -54,7 +54,7 @@ public class BlockPrintingPress extends BiblioSimpleBlock
 				case 0:
 				{
 					//ink
-					if (playerhand != ItemStack.EMPTY && tile.isInk(playerhand))
+					if (playerhand != ItemStack.EMPTY && TileEntityPrintPress.isInk(playerhand))
 					{
 						tile.addStackToInventoryFromWorld(playerhand, slot, player);
 					}
