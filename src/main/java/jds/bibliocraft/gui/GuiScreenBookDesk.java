@@ -62,7 +62,7 @@ public class GuiScreenBookDesk extends GuiScreen
     private GuiButton buttonSign;
     private GuiButton buttonFinalize;
     private GuiButton buttonCancel;
-    private static final String __OBFID = "CL_00000744";
+
     
     private int i;
     private int j;
@@ -511,7 +511,7 @@ public class GuiScreenBookDesk extends GuiScreen
     static class NextPageButton extends GuiButton
         {
             private final boolean field_146151_o;
-            private static final String __OBFID = "CL_00000745";
+
 
             public NextPageButton(int par1, int par2, int par3, boolean par4)
             {
