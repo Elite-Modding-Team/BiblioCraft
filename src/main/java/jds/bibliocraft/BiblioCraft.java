@@ -5,6 +5,7 @@ import jds.bibliocraft.enchantments.EnchantmentReading;
 import jds.bibliocraft.entity.EntitySeat;
 import jds.bibliocraft.events.*;
 import jds.bibliocraft.network.BiblioNetworking;
+import jds.biliocraft.bibliocraft.Tags;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
@@ -14,7 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,8 +28,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.File;
 
 /**
  * BiblioCraft
@@ -47,12 +45,11 @@ import java.io.File;
  */
 
 // Minecraft v1.11.x+
-@Mod(modid=BiblioCraft.MODID, name="BiblioCraft", version=BiblioCraft.VERSION)
+@Mod(modid= Tags.MOD_ID, name= Tags.MOD_NAME, version=Tags.VERSION)
 
 public class BiblioCraft 
 {
-    public static final String MODID = "bibliocraft";
-    public static final String VERSION = "2.4.6";
+    public static final String MODID = Tags.MOD_ID;
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static FMLEventChannel ch_BiblioType;
     public static FMLEventChannel ch_BiblioTypeFlag;
@@ -202,6 +199,6 @@ public class BiblioCraft
 	{
 		MinecraftForge.EVENT_BUS.register(new GuiBiblioOverlay(Minecraft.getMinecraft())); 
 		
-		
+
 	}
 }
