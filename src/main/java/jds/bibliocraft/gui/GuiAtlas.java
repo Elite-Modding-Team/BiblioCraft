@@ -1,12 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.containers.ContainerAtlas;
 import jds.bibliocraft.items.ItemAtlas;
@@ -25,6 +18,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiAtlas extends GuiContainer
 {

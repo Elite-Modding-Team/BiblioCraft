@@ -1,7 +1,5 @@
 package jds.bibliocraft.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.containers.ContainerNameTester;
 import jds.bibliocraft.items.ItemNameTester;
@@ -16,6 +14,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.util.Constants;
+import org.lwjgl.opengl.GL11;
 
 public class GuiNameTester extends GuiContainer
 {

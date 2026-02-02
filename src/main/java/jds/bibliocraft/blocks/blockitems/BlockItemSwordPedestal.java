@@ -1,7 +1,5 @@
 package jds.bibliocraft.blocks.blockitems;
 
-import java.util.List;
-
 import jds.bibliocraft.blocks.BlockSwordPedestal;
 import jds.bibliocraft.helpers.EnumColor;
 import net.minecraft.block.Block;
@@ -10,6 +8,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class BlockItemSwordPedestal extends ItemBlock
 {

@@ -1,7 +1,5 @@
 package jds.bibliocraft.tileentities;
 
-import java.util.ArrayList;
-
 import jds.bibliocraft.blocks.BlockCookieJar;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +9,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.ArrayList;
 
 public class TileEntityCookieJar extends BiblioTileEntity implements ITickable
 {

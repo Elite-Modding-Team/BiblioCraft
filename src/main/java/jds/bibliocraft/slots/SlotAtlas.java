@@ -1,13 +1,7 @@
 package jds.bibliocraft.slots;
 
 import jds.bibliocraft.containers.ContainerAtlas;
-import jds.bibliocraft.items.ItemAtlas;
-import jds.bibliocraft.items.ItemBigBook;
-import jds.bibliocraft.items.ItemClipboard;
-import jds.bibliocraft.items.ItemDrill;
-import jds.bibliocraft.items.ItemMapTool;
-import jds.bibliocraft.items.ItemTapeMeasure;
-import jds.bibliocraft.items.ItemWaypointCompass;
+import jds.bibliocraft.items.*;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

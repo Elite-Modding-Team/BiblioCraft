@@ -1,12 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.helpers.InventoryListItem;
 import jds.bibliocraft.helpers.SortedListItem;
@@ -20,6 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiStockCatalog extends GuiScreen
 {

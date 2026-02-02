@@ -1,17 +1,16 @@
 package jds.bibliocraft.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.blocks.BiblioLightBlock;
 import jds.bibliocraft.blocks.BlockPrintingPress;
 import jds.bibliocraft.helpers.EnumColor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModelPrintingPress extends BiblioModelSimple
 {

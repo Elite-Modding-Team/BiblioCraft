@@ -1,13 +1,12 @@
 package jds.bibliocraft.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.containers.ContainerDiscRack;
 import jds.bibliocraft.tileentities.TileEntityDiscRack;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.text.translation.I18n;
+import org.lwjgl.opengl.GL11;
 
 public class GuiDiscRack extends GuiContainer
 {

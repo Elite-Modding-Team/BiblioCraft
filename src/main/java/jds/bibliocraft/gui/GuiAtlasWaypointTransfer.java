@@ -1,9 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.network.BiblioNetworking;
 import jds.bibliocraft.network.packet.server.BiblioAtlasWPT;
@@ -14,6 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 public class GuiAtlasWaypointTransfer extends GuiScreen
 {

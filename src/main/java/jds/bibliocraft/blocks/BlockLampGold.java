@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jds.bibliocraft.helpers.EnumMetalType;
 import jds.bibliocraft.helpers.EnumVertPosition;
 import jds.bibliocraft.tileentities.BiblioLightTileEntity;
@@ -12,6 +9,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockLampGold extends BiblioLightBlock
 {

@@ -1,11 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.network.BiblioNetworking;
@@ -35,6 +29,11 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockFurniturePaneler extends BiblioWoodBlock
 {

@@ -1,18 +1,9 @@
 package jds.bibliocraft;
 
-import java.io.File;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import jds.bibliocraft.enchantments.EnchantmentDeathCompass;
 import jds.bibliocraft.enchantments.EnchantmentReading;
 import jds.bibliocraft.entity.EntitySeat;
-import jds.bibliocraft.events.EventBlockMarkerHighlight;
-import jds.bibliocraft.events.EventDeathDrop;
-import jds.bibliocraft.events.EventItemToss;
-import jds.bibliocraft.events.EventSpawn;
-import jds.bibliocraft.events.GuiBiblioOverlay;
+import jds.bibliocraft.events.*;
 import jds.bibliocraft.network.BiblioNetworking;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -35,6 +26,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.File;
 
 /**
  * BiblioCraft

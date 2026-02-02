@@ -2,12 +2,8 @@ package jds.bibliocraft.blocks;
 
 //import jds.bibliocraft.items.ItemDrill;
 //import jds.bibliocraft.items.ItemLock;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import com.google.common.collect.Lists;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.blocks.blockitems.BlockItemBookcase;
@@ -29,6 +25,10 @@ import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class BlockBookcase extends BiblioWoodBlock 

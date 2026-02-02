@@ -1,8 +1,5 @@
 package jds.bibliocraft.events;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.items.ItemAtlas;
@@ -17,6 +14,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class EventDeathDrop 
 {

@@ -1,8 +1,6 @@
 package jds.bibliocraft.containers;
 
 
-import java.util.ArrayList;
-
 import jds.bibliocraft.items.ItemAtlas;
 import jds.bibliocraft.items.ItemWaypointCompass;
 import jds.bibliocraft.network.BiblioNetworking;
@@ -14,11 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
@@ -29,6 +23,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapData;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.ArrayList;
 
 public class ContainerAtlas extends Container
 {

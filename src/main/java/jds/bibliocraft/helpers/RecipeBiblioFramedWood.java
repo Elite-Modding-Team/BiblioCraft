@@ -1,8 +1,5 @@
 package jds.bibliocraft.helpers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -12,6 +9,9 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RecipeBiblioFramedWood extends ShapedRecipes
 {

@@ -1,7 +1,5 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-
 import jds.bibliocraft.BlockLoader;
 import jds.bibliocraft.blocks.BlockClipboard;
 import jds.bibliocraft.gui.GuiClipboard;
@@ -22,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemClipboard extends Item
 {

@@ -1,7 +1,5 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.BlockLoader;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,6 +11,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemSlottedBook extends Item {
 	public String playername;

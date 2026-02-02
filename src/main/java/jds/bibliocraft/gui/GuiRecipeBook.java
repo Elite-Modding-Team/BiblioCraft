@@ -1,10 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import jds.bibliocraft.CommonProxy;
@@ -24,6 +19,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 public class GuiRecipeBook extends GuiScreen
 {

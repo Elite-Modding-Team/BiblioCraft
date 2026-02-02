@@ -1,10 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import jds.bibliocraft.CommonProxy;
@@ -26,6 +21,10 @@ import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 public class GuiBigBook extends GuiScreen
 {

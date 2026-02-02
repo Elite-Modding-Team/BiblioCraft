@@ -1,10 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.containers.ContainerFancyWorkbench;
 import jds.bibliocraft.items.ItemRecipeBook;
@@ -24,6 +19,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiFancyWorkbench extends GuiContainer
 {

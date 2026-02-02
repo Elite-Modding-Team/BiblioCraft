@@ -1,9 +1,6 @@
 package jds.bibliocraft.statemappers;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import jds.bibliocraft.blocks.BlockLampGold;
 import jds.bibliocraft.blocks.BlockLampIron;
 import jds.bibliocraft.blocks.BlockLanternGold;
@@ -14,6 +11,8 @@ import jds.bibliocraft.models.ModelLantern;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+
+import java.util.Map;
 
 public class LightingStateMapper extends DefaultStateMapper
 {

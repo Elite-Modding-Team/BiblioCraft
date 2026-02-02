@@ -1,9 +1,6 @@
 package jds.bibliocraft.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import jds.bibliocraft.BlockLoader;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import net.minecraft.block.SoundType;
@@ -17,6 +14,8 @@ import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
+
+import java.util.List;
 
 public abstract class BiblioSimpleBlock extends BiblioBlock
 {

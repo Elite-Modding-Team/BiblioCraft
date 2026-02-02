@@ -1,7 +1,5 @@
 package jds.bibliocraft.rendering;
 
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.helpers.BiblioEnums.EnumBiblioPaintings;
 import jds.bibliocraft.helpers.EnumPaintingFrame;
@@ -17,6 +15,7 @@ import net.minecraft.entity.item.EntityPainting.EnumArt;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.Attributes;
 import net.minecraftforge.client.model.pipeline.LightUtil;
+import org.lwjgl.opengl.GL11;
 
 public class TileEntityPaintingRenderer extends TileEntityBiblioRenderer
 {

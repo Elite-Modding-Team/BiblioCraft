@@ -1,7 +1,5 @@
 package jds.bibliocraft.helpers;
 
-import java.util.HashMap;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.enchantments.EnchantmentDeathCompass;
 import jds.bibliocraft.items.ItemAtlas;
@@ -16,6 +14,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+
+import java.util.HashMap;
 
 public class RecipeBiblioAtlas extends ShapedRecipes
 {

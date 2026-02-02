@@ -1,9 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import jds.bibliocraft.entity.EntityCandleFX;
 import jds.bibliocraft.helpers.EnumMetalType;
 import jds.bibliocraft.tileentities.BiblioLightTileEntity;
@@ -17,6 +13,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockLanternGold extends BiblioLightBlock
 {

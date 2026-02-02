@@ -1,15 +1,7 @@
 package jds.bibliocraft.network.packet;
 
-import java.util.ArrayList;
-
 import jds.bibliocraft.BiblioCraft;
-import jds.bibliocraft.gui.GuiAtlasMap;
-import jds.bibliocraft.gui.GuiAtlasWaypointTransfer;
-import jds.bibliocraft.gui.GuiBigBook;
-import jds.bibliocraft.gui.GuiClipboard;
-import jds.bibliocraft.gui.GuiRecipeBook;
-import jds.bibliocraft.gui.GuiScreenBookDesk;
-import jds.bibliocraft.gui.GuiStockCatalog;
+import jds.bibliocraft.gui.*;
 import jds.bibliocraft.helpers.EnumVertPosition;
 import jds.bibliocraft.helpers.SortedListItem;
 import jds.bibliocraft.items.ItemRecipeBook;
@@ -35,6 +27,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
 
 public class Utils {
     @SideOnly(Side.CLIENT)

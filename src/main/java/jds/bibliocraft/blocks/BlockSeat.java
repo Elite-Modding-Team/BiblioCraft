@@ -1,19 +1,9 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.Config;
 import jds.bibliocraft.entity.EntitySeat;
 import jds.bibliocraft.helpers.SeatHelper;
-import jds.bibliocraft.items.ItemSeatBack;
-import jds.bibliocraft.items.ItemSeatBack2;
-import jds.bibliocraft.items.ItemSeatBack3;
-import jds.bibliocraft.items.ItemSeatBack4;
-import jds.bibliocraft.items.ItemSeatBack5;
+import jds.bibliocraft.items.*;
 import jds.bibliocraft.states.TextureState;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntitySeat;
@@ -31,6 +21,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockSeat extends BiblioWoodBlock
 {

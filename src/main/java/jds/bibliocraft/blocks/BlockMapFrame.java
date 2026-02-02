@@ -1,13 +1,6 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import com.google.common.collect.Lists;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import jds.bibliocraft.helpers.EnumVertPosition;
@@ -35,6 +28,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockMapFrame extends BiblioWoodBlock
 {

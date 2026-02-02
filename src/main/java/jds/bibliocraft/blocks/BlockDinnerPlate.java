@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-
 import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntityDinnerPlate;
@@ -25,6 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 
 public class BlockDinnerPlate extends BiblioSimpleBlock
 {

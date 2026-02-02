@@ -1,7 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.List;
-
 import jds.bibliocraft.BlockLoader;
 import jds.bibliocraft.Config;
 import jds.bibliocraft.states.TextureProperty;
@@ -31,6 +29,8 @@ import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+
+import java.util.List;
 
 public abstract class BiblioWoodBlock extends BiblioBlock
 {

@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jds.bibliocraft.gui.GuiTypesetting;
 import jds.bibliocraft.items.ItemChase;
 import jds.bibliocraft.items.ItemPlate;
@@ -23,6 +20,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockTypesettingTable extends BiblioSimpleBlock
 {

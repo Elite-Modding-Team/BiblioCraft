@@ -1,8 +1,5 @@
 package jds.bibliocraft.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jds.bibliocraft.helpers.EnumPaintingFrame;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntityPainting;
@@ -10,6 +7,9 @@ import jds.bibliocraft.tileentities.TileEntityPaintingFancy;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockPaintingFrameFancy extends BlockPainting
 {

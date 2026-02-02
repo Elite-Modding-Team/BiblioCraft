@@ -1,12 +1,7 @@
 package jds.bibliocraft.rendering;
 
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
-
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.helpers.EnumShiftPosition;
 import jds.bibliocraft.helpers.EnumVertPosition;
 import jds.bibliocraft.items.ItemClipboard;
@@ -19,9 +14,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
-//import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-//import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -33,10 +26,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.MapData;
 import net.minecraftforge.client.model.Attributes;
-//import net.minecraftforge.client.model.IBakedModel;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.obj.OBJModel;
+import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 public abstract class TileEntityBiblioRenderer extends TileEntitySpecialRenderer
 {

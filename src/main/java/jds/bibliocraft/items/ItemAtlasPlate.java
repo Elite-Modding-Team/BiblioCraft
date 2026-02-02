@@ -1,13 +1,13 @@
 package jds.bibliocraft.items;
 
-import java.util.List;
-
 import jds.bibliocraft.BlockLoader;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 
 public class ItemAtlasPlate extends Item

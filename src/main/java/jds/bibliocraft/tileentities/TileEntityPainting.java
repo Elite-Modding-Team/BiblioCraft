@@ -1,11 +1,7 @@
 package jds.bibliocraft.tileentities;
 
 import jds.bibliocraft.Config;
-import jds.bibliocraft.blocks.BlockPaintingFrameBorderless;
-import jds.bibliocraft.blocks.BlockPaintingFrameFancy;
-import jds.bibliocraft.blocks.BlockPaintingFrameFlat;
-import jds.bibliocraft.blocks.BlockPaintingFrameMiddle;
-import jds.bibliocraft.blocks.BlockPaintingFrameSimple;
+import jds.bibliocraft.blocks.*;
 import jds.bibliocraft.helpers.EnumPaintingFrame;
 import jds.bibliocraft.items.ItemPaintingCanvas;
 import net.minecraft.item.Item;

@@ -1,7 +1,5 @@
 package jds.bibliocraft.network.packet.client;
 
-import java.util.ArrayList;
-
 import io.netty.buffer.ByteBuf;
 import jds.bibliocraft.helpers.BiblioSortingHelper;
 import jds.bibliocraft.helpers.SortedListItem;
@@ -15,6 +13,8 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import java.util.ArrayList;
 
 public class BiblioStockLog implements IMessage {
     NBTTagCompound tags;

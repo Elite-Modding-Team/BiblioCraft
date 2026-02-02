@@ -1,13 +1,7 @@
 package jds.bibliocraft.rendering;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
-
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.helpers.EnumVertPosition;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
@@ -28,6 +22,10 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.client.model.pipeline.LightUtil;
+import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityMapFrameRenderer extends TileEntityBiblioRenderer
 {

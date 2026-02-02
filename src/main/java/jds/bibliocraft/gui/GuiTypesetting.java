@@ -1,8 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.helpers.FileUtil;
 import jds.bibliocraft.network.BiblioNetworking;
@@ -18,6 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class GuiTypesetting extends GuiScreen //GuiContainer
 {

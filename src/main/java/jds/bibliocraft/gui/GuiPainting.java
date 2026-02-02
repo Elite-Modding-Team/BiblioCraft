@@ -1,9 +1,5 @@
 package jds.bibliocraft.gui;
 
-import java.io.IOException;
-
-import org.lwjgl.opengl.GL11;
-
 import jds.bibliocraft.CommonProxy;
 import jds.bibliocraft.containers.ContainerPainting;
 import jds.bibliocraft.helpers.BiblioEnums.EnumBiblioPaintings;
@@ -19,6 +15,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 public class GuiPainting extends GuiContainer
 {

@@ -1,13 +1,5 @@
 package jds.bibliocraft.helpers;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import jds.bibliocraft.Config;
 import jds.bibliocraft.items.ItemBigBook;
 import jds.bibliocraft.items.ItemRecipeBook;
@@ -15,15 +7,14 @@ import jds.bibliocraft.items.ItemStockroomCatalog;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagByte;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.nbt.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.io.*;
+import java.util.ArrayList;
 
 public class FileUtil {
 	private final String savePath = "books_bibliocraft";
