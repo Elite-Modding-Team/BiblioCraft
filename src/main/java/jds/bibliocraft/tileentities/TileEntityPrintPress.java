@@ -451,7 +451,7 @@ public class TileEntityPrintPress extends BiblioTileEntity implements ITickable,
             return 0;
         }
     	Item var2 = par0ItemStack.getItem();
-    	if (var2 instanceof ItemDye) 
+    	if (isInk(par0ItemStack))
     	{
     		return 200;
     	}
@@ -471,7 +471,7 @@ public class TileEntityPrintPress extends BiblioTileEntity implements ITickable,
     	return animate;
     }
     
-    public boolean isInk(ItemStack stack)
+    public static boolean isInk(ItemStack stack)
 	{
 		boolean output = false;
 		int[] oreIDs = OreDictionary.getOreIDs(stack);
