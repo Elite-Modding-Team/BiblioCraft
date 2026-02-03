@@ -547,83 +547,78 @@ public abstract class BiblioTileEntity extends TileEntity implements IInventory,
 	}
 
 	@Override
-	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) 
+	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
 	{
-		ItemStack returnStack = stack;
-		if (slot < this.inventory.size())
-		{
-			ItemStack currentSlot = this.getStackInSlot(slot);
-			if (currentSlot != ItemStack.EMPTY)
-			{
-				if (stack.getItem() == currentSlot.getItem() && currentSlot.getCount() < currentSlot.getMaxStackSize())
-				{
-					if (!simulate)
-					{
-						int count = currentSlot.getCount() + stack.getCount();
-						if (count > stack.getMaxStackSize())
-						{
-							currentSlot.setCount(currentSlot.getMaxStackSize());
-							setInventorySlotContents(slot, currentSlot);
-							returnStack = stack.copy();
-							returnStack.setCount(count - currentSlot.getMaxStackSize());
-						}
-						else
-						{
-							stack.setCount(count);
-							setInventorySlotContents(slot, stack);
-							returnStack = ItemStack.EMPTY;
-						}
-					}
-				}
+		if (stack.isEmpty() || slot >= getSlots() || !isItemValidForSlot(slot, stack)) {
+			return stack;
+		}
+
+		ItemStack existing = getStackInSlot(slot);
+		int limit = getSlotLimit(slot);
+
+		if (!existing.isEmpty()) {
+			if (!ItemStack.areItemsEqual(stack, existing) || !ItemStack.areItemStackTagsEqual(stack, existing)) {
+				return stack;
 			}
-			else
-			{
-				if (!simulate)
-				{
-					this.setInventorySlotContents(slot, stack);
-					returnStack = ItemStack.EMPTY;
-				}
+			limit -= existing.getCount();
+		}
+
+		if (limit <= 0) {
+			return stack;
+		}
+
+		int toInsert = Math.min(stack.getCount(), limit);
+
+		if (!simulate) {
+			if (existing.isEmpty()) {
+				setInventorySlotContents(slot, stack.splitStack(toInsert));
+			} else {
+				existing.grow(toInsert);
+				// setInventorySlotContents is already called inside grow, but we call it again to ensure updates
+				setInventorySlotContents(slot, existing);
 			}
 		}
-		return returnStack;
+
+		if (toInsert == stack.getCount()) {
+			return ItemStack.EMPTY;
+		} else {
+			stack.shrink(toInsert);
+			return stack;
+		}
 	}
 
 	@Override
-	public ItemStack extractItem(int slot, int amount, boolean simulate) 
+	public ItemStack extractItem(int slot, int amount, boolean simulate)
 	{
-		ItemStack result = ItemStack.EMPTY;
-		if (slot < this.inventory.size())
-		{
-			ItemStack slottedStack = this.getStackInSlot(slot);
-			if (slottedStack != ItemStack.EMPTY && !simulate)
-			{
-				result = slottedStack.copy();
-				if (amount >= slottedStack.getCount())
-				{
-					// send it all
-					this.setInventorySlotContents(slot, ItemStack.EMPTY);
-				}
-				else
-				{
-					result.setCount(amount);
-					slottedStack.setCount(slottedStack.getCount() - amount);
-					this.setInventorySlotContents(slot, slottedStack);
-				}
-			}
-			
-			if (simulate)
-			{
-				// TODO return the simulated extracted ItemStack
-			}
+		if (amount == 0 || slot >= getSlots()) {
+			return ItemStack.EMPTY;
 		}
-		return result;
+
+		ItemStack existing = getStackInSlot(slot);
+
+		if (existing.isEmpty()) {
+			return ItemStack.EMPTY;
+		}
+
+		int toExtract = Math.min(amount, existing.getMaxStackSize());
+
+		if (existing.getCount() <= toExtract) {
+			if (!simulate) {
+				setInventorySlotContents(slot, ItemStack.EMPTY);
+			}
+			return existing;
+		} else {
+			if (!simulate) {
+				setInventorySlotContents(slot, existing.splitStack(existing.getCount() - toExtract));
+			}
+			return existing.splitStack(toExtract);
+		}
 	}
 
 	@Override
-	public int getSlotLimit(int slot) 
+	public int getSlotLimit(int slot)
 	{
-		// TODO I may have to tweak this for certain use cases? Like map frames, armor stands, clipboard block, 
-		return 64;
+		return getInventoryStackLimit();
 	}
 
 }
