@@ -9,33 +9,30 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RecipeBiblioFramedWood extends ShapedRecipes
 {
-	//private static String textureString = "none"; // TODO this fails, it only registered this class 1 time and thus the textureString becomes the last recipe registered
-	// and also returns the last textureString reguardless of what wood goes into recipie
-	// TODO, maybe I should make a string registry
 	private static ArrayList<WoodRegistryEntry> registry;
 
-	public RecipeBiblioFramedWood(int width, int height, NonNullList<Ingredient> ingredientsIn, ItemStack output) 
+	public RecipeBiblioFramedWood(String group, int width, int height, NonNullList<Ingredient> ingredientsIn, ItemStack output) 
 	{
-		super("", width, height, ingredientsIn, output);
+		super(group, width, height, ingredientsIn, output);
 		if (registry == null)
 			registry = new ArrayList<WoodRegistryEntry>();
 		
 	}
 	
-	public static IRecipe addShapedWoodRecipe(ItemStack stack, WoodRegistryEntry entry, Object ... stuff)
+	public static IRecipe addShapedWoodRecipe(ResourceLocation registryName, ItemStack stack, WoodRegistryEntry entry, Object ... stuff)
 	{
 		if (registry == null)
 			registry = new ArrayList<WoodRegistryEntry>();
 		
 		registry.add(entry);
 		
-		//textureString = texture;
 		String recipe = "";
 		int i = 0;
 		int width = 0;
@@ -64,31 +61,35 @@ public class RecipeBiblioFramedWood extends ShapedRecipes
             }
         }
 
-        HashMap hashmap;
+        HashMap<Character, Ingredient> hashmap = new HashMap<Character, Ingredient>();
 
-        for (hashmap = new HashMap(); i < stuff.length; i += 2)
+        for (; i < stuff.length; i += 2)
         {
             Character character = (Character)stuff[i];
-            ItemStack itemstack1 = ItemStack.EMPTY;
+            Object object = stuff[i + 1];
+            Ingredient ingredient = Ingredient.EMPTY;
 
-            if (stuff[i + 1] instanceof Item)
+            if (object instanceof Item)
             {
-                itemstack1 = new ItemStack((Item)stuff[i + 1]);
+                ingredient = Ingredient.fromItem((Item)object);
             }
-            else if (stuff[i + 1] instanceof Block)
+            else if (object instanceof Block)
             {
-                itemstack1 = new ItemStack((Block)stuff[i + 1], 1, 32767);
+                ingredient = Ingredient.fromStacks(new ItemStack((Block)object, 1, 32767));
             }
-            else if (stuff[i + 1] instanceof ItemStack)
+            else if (object instanceof ItemStack)
             {
-                itemstack1 = (ItemStack)stuff[i + 1];
+                ingredient = Ingredient.fromStacks((ItemStack)object);
+            }
+            else if (object instanceof String)
+            {
+                ingredient = new net.minecraftforge.oredict.OreIngredient((String)object);
             }
 
-            hashmap.put(character, itemstack1);
+            hashmap.put(character, ingredient);
         }
 
-        NonNullList<Ingredient> stackarray = NonNullList.<Ingredient>create();
-        //ItemStack[] stackarray = new ItemStack[width * height];
+        NonNullList<Ingredient> stackarray = NonNullList.<Ingredient>withSize(width * height, Ingredient.EMPTY);
 
         for (int j = 0; j < width * height; ++j)
         {
@@ -96,20 +97,15 @@ public class RecipeBiblioFramedWood extends ShapedRecipes
 
             if (hashmap.containsKey(Character.valueOf(c0)))
             {
-            	// TODO this is totally broken
-            	//ItemStack thestack = ((ItemStack)hashmap.get(Character.valueOf(c0))).copy();
-            	//stackarray.add(((Ingredient)thestack);
+                stackarray.set(j, hashmap.get(Character.valueOf(c0)));
             }
-            //else
-           // {
-           //     stackarray[j] = ItemStack.EMPTY;
-           // }
         }
 
         NBTTagCompound tags = new NBTTagCompound();
         tags.setString("renderTexture", entry.getTextureString());
         stack.setTagCompound(tags);
-		IRecipe shapedrecipe = new RecipeBiblioFramedWood(width, height, stackarray, stack);
+		IRecipe shapedrecipe = new RecipeBiblioFramedWood("", width, height, stackarray, stack);
+		shapedrecipe.setRegistryName(registryName);
 		return shapedrecipe;
 	}
 	
@@ -119,8 +115,9 @@ public class RecipeBiblioFramedWood extends ShapedRecipes
         ItemStack itemstack = this.getRecipeOutput().copy();
         WoodRegistryEntry match;
         String texture = "none";
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++) // 3x3 grid
         {
+            if (i >= inv.getSizeInventory()) break;
         	match = foundMatch(inv.getStackInSlot(i));
         	if (match.getIfReal())
         	{
@@ -128,7 +125,6 @@ public class RecipeBiblioFramedWood extends ShapedRecipes
         		break;
         	}
         }
-        // TODO here is where it happens I think, I need to call from the registry.
         
         NBTTagCompound tags = new NBTTagCompound();
         tags.setString("renderTexture", texture);
@@ -138,7 +134,8 @@ public class RecipeBiblioFramedWood extends ShapedRecipes
 	
 	private WoodRegistryEntry foundMatch(ItemStack stack)
 	{
-		//boolean result = false;
+	    if (stack.isEmpty()) return new WoodRegistryEntry("none", "none", "none", false);
+	    
 		WoodRegistryEntry result = new WoodRegistryEntry("none", "none", "none", false);
 		
 		for (int i = 0; i < registry.size(); i++)

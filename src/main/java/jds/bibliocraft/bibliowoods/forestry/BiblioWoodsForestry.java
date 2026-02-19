@@ -1,4 +1,4 @@
-package jds.bibliowoods.forestry;
+package jds.bibliocraft.bibliowoods.forestry;
 
 import jds.bibliocraft.blocks.BlockBookcase;
 import jds.bibliocraft.helpers.BiblioWoodHelperTab;
@@ -8,32 +8,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-
-@Mod(modid=BiblioWoodsForestry.MODID, name="BiblioWoodForestry", version=BiblioWoodsForestry.VERSION, dependencies="after:bibliocraft; after:foresty")
 
 public class BiblioWoodsForestry 
 {
-    public static final String MODID = "bibliowoodsforestry";
-    public static final String VERSION = "2.0";
     public static CreativeTabs creativeTab;
     
-	public boolean modloaded = Loader.isModLoaded("forestry");
-	public boolean biblioLoaded = Loader.isModLoaded("bibliocraft");
-	
-	@Mod.Instance(MODID)
-	public static BiblioWoodsForestry instance;
-	
-	@Mod.EventHandler 
-	public void load(FMLInitializationEvent event) 
+	public static void init() 
 	{
-		modloaded = Loader.isModLoaded("forestry");
-		biblioLoaded = Loader.isModLoaded("bibliocraft");
-		
-		if (biblioLoaded && modloaded)
+		if (Loader.isModLoaded("forestry"))
 		{
 			Block planks1 = Block.REGISTRY.getObject(new ResourceLocation("forestry:planks.0")); 
 			Block planks2 = Block.REGISTRY.getObject(new ResourceLocation("forestry:planks.1")); 
@@ -41,6 +24,9 @@ public class BiblioWoodsForestry
 			Block slabs2 = Block.REGISTRY.getObject(new ResourceLocation("forestry:slabs.1"));
 			Block slabs3 = Block.REGISTRY.getObject(new ResourceLocation("forestry:slabs.2"));
 			Block slabs4 = Block.REGISTRY.getObject(new ResourceLocation("forestry:slabs.3"));
+            
+            if (planks1 == null || planks2 == null || slabs1 == null || slabs2 == null || slabs3 == null || slabs4 == null) return;
+            
 			Block[] planks = {planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1, planks1,
 							  planks2, planks2, planks2, planks2, planks2, planks2, planks2, planks2, planks2, planks2, planks2, planks2, planks2};
 			int[] plankID = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,1,2,3,4,5,6,7,8,9,10,11,12};
@@ -89,12 +75,6 @@ public class BiblioWoodsForestry
 				RegisterCustomFramedBlocks reg = new RegisterCustomFramedBlocks(textures[i]);
 				reg.registerRecipies(new ItemStack(planks[i], 1, plankID[i]), new ItemStack(slabs[i], 1, slabID[i]));
 			}
-		}
-		else
-		{
-			FMLLog.warning("BiblioWoods Forestry edition failed to load");
-			FMLLog.warning("Is BiblioCraft loaded?   "+biblioLoaded);
-			FMLLog.warning("Is Forestry loaded?   "+modloaded);
 		}
 	}
 }
