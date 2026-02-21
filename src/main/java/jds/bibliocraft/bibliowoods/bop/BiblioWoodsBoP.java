@@ -1,4 +1,4 @@
-package jds.bibliowoods.bop;
+package jds.bibliocraft.bibliowoods.bop;
 
 import jds.bibliocraft.blocks.BlockBookcase;
 import jds.bibliocraft.helpers.BiblioWoodHelperTab;
@@ -8,37 +8,22 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-
-@Mod(modid=BiblioWoodsBoP.MODID, name="BiblioWoodBoP", version=BiblioWoodsBoP.VERSION, dependencies="after:bibliocraft; after:biomesoplenty")
 
 public class BiblioWoodsBoP 
 {
-    public static final String MODID = "bibliowoodsbop";
-    public static final String VERSION = "2.0";
     public static CreativeTabs creativeTab;
     
-	boolean modloaded = Loader.isModLoaded("biomesoplenty");
-	boolean biblioLoaded = Loader.isModLoaded("bibliocraft");
-    
-	@Mod.Instance(MODID)
-	public static BiblioWoodsBoP instance;
-	
-	@Mod.EventHandler 
-	public void load(FMLInitializationEvent event) 
+	public static void init() 
 	{
-		// TODO the recipe for hellbark gave me eucalyptus
-		modloaded = Loader.isModLoaded("biomesoplenty");
-		biblioLoaded = Loader.isModLoaded("bibliocraft");
-		//modloaded = true;
-		if (biblioLoaded && modloaded)
+		if (Loader.isModLoaded("biomesoplenty"))
 		{
 			Block planks = Block.REGISTRY.getObject(new ResourceLocation("biomesoplenty:planks_0")); 
 			Block slabs1 = Block.REGISTRY.getObject(new ResourceLocation("biomesoplenty:wood_slab_0"));
 			Block slabs2 = Block.REGISTRY.getObject(new ResourceLocation("biomesoplenty:wood_slab_1"));
+            
+            if (planks == null || slabs1 == null || slabs2 == null) return;
+
 			Block[] slabs = {slabs1, slabs1, slabs1, slabs1, slabs1, slabs1, slabs1, slabs1, slabs2, slabs2, slabs2, slabs2, slabs2, slabs2, slabs2, slabs2};
 			int[] slabMetas = {0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7};
 			String[] textures = {
@@ -70,12 +55,5 @@ public class BiblioWoodsBoP
 				reg.registerRecipies(new ItemStack(planks, 1, i), new ItemStack(slabs[i], 1, slabMetas[i]));
 			}
 		}
-		else
-		{
-			FMLLog.warning("BiblioWoods Biomes O Plenty edition failed to load");
-			FMLLog.warning("Is BiblioCraft loaded?   "+biblioLoaded);
-			FMLLog.warning("Is BiomesOPlenty loaded?   "+modloaded);
-		}
 	}
-	
 }

@@ -7,6 +7,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 
@@ -95,6 +97,12 @@ public class RegisterCustomFramedBlocks
 		return this.enabledMap;
 	}
 	
+	private ResourceLocation getRegistryName(String blockName)
+	{
+		String safeTexture = this.textureString.replaceAll("[^a-z0-9_.-]", "_").toLowerCase();
+		return new ResourceLocation("bibliocraft", "custom_framed_" + safeTexture + "_" + blockName);
+	}
+
 	public void registerRecipies(ItemStack plank, ItemStack slab)
 	{
 		WoodRegistryEntry recipeStrings = new WoodRegistryEntry(slab.getTranslationKey(), plank.getTranslationKey(), this.textureString, true);
@@ -114,75 +122,72 @@ public class RegisterCustomFramedBlocks
 		ItemStack torch = new ItemStack(Blocks.TORCH, 1, 0);
 		ItemStack woodPP = new ItemStack(Blocks.WOODEN_PRESSURE_PLATE, 1, 0);
 		
-		/* TODO All recipes are bra-oke-en
-		//GameRegistry.addShapedRecipe(name, group, output, params);
 		if (Config.enableBookcase)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(0), recipeStrings, new Object[]{"XYX", "XYX", "XYX", Character.valueOf('X'), plank, Character.valueOf('Y'), slab}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("bookcase"), this.blockList.get(0), recipeStrings, new Object[]{"XYX", "XYX", "XYX", Character.valueOf('X'), plank, Character.valueOf('Y'), slab}));
 			
 		if (Config.enableFramedChest && Config.enableWoodLabel)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(2), recipeStrings, new Object[]{ "SSS", "SLS", "SSS", Character.valueOf('S'), plank, Character.valueOf('L'), this.blockList.get(18)}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("framedchest"), this.blockList.get(2), recipeStrings, new Object[]{ "SSS", "SLS", "SSS", Character.valueOf('S'), plank, Character.valueOf('L'), this.blockList.get(18)}));
 		
 		if (Config.enableFancyWorkbench && Config.enableBookcase)
 		{
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(3), recipeStrings, new Object[]{"ITF", "SBS", "SSS", Character.valueOf('I'), "dyeBlack", Character.valueOf('T'), craftingBench, Character.valueOf('F'), feather, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(0)}));
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(3), recipeStrings, new Object[]{"FTI", "SBS", "SSS", Character.valueOf('I'), "dyeBlack", Character.valueOf('T'), craftingBench, Character.valueOf('F'), feather, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(0)}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("fancyworkbench1"), this.blockList.get(3), recipeStrings, new Object[]{"ITF", "SBS", "SSS", Character.valueOf('I'), "dyeBlack", Character.valueOf('T'), craftingBench, Character.valueOf('F'), feather, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(0)}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("fancyworkbench2"), this.blockList.get(3), recipeStrings, new Object[]{"FTI", "SBS", "SSS", Character.valueOf('I'), "dyeBlack", Character.valueOf('T'), craftingBench, Character.valueOf('F'), feather, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(0)}));
 		}
 	
 		if (Config.enableFurniturePaneler)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(4), recipeStrings, new Object[]{"IFI", "SSS", "PPP", Character.valueOf('S'), slab, Character.valueOf('F'), saw, Character.valueOf('P'), plank, Character.valueOf('I'), ironIngot}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("furniturepaneler"), this.blockList.get(4), recipeStrings, new Object[]{"IFI", "SSS", "PPP", Character.valueOf('S'), slab, Character.valueOf('F'), saw, Character.valueOf('P'), plank, Character.valueOf('I'), ironIngot}));
 		
 		if (Config.enableGenericshelf)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(5), recipeStrings, new Object[]{"YYY", " X ", "YYY", Character.valueOf('X'), plank, Character.valueOf('Y'), slab}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("genericshelf"), this.blockList.get(5), recipeStrings, new Object[]{"YYY", " X ", "YYY", Character.valueOf('X'), plank, Character.valueOf('Y'), slab}));
 		
 		if (Config.enableToolrack)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(6), recipeStrings, new Object[]{"YYY", "YXY", "YYY", Character.valueOf('X'), ironIngot, Character.valueOf('Y'), slab}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("toolrack"), this.blockList.get(6), recipeStrings, new Object[]{"YYY", "YXY", "YYY", Character.valueOf('X'), ironIngot, Character.valueOf('Y'), slab}));
 			
 		if (Config.enablePotionshelf)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(7), recipeStrings, new Object[]{"YYY", "XBX", "YYY", Character.valueOf('X'), plank, Character.valueOf('Y'), slab, Character.valueOf('B'), emptyBottle}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("potionshelf"), this.blockList.get(7), recipeStrings, new Object[]{"YYY", "XBX", "YYY", Character.valueOf('X'), plank, Character.valueOf('Y'), slab, Character.valueOf('B'), emptyBottle}));
 
 		if (Config.enableClock)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(8), recipeStrings, new Object[]{ "SCS", "STS", "SGS", Character.valueOf('S'), slab, Character.valueOf('C'), vanclock, Character.valueOf('T'), stick, Character.valueOf('G'), goldIngot}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("clock"), this.blockList.get(8), recipeStrings, new Object[]{ "SCS", "STS", "SGS", Character.valueOf('S'), slab, Character.valueOf('C'), vanclock, Character.valueOf('T'), stick, Character.valueOf('G'), goldIngot}));
 		
 		if (Config.enablePainting)
 		{
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(9), recipeStrings, new Object[]{"TST", "SSS", "TST", Character.valueOf('T'), stick, Character.valueOf('S'), slab})); 
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(10), recipeStrings, new Object[]{"SSS", "SBS", "SSS", Character.valueOf('B'), this.blockList.get(9), Character.valueOf('S'), slab}));
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(11), recipeStrings, new Object[]{"TST", "SBS", "TST", Character.valueOf('T'), stick, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(9)}));
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(12), recipeStrings, new Object[]{"TST", "TBT", "TST", Character.valueOf('T'), stick, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(9)}));
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(13), recipeStrings, new Object[]{"TTT", "TBT", "TTT", Character.valueOf('T'), stick, Character.valueOf('B'), this.blockList.get(9)}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("paintingframeborderless"), this.blockList.get(9), recipeStrings, new Object[]{"TST", "SSS", "TST", Character.valueOf('T'), stick, Character.valueOf('S'), slab})); 
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("paintingframeflat"), this.blockList.get(10), recipeStrings, new Object[]{"SSS", "SBS", "SSS", Character.valueOf('B'), this.blockList.get(9), Character.valueOf('S'), slab}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("paintingframesimple"), this.blockList.get(11), recipeStrings, new Object[]{"TST", "SBS", "TST", Character.valueOf('T'), stick, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(9)}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("paintingframemiddle"), this.blockList.get(12), recipeStrings, new Object[]{"TST", "TBT", "TST", Character.valueOf('T'), stick, Character.valueOf('S'), slab, Character.valueOf('B'), this.blockList.get(9)}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("paintingframefancy"), this.blockList.get(13), recipeStrings, new Object[]{"TTT", "TBT", "TTT", Character.valueOf('T'), stick, Character.valueOf('B'), this.blockList.get(9)}));
 		}
 		
 		if (Config.enableWeaponcase)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(14), recipeStrings, new Object[]{"YZY", "YXY", "YYY", Character.valueOf('X'), whiteWool, Character.valueOf('Y'), slab, Character.valueOf('Z'), glassPane}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("weaponcase"), this.blockList.get(14), recipeStrings, new Object[]{"YZY", "YXY", "YYY", Character.valueOf('X'), whiteWool, Character.valueOf('Y'), slab, Character.valueOf('Z'), glassPane}));
 		
 		if (Config.enableWritingdesk)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(16), recipeStrings, new Object[]{"T F", "XXX", "Y Y", Character.valueOf('T'), torch, Character.valueOf('F'), feather, Character.valueOf('X'), slab, Character.valueOf('Y'), plank}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("writingdesk"), this.blockList.get(16), recipeStrings, new Object[]{"T F", "XXX", "Y Y", Character.valueOf('T'), torch, Character.valueOf('F'), feather, Character.valueOf('X'), slab, Character.valueOf('Y'), plank}));
 			
 		if (Config.enableMapFrame)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(17), recipeStrings, new Object[]{"SSS", "SXS", "SSS", Character.valueOf('S'), stick, Character.valueOf('X'), slab})); // TODO the stick didn't work?
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("mapframe"), this.blockList.get(17), recipeStrings, new Object[]{"SSS", "SXS", "SSS", Character.valueOf('S'), stick, Character.valueOf('X'), slab}));
 			
 		if (Config.enableWoodLabel)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(18), recipeStrings, new Object[]{"YYY", "YYY", Character.valueOf('Y'), slab}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("woodlabel"), this.blockList.get(18), recipeStrings, new Object[]{"YYY", "YYY", Character.valueOf('Y'), slab}));
 		
 		if (Config.enableArmorstand)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(19), recipeStrings, new Object[]{" Y ", " Y ", "XXX", Character.valueOf('X'), slab, Character.valueOf('Y'), stick}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("armorstand"), this.blockList.get(19), recipeStrings, new Object[]{" Y ", " Y ", "XXX", Character.valueOf('X'), slab, Character.valueOf('Y'), stick}));
 		
 		if (Config.enableTable)
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(20), recipeStrings, new Object[]{"XXX", " Y ", " Y ", Character.valueOf('X'), slab, Character.valueOf('Y'), plank}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("table"), this.blockList.get(20), recipeStrings, new Object[]{"XXX", " Y ", " Y ", Character.valueOf('X'), slab, Character.valueOf('Y'), plank}));
 		
 		if (Config.enableFancySign && Config.enableWoodLabel)
-			GameRegistry.addRecipe(RecipeShapelessFramedWood.addShapedWoodRecipe(this.blockList.get(21), recipeStrings, new Object[]{this.blockList.get(18), slab, paper}));
+			ForgeRegistries.RECIPES.register(RecipeShapelessFramedWood.addShapedWoodRecipe(getRegistryName("fancysign"), this.blockList.get(21), recipeStrings, new Object[]{this.blockList.get(18), slab, paper}));
 		
 		if (Config.enableSeat)
 		{
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(22), recipeStrings, new Object[]{" W ", " S ", "T T", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab, Character.valueOf('T'), stick}));
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(23), recipeStrings, new Object[]{"TWT", "TST", "T T", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab, Character.valueOf('T'), stick}));
-			GameRegistry.addRecipe(RecipeBiblioFramedWood.addShapedWoodRecipe(this.blockList.get(25), recipeStrings, new Object[]{"TWT", " S ", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab}));
-			GameRegistry.addRecipe(RecipeShapelessFramedWood.addShapedWoodRecipe(this.blockList.get(24), recipeStrings, new Object[]{slab, this.blockList.get(23)})); 
-			GameRegistry.addRecipe(RecipeShapelessFramedWood.addShapedWoodRecipe(this.blockList.get(26), recipeStrings, new Object[]{slab, slab, this.blockList.get(23)})); 
-			GameRegistry.addRecipe(new ShapedOreRecipe(this.blockList.get(15), true, new Object[]{" W ", " S ", "TPT", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab, Character.valueOf('T'), stick, Character.valueOf('P'), woodPP}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("seatback1"), this.blockList.get(22), recipeStrings, new Object[]{" W ", " S ", "T T", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab, Character.valueOf('T'), stick}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("seatback2"), this.blockList.get(23), recipeStrings, new Object[]{"TWT", "TST", "T T", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab, Character.valueOf('T'), stick}));
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("seatback4"), this.blockList.get(25), recipeStrings, new Object[]{"TWT", " S ", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab}));
+			ForgeRegistries.RECIPES.register(RecipeShapelessFramedWood.addShapedWoodRecipe(getRegistryName("seatback3"), this.blockList.get(24), recipeStrings, new Object[]{slab, this.blockList.get(23)})); 
+			ForgeRegistries.RECIPES.register(RecipeShapelessFramedWood.addShapedWoodRecipe(getRegistryName("seatback5"), this.blockList.get(26), recipeStrings, new Object[]{slab, slab, this.blockList.get(23)})); 
+			ForgeRegistries.RECIPES.register(RecipeBiblioFramedWood.addShapedWoodRecipe(getRegistryName("seat"), this.blockList.get(15), recipeStrings, new Object[]{" W ", " S ", "TPT", Character.valueOf('W'), whiteWool, Character.valueOf('S'), slab, Character.valueOf('T'), stick, Character.valueOf('P'), woodPP}));
 		}
-		*/
 	}
 	
 }

@@ -156,6 +156,12 @@ public class BiblioCraft
 		@SubscribeEvent
 		public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
 		{
+			// Initialize BiblioWoods modules to register their recipes
+			jds.bibliocraft.bibliowoods.bop.BiblioWoodsBoP.init();
+			jds.bibliocraft.bibliowoods.botania.BiblioWoodsBotania.init();
+			jds.bibliocraft.bibliowoods.forestry.BiblioWoodsForestry.init();
+			jds.bibliocraft.bibliowoods.natura.BiblioWoodsNatura.init();
+
 			ItemLoader.addRecipies(event);
 		}
 		
@@ -190,6 +196,12 @@ public class BiblioCraft
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiLoader());
 		MinecraftForge.EVENT_BUS.register(proxy);
 		BiblioNetworking.setup();
+	}
+
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		// BiblioWoods modules are now initialized in registerRecipes
 	}
 	
 
