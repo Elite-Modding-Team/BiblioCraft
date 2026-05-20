@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.storage.MapData;
@@ -66,12 +67,14 @@ public class RenderAtlasFace
 		    boolean isSmallRight = false;
 		    if (event.getHand() == EnumHand.OFF_HAND)
 		    {
-		    	isSmallLeft = true;
+				if (Minecraft.getMinecraft().player.getPrimaryHand() == EnumHandSide.LEFT) isSmallRight = true;
+		    	else isSmallLeft = true;
 		    }
 		    
 		    if (event.getHand() == EnumHand.MAIN_HAND && mc.player.getHeldItem(EnumHand.OFF_HAND) != ItemStack.EMPTY && mc.player.getHeldItem(EnumHand.OFF_HAND).getItem() != Items.AIR)
 		    {
-		    	isSmallRight = true;
+				if (Minecraft.getMinecraft().player.getPrimaryHand() == EnumHandSide.LEFT) isSmallLeft = true;
+				else isSmallRight = true;
 		    }
 		    
 			float swing = event.getSwingProgress();

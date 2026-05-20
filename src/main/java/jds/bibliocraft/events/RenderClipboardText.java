@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumHandSide;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -36,7 +37,7 @@ public class RenderClipboardText
 	
 	private void render(Minecraft mc, RenderSpecificHandEvent event, ItemStack stack) throws Throwable
 	{
-		boolean isRightHand = event.getHand() == EnumHand.MAIN_HAND;
+		boolean isRightHand = (event.getHand() == EnumHand.MAIN_HAND) == (Minecraft.getMinecraft().player.getPrimaryHand() == EnumHandSide.RIGHT);
 		NBTTagCompound cliptags = stack.getTagCompound();
     	if (cliptags != null)
     	{
