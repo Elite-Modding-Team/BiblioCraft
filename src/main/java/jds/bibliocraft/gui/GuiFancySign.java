@@ -976,15 +976,15 @@ public class GuiFancySign extends GuiContainer {
 				GL11.glScaled(1.23, 1.23, 1.23);
 				if (this.slot1Rot == 0) {
 					GL11.glRotatef(-25.0F, 1.0F, 0.0F, 0.0F);
-					GL11.glRotatef(-225.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 				}
 				if (this.slot1Rot == 1) {
-					GL11.glRotatef(90.0F, 0.0f, 1.0f, 0.0f);
+					GL11.glRotatef(0.0F, 0.0f, 1.0f, 0.0f);
 				}
 				if (this.slot1Rot == 2) {
 					GL11.glRotatef(-25.0F, 1.0F, 0.0F, 0.0F);
-					GL11.glRotatef(225.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 				}
 			} else {
@@ -1017,15 +1017,12 @@ public class GuiFancySign extends GuiContainer {
 				GL11.glScaled(1.23, 1.23, 1.23);
 				if (this.slot2Rot == 0) {
 					GL11.glRotatef(-25.0F, 1.0F, 0.0F, 0.0F);
-					GL11.glRotatef(-225.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-				}
-				if (this.slot2Rot == 1) {
-					GL11.glRotatef(90.0F, 0.0f, 1.0f, 0.0f);
 				}
 				if (this.slot2Rot == 2) {
 					GL11.glRotatef(-25.0F, 1.0F, 0.0F, 0.0F);
-					GL11.glRotatef(225.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 				}
 			} else {
