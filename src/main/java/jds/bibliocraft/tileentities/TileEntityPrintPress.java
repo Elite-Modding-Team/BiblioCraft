@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
@@ -18,10 +19,13 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 
 public class TileEntityPrintPress extends BiblioTileEntity implements ITickable, ISidedInventory
-{	
+{
+	private static final Ingredient INK_INGREDIENT = new OreIngredient("dyeBlack");
+
 	public int furnaceCookTime = 0;
 	public int furnaceBurnTime = 0;
 	public int currentItemBurnTime = 0;
@@ -444,7 +448,6 @@ public class TileEntityPrintPress extends BiblioTileEntity implements ITickable,
         {
             return 0;
         }
-    	Item var2 = par0ItemStack.getItem();
     	if (isInk(par0ItemStack))
     	{
     		return 200;
@@ -467,20 +470,7 @@ public class TileEntityPrintPress extends BiblioTileEntity implements ITickable,
     
     public static boolean isInk(ItemStack stack)
 	{
-		boolean output = false;
-		int[] oreIDs = OreDictionary.getOreIDs(stack);
-		if (oreIDs.length > 0)
-		{
-			for (int i = 0; i < oreIDs.length; i++)
-			{
-				String oreName = OreDictionary.getOreName(oreIDs[i]);
-				if (oreName.equals("dyeBlack"))
-				{
-					output = true;
-				}
-			}
-		}
-		return output;
+		return INK_INGREDIENT.apply(stack);
 	}
 
 	@Override
@@ -543,7 +533,7 @@ public class TileEntityPrintPress extends BiblioTileEntity implements ITickable,
 			if (itemstack != ItemStack.EMPTY)
 			{
 				Item stackItem = itemstack.getItem();
-				if (stackItem instanceof ItemDye && itemstack.getItemDamage() == 0 && slot == 0)
+				if (isInk(itemstack) && slot == 0)
 				{
 					return true;
 				}
