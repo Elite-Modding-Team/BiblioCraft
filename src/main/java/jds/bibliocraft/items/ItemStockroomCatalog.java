@@ -107,7 +107,7 @@ public class ItemStockroomCatalog extends Item
     {
 		if (!world.isRemote && player.isSneaking())
 		{
-			ItemStack stack = player.getHeldItemMainhand();
+			ItemStack stack = player.getHeldItem(hand);
 			TileEntity tile = world.getTileEntity(pos);
 			if (tile != null && tile instanceof IInventory)
 			{
@@ -160,7 +160,7 @@ public class ItemStockroomCatalog extends Item
 				inventoryList.appendTag(newInvTag);
 				tags.setTag("inventoryList", inventoryList);
 				stack.setTagCompound(tags);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
+				player.setHeldItem(hand, stack);
 				return EnumActionResult.SUCCESS;
 			}
 		}

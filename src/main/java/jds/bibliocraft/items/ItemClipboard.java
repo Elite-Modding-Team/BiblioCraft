@@ -43,15 +43,15 @@ public class ItemClipboard extends Item
 	{
 		if (player.isSneaking())
 		{
-			ItemStack stack = player.getHeldItemMainhand();
+			ItemStack stack = player.getHeldItem(hand);
 			if (stack != ItemStack.EMPTY)
 			{
 				switch (face)
 				{
-					case NORTH:{setClipboardBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1), EnumFacing.WEST, world, player, stack); break;}
-					case SOUTH:{setClipboardBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1), EnumFacing.EAST, world, player, stack); break;}
-					case WEST:{setClipboardBlock(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ()), EnumFacing.SOUTH, world, player, stack); break;}
-					case EAST:{setClipboardBlock(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ()), EnumFacing.NORTH, world, player, stack); break;}
+					case NORTH:{setClipboardBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1), EnumFacing.WEST, world, player, stack, hand); break;}
+					case SOUTH:{setClipboardBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1), EnumFacing.EAST, world, player, stack, hand); break;}
+					case WEST:{setClipboardBlock(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ()), EnumFacing.SOUTH, world, player, stack, hand); break;}
+					case EAST:{setClipboardBlock(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ()), EnumFacing.NORTH, world, player, stack, hand); break;}
 					default: break;
 				}
 				return EnumActionResult.SUCCESS;
@@ -60,7 +60,7 @@ public class ItemClipboard extends Item
 		return EnumActionResult.PASS;
 	}
 	
-	public void setClipboardBlock(BlockPos pos, EnumFacing angle, World world, EntityPlayer player, ItemStack stack)
+	public void setClipboardBlock(BlockPos pos, EnumFacing angle, World world, EntityPlayer player, ItemStack stack, EnumHand hand)
 	{
 		Block testBlock = world.getBlockState(pos).getBlock();
 		if (testBlock.isAir(world.getBlockState(pos), world, pos))
@@ -72,7 +72,7 @@ public class ItemClipboard extends Item
 			{
 				clipboard.setAngle(angle);
 				clipboard.setInventorySlotContents(0, stack);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY); 
+				player.setHeldItem(hand, ItemStack.EMPTY);
 				clipboard.getNBTData();
 			}
 		}
