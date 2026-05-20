@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-public class SlotArmorBoots extends Slot
+public class SlotArmorBoots extends SlotArmor
 {
 final ContainerArmor armorStand;
 	
@@ -46,12 +46,4 @@ final ContainerArmor armorStand;
 			return false;
 		}
 	}
-	
-	
-	@Override
-	public int getSlotStackLimit()
-    {
-        return 1;
-    }
 }
-

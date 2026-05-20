@@ -4,6 +4,7 @@ import jds.bibliocraft.BiblioCraft;
 import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntityArmorStand;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -126,6 +127,7 @@ public class BlockArmorStand extends BiblioWoodBlock {
 				break;
 		}
 		if (atilearmor != -1 && armortype >= 0 && armortype < 4) {
+			if (EnchantmentHelper.hasBindingCurse(playerArmor) && !player.isCreative()) return;
 			ItemStack standArmor = armorTile.getStackInSlot(atilearmor);// getArmor(atilearmor);
 			// ItemStack plegcopy = null;
 			// ItemStack alegcopy = null;
