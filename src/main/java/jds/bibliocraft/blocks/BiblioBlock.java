@@ -270,12 +270,7 @@ public abstract class BiblioBlock extends BlockContainer
 				default: {adjusti = 0.2F; adjustk = 0.0F; break;}
 			}
 			
-			EntityItem entityItem = new EntityItem(world, extractPos.getX()+0.5F+adjusti, extractPos.getY() + 0.5F, extractPos.getZ() +0.5F+adjustk, new ItemStack(stack.getItem(), stack.getCount(), stack.getItemDamage()));
-			
-			if (stack.hasTagCompound())
-			{
-				entityItem.getItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
-			}
+			EntityItem entityItem = new EntityItem(world, extractPos.getX()+0.5F+adjusti, extractPos.getY() + 0.5F, extractPos.getZ() +0.5F+adjustk, stack.copy());
 			
 			entityItem.motionX = 0;
 			entityItem.motionY = 0;
@@ -395,12 +390,7 @@ public abstract class BiblioBlock extends BlockContainer
 				float rj = rando.nextFloat() * 0.8F + 0.1F;
 				float rk = rando.nextFloat() * 0.8F + 0.1F;
 				
-				EntityItem entityItem = new EntityItem(world, pos.getX() + ri, pos.getY() + rj, pos.getZ() + rk, new ItemStack(item.getItem(), item.getCount(), item.getItemDamage()));
-				
-				if (item.hasTagCompound())
-				{
-					entityItem.getItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
-				}
+				EntityItem entityItem = new EntityItem(world, pos.getX() + ri, pos.getY() + rj, pos.getZ() + rk, item.copy());
 				
 				float factor = 0.05F;
 				entityItem.motionX = rando.nextGaussian() * factor;
