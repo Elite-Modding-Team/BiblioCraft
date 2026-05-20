@@ -12,6 +12,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -26,6 +27,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -179,6 +181,28 @@ public class BiblioCraft
 			if (Config.enableReadingglasses){
 				event.getRegistry().register(readingEnch);	
 				}		
+		}
+
+		@SubscribeEvent
+		public static void registerSounds(RegistryEvent.Register<SoundEvent> event)
+		{
+			IForgeRegistry<SoundEvent> reg = event.getRegistry();
+			reg.register(CommonProxy.SOUND_DING.setRegistryName(CommonProxy.SOUND_DING.getSoundName()));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_ADDPAPER.setRegistryName(CommonProxy.SOUND_TYPEWRITER_ADDPAPER.getSoundName()));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_TYPEING.setRegistryName(CommonProxy.SOUND_TYPEWRITER_TYPEING.getSoundName()));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_ENDBELL.setRegistryName(CommonProxy.SOUND_TYPEWRITER_ENDBELL.getSoundName()));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_REMOVEBOOK.setRegistryName(CommonProxy.SOUND_TYPEWRITER_REMOVEBOOK.getSoundName()));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_TYPESINGLE.setRegistryName(CommonProxy.SOUND_TYPEWRITER_TYPESINGLE.getSoundName()));
+			reg.register(CommonProxy.SOUND_CLOCK_TICK.setRegistryName(CommonProxy.SOUND_CLOCK_TICK.getSoundName()));
+			reg.register(CommonProxy.SOUND_CLOCK_TOCK.setRegistryName(CommonProxy.SOUND_CLOCK_TOCK.getSoundName()));
+			reg.register(CommonProxy.SOUND_CLOCK_CHIME.setRegistryName(CommonProxy.SOUND_CLOCK_CHIME.getSoundName()));
+			reg.register(CommonProxy.SOUND_CLOCK_WIND.setRegistryName(CommonProxy.SOUND_CLOCK_WIND.getSoundName()));
+			reg.register(CommonProxy.SOUND_ITEM_HANDDRILL.setRegistryName(CommonProxy.SOUND_ITEM_HANDDRILL.getSoundName()));
+			reg.register(CommonProxy.SOUND_ITEM_SCREWGUN.setRegistryName(CommonProxy.SOUND_ITEM_SCREWGUN.getSoundName()));
+			reg.register(CommonProxy.SOUND_CASE_OPEN.setRegistryName(CommonProxy.SOUND_CASE_OPEN.getSoundName()));
+			reg.register(CommonProxy.SOUND_CASE_CLOSE.setRegistryName(CommonProxy.SOUND_CASE_CLOSE.getSoundName()));
+			reg.register(CommonProxy.SOUND_TAPE_OPEN.setRegistryName(CommonProxy.SOUND_TAPE_OPEN.getSoundName()));
+			reg.register(CommonProxy.SOUND_TAPE_CLOSE.setRegistryName(CommonProxy.SOUND_TAPE_CLOSE.getSoundName()));
 		}
 	}
 	
