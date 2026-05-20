@@ -103,7 +103,7 @@ public class TileEntityFancySignRenderer extends TileEntityBiblioRenderer
 		}
 		else
 		{
-			if (slotRot == 0)
+			if (slotRot == 2)
 			{
 				GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
 			}
