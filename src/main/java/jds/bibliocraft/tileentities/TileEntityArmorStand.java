@@ -1,9 +1,9 @@
 package jds.bibliocraft.tileentities;
 
 import jds.bibliocraft.blocks.BlockArmorStand;
+
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.ITextComponent;
@@ -142,43 +142,35 @@ public class TileEntityArmorStand extends BiblioTileEntity
     }
     
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
 		if (!this.getIsBottomStand())
 		{
 			return false;
 		}
-		Item stackItem = itemstack.getItem();
-		if (stackItem instanceof ItemArmor )
-		{
-			ItemArmor armorItem = (ItemArmor)stackItem;
-			if (armorItem != ItemStack.EMPTY.getItem()) 
-			{
-				EntityEquipmentSlot armorType = armorItem.armorType;
 
-				if (slot == 0 && armorType == EntityEquipmentSlot.FEET)
-				{
-					return true;
-				}	
-				else if (slot == 1 && armorType == EntityEquipmentSlot.LEGS)
-				{
-					return true;
-				}
-				else if (slot == 2 && armorType == EntityEquipmentSlot.CHEST)
-				{
-					return true;
-				}
-				else if (slot == 3 && armorType == EntityEquipmentSlot.HEAD)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
+		EntityEquipmentSlot armorType = EntityLiving.getSlotForItemStack(itemstack);
+
+		if (slot == 0 && armorType == EntityEquipmentSlot.HEAD)
+		{
+			return true;
 		}
-		return false;
+		else if (slot == 1 && armorType == EntityEquipmentSlot.CHEST)
+		{
+			return true;
+		}
+		else if (slot == 2 && armorType == EntityEquipmentSlot.LEGS)
+		{
+			return true;
+		}
+		else if (slot == 3 && armorType == EntityEquipmentSlot.FEET)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
