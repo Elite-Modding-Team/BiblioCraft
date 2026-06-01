@@ -187,22 +187,22 @@ public class BiblioCraft
 		public static void registerSounds(RegistryEvent.Register<SoundEvent> event)
 		{
 			IForgeRegistry<SoundEvent> reg = event.getRegistry();
-			reg.register(CommonProxy.SOUND_DING.setRegistryName(CommonProxy.SOUND_DING.getSoundName()));
-			reg.register(CommonProxy.SOUND_TYPEWRITER_ADDPAPER.setRegistryName(CommonProxy.SOUND_TYPEWRITER_ADDPAPER.getSoundName()));
-			reg.register(CommonProxy.SOUND_TYPEWRITER_TYPEING.setRegistryName(CommonProxy.SOUND_TYPEWRITER_TYPEING.getSoundName()));
-			reg.register(CommonProxy.SOUND_TYPEWRITER_ENDBELL.setRegistryName(CommonProxy.SOUND_TYPEWRITER_ENDBELL.getSoundName()));
-			reg.register(CommonProxy.SOUND_TYPEWRITER_REMOVEBOOK.setRegistryName(CommonProxy.SOUND_TYPEWRITER_REMOVEBOOK.getSoundName()));
-			reg.register(CommonProxy.SOUND_TYPEWRITER_TYPESINGLE.setRegistryName(CommonProxy.SOUND_TYPEWRITER_TYPESINGLE.getSoundName()));
-			reg.register(CommonProxy.SOUND_CLOCK_TICK.setRegistryName(CommonProxy.SOUND_CLOCK_TICK.getSoundName()));
-			reg.register(CommonProxy.SOUND_CLOCK_TOCK.setRegistryName(CommonProxy.SOUND_CLOCK_TOCK.getSoundName()));
-			reg.register(CommonProxy.SOUND_CLOCK_CHIME.setRegistryName(CommonProxy.SOUND_CLOCK_CHIME.getSoundName()));
-			reg.register(CommonProxy.SOUND_CLOCK_WIND.setRegistryName(CommonProxy.SOUND_CLOCK_WIND.getSoundName()));
-			reg.register(CommonProxy.SOUND_ITEM_HANDDRILL.setRegistryName(CommonProxy.SOUND_ITEM_HANDDRILL.getSoundName()));
-			reg.register(CommonProxy.SOUND_ITEM_SCREWGUN.setRegistryName(CommonProxy.SOUND_ITEM_SCREWGUN.getSoundName()));
-			reg.register(CommonProxy.SOUND_CASE_OPEN.setRegistryName(CommonProxy.SOUND_CASE_OPEN.getSoundName()));
-			reg.register(CommonProxy.SOUND_CASE_CLOSE.setRegistryName(CommonProxy.SOUND_CASE_CLOSE.getSoundName()));
-			reg.register(CommonProxy.SOUND_TAPE_OPEN.setRegistryName(CommonProxy.SOUND_TAPE_OPEN.getSoundName()));
-			reg.register(CommonProxy.SOUND_TAPE_CLOSE.setRegistryName(CommonProxy.SOUND_TAPE_CLOSE.getSoundName()));
+			reg.register(CommonProxy.SOUND_DING.setRegistryName(new ResourceLocation(MODID, "ding")));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_ADDPAPER.setRegistryName(new ResourceLocation(MODID, "addpaper")));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_TYPEING.setRegistryName(new ResourceLocation(MODID, "typing")));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_ENDBELL.setRegistryName(new ResourceLocation(MODID, "endbell")));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_REMOVEBOOK.setRegistryName(new ResourceLocation(MODID, "removebook")));
+			reg.register(CommonProxy.SOUND_TYPEWRITER_TYPESINGLE.setRegistryName(new ResourceLocation(MODID, "typingsingle")));
+			reg.register(CommonProxy.SOUND_CLOCK_TICK.setRegistryName(new ResourceLocation(MODID, "tick")));
+			reg.register(CommonProxy.SOUND_CLOCK_TOCK.setRegistryName(new ResourceLocation(MODID, "tock")));
+			reg.register(CommonProxy.SOUND_CLOCK_CHIME.setRegistryName(new ResourceLocation(MODID, "woundchime")));
+			reg.register(CommonProxy.SOUND_CLOCK_WIND.setRegistryName(new ResourceLocation(MODID, "wind")));
+			reg.register(CommonProxy.SOUND_ITEM_HANDDRILL.setRegistryName(new ResourceLocation(MODID, "drill")));
+			reg.register(CommonProxy.SOUND_ITEM_SCREWGUN.setRegistryName(new ResourceLocation(MODID, "screw")));
+			reg.register(CommonProxy.SOUND_CASE_OPEN.setRegistryName(new ResourceLocation(MODID, "copen")));
+			reg.register(CommonProxy.SOUND_CASE_CLOSE.setRegistryName(new ResourceLocation(MODID, "cclose")));
+			reg.register(CommonProxy.SOUND_TAPE_OPEN.setRegistryName(new ResourceLocation(MODID, "tapeopen")));
+			reg.register(CommonProxy.SOUND_TAPE_CLOSE.setRegistryName(new ResourceLocation(MODID, "tapeclose")));
 		}
 	}
 	
