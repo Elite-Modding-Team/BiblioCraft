@@ -1,5 +1,9 @@
 package jds.bibliocraft;
 
+import jds.bibliocraft.bibliowoods.bop.BiblioWoodsBoP;
+import jds.bibliocraft.bibliowoods.botania.BiblioWoodsBotania;
+import jds.bibliocraft.bibliowoods.forestry.BiblioWoodsForestry;
+import jds.bibliocraft.bibliowoods.natura.BiblioWoodsNatura;
 import jds.bibliocraft.enchantments.EnchantmentDeathCompass;
 import jds.bibliocraft.enchantments.EnchantmentReading;
 import jds.bibliocraft.entity.EntitySeat;
@@ -159,10 +163,10 @@ public class BiblioCraft
 		public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
 		{
 			// Initialize BiblioWoods modules to register their recipes
-			jds.bibliocraft.bibliowoods.bop.BiblioWoodsBoP.init();
-			jds.bibliocraft.bibliowoods.botania.BiblioWoodsBotania.init();
-			jds.bibliocraft.bibliowoods.forestry.BiblioWoodsForestry.init();
-			jds.bibliocraft.bibliowoods.natura.BiblioWoodsNatura.init();
+			BiblioWoodsBoP.init();
+			BiblioWoodsBotania.init();
+			BiblioWoodsForestry.init();
+			BiblioWoodsNatura.init();
 
 			ItemLoader.addRecipies(event);
 		}
