@@ -163,10 +163,14 @@ public class BiblioCraft
 		public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
 		{
 			// Initialize BiblioWoods modules to register their recipes
-			BiblioWoodsBoP.init();
-			BiblioWoodsBotania.init();
-			BiblioWoodsForestry.init();
-			BiblioWoodsNatura.init();
+			if (Config.enableBiblioWoodsBoP)
+				BiblioWoodsBoP.init();
+			if (Config.enableBiblioWoodsBotania)
+				BiblioWoodsBotania.init();
+			if (Config.enableBiblioWoodsForestry)
+				BiblioWoodsForestry.init();
+			if (Config.enableBiblioWoodsNatura)
+				BiblioWoodsNatura.init();
 
 			ItemLoader.addRecipies(event);
 		}

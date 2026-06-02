@@ -86,6 +86,11 @@ public class Config
 	public static boolean enableStockroomCatalog;
 	
 	public static boolean enableLockRecipe;
+	
+	public static boolean enableBiblioWoodsForestry;
+	public static boolean enableBiblioWoodsNatura;
+	public static boolean enableBiblioWoodsBotania;
+	public static boolean enableBiblioWoodsBoP;
 	public static boolean enableRecipeBookCrafting;
 	public static boolean enablePublicTypesettingBooks;
 	
@@ -155,6 +160,12 @@ public class Config
 		enableLockRecipe = bConfig.get(Configuration.CATEGORY_GENERAL, "EnableLockAndKeyRecipe", false).getBoolean(false);
 		enableFramedChest = bConfig.get("Blocks Enabled",  "FramedChest", true).getBoolean(true);
 		enableStockroomCatalog = bConfig.get("Blocks Enabled",  "StockroomCatalog", true).getBoolean(true);
+		
+		bConfig.addCustomCategoryComment("BiblioWoods", "Here you can enable or disable BiblioWoods compatibility with other mods. Change value to false to disable compatibility with the selected mod.");
+		enableBiblioWoodsForestry = bConfig.get("BiblioWoods", "EnableForestry", true, "Enable BiblioWoods compatibility with Forestry. Requires restart.").getBoolean(true);
+		enableBiblioWoodsNatura = bConfig.get("BiblioWoods", "EnableNatura", true, "Enable BiblioWoods compatibility with Natura. Requires restart.").getBoolean(true);
+		enableBiblioWoodsBotania = bConfig.get("BiblioWoods", "EnableBotania", true, "Enable BiblioWoods compatibility with Botania. Requires restart.").getBoolean(true);
+		enableBiblioWoodsBoP = bConfig.get("BiblioWoods", "EnableBiomesOPlenty", true, "Enable BiblioWoods compatibility with Biomes O' Plenty. Requires restart.").getBoolean(true);
 		
 		enableRecipeBookCrafting = bConfig.get(Configuration.CATEGORY_GENERAL,  "EnableCraftingWithRecipieBooks", true, "This option enables crafting to be done inside a recipe book with no workbench.").getBoolean(true);
 		enablePublicTypesettingBooks = bConfig.get(Configuration.CATEGORY_GENERAL,  "EnablePublicTypesettingBooks", false, "This option forces all new books added to the typesetting table to be public").getBoolean(false);
