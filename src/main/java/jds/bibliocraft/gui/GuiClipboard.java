@@ -3,6 +3,7 @@ package jds.bibliocraft.gui;
 import jds.bibliocraft.network.BiblioNetworking;
 import jds.bibliocraft.network.packet.server.BiblioMCBEdit;
 import jds.bibliocraft.network.packet.server.BiblioUpdateInv;
+import jds.bibliocraft.tileentities.TileEntityClipboard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -82,14 +83,20 @@ public class GuiClipboard extends GuiScreen
     		tilez = tz;
     	}
 	}
+
+    @Override
+    public boolean doesGuiPauseGame()
+    {
+        return false;
+    }
    // fontRenderer fr;
     public void getNBTData()
     {
     	NBTTagCompound cliptags = clipStack.getTagCompound();
     	if (cliptags != null)
     	{
-    		currentPage = cliptags.getInteger("currentPage");
-    		totalPages = cliptags.getInteger("totalPages");
+     		totalPages = Math.max(1, Math.min(TileEntityClipboard.MAX_PAGES, cliptags.getInteger("totalPages")));
+     		currentPage = Math.max(1, Math.min(totalPages, cliptags.getInteger("currentPage")));
     		//System.out.println(currentPage);
     		String pagenum = "page"+currentPage;
     		NBTTagCompound pagetag = cliptags.getCompoundTag(pagenum);
@@ -97,18 +104,15 @@ public class GuiClipboard extends GuiScreen
     		{
     			int[] taskstat = pagetag.getIntArray("taskStates");
     			//System.out.println(taskstat.length);
-    			if (taskstat.length > 0)
-    			{
-	    			button0state = taskstat[0];
-	    			button1state = taskstat[1];
-	    			button2state = taskstat[2];
-	    			button3state = taskstat[3];
-	    			button4state = taskstat[4];
-	    			button5state = taskstat[5];
-	    			button6state = taskstat[6];
-	    			button7state = taskstat[7];
-	    			button8state = taskstat[8];
-    			}
+     		button0state = taskstat.length > 0 ? taskstat[0] : 0;
+     		button1state = taskstat.length > 1 ? taskstat[1] : 0;
+     		button2state = taskstat.length > 2 ? taskstat[2] : 0;
+     		button3state = taskstat.length > 3 ? taskstat[3] : 0;
+     		button4state = taskstat.length > 4 ? taskstat[4] : 0;
+     		button5state = taskstat.length > 5 ? taskstat[5] : 0;
+     		button6state = taskstat.length > 6 ? taskstat[6] : 0;
+     		button7state = taskstat.length > 7 ? taskstat[7] : 0;
+     		button8state = taskstat.length > 8 ? taskstat[8] : 0;
     			NBTTagCompound tasks = pagetag.getCompoundTag("tasks");
     			button0text = tasks.getString("task1");
     			button1text = tasks.getString("task2");
@@ -167,6 +171,7 @@ public class GuiClipboard extends GuiScreen
     	this.textField7.setEnableBackgroundDrawing(false);
     	this.textField8.setEnableBackgroundDrawing(false);
     	this.textFieldTitle.setEnableBackgroundDrawing(false);
+    	this.textFieldTitle.setCentered(true);
     	this.textField0.setTextColor(0x404040);
     	this.textField1.setTextColor(0x404040);
     	this.textField2.setTextColor(0x404040);
@@ -284,7 +289,7 @@ public class GuiClipboard extends GuiScreen
         {
         	this.buttonPreviousPage.enabled = false;
         }
-        if (currentPage > 49)
+        if (currentPage >= TileEntityClipboard.MAX_PAGES)
         {
         	this.buttonNextPage.enabled = false;
         }
@@ -326,46 +331,35 @@ public class GuiClipboard extends GuiScreen
     	NBTTagCompound cliptags = clipStack.getTagCompound();
     	if (cliptags != null)
     	{
-    		currentPage = cliptags.getInteger("currentPage");
+    		currentPage = Math.max(1, Math.min(TileEntityClipboard.MAX_PAGES, cliptags.getInteger("currentPage")));
     		int nextpage = currentPage + 1;
+		if (nextpage > TileEntityClipboard.MAX_PAGES)
+		{
+			return;
+		}
     		//System.out.println(nextpage);
     		String pagenum = "page"+nextpage;
-    		NBTTagCompound pagetag = cliptags.getCompoundTag(pagenum);
-    		int[] taskstat = pagetag.getIntArray("taskStates");
-    		if (taskstat.length == 9)
-    		{
-    			//System.out.println("I guess we found some NBT ...");
-    			currentPage++;
-    			cliptags.setInteger("currentPage", currentPage);
+		if (cliptags.hasKey(pagenum, 10))
+     		{
+     			//System.out.println("I guess we found some NBT ...");
+     			currentPage++;
+			totalPages = Math.max(totalPages, currentPage);
+     			cliptags.setInteger("currentPage", currentPage);
+			cliptags.setInteger("totalPages", totalPages);
     			clipStack.setTagCompound(cliptags);
     			getNBTData();
     			initGui();
     			//return true;
     		}
-    		else
-    		{
+			else
+			{
     			// here is where I need to add nbt to the next page.
     			//System.out.println("adding new NBT");
     			currentPage++;
-				NBTTagCompound page = new NBTTagCompound();
-				NBTTagCompound tasks = new NBTTagCompound();
-				int[] taskstate = {0,0,0,0,0,0,0,0,0};
-				page.setIntArray("taskStates", taskstate);
-				tasks.setString("task1", "");
-				tasks.setString("task2", "");
-				tasks.setString("task3", "");
-				tasks.setString("task4", "");
-				tasks.setString("task5", "");
-				tasks.setString("task6", "");
-				tasks.setString("task7", "");
-				tasks.setString("task8", "");
-				tasks.setString("task9", "");
-				page.setTag("tasks", tasks);
-				page.setString("title", "");
-				String pagename = "page"+currentPage;
-				cliptags.setTag(pagename,  page);
+				cliptags.setTag(pagenum, TileEntityClipboard.createEmptyPage());
 				cliptags.setInteger("currentPage", currentPage);
-				cliptags.setInteger("totalPages", (totalPages + 1));
+				totalPages = Math.max(totalPages, currentPage);
+				cliptags.setInteger("totalPages", totalPages);
 				//System.out.println("updated NBT");
 				clipStack.setTagCompound(cliptags);
 				getNBTData();
@@ -384,11 +378,13 @@ public class GuiClipboard extends GuiScreen
     		currentPage = cliptags.getInteger("currentPage");
     		int prevpage = currentPage - 1;
     		//System.out.println(currentPage);
-    		String pagenum = "page"+prevpage;
-    		NBTTagCompound pagetag = cliptags.getCompoundTag(pagenum);
-    		if (pagetag != null)
-    		{
-    			currentPage = currentPage - 1;
+    		if (prevpage >= 1)
+		{
+	    	currentPage = currentPage - 1;
+			if (!cliptags.hasKey("page" + currentPage, 10))
+			{
+				cliptags.setTag("page" + currentPage, TileEntityClipboard.createEmptyPage());
+			}
     			cliptags.setInteger("currentPage", currentPage);
     			clipStack.setTagCompound(cliptags);
     			getNBTData();
