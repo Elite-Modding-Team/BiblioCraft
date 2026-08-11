@@ -40,7 +40,7 @@ public class TileEntityArmorStand extends BiblioTileEntity
 	public void checkArmorSlots()
 	{
 		ItemStack stackTest0 = getStackInSlot(0);
-		if (stackTest0 != ItemStack.EMPTY)
+		if (!stackTest0.isEmpty())
 		{
 			helm = true;
 		}
@@ -50,7 +50,7 @@ public class TileEntityArmorStand extends BiblioTileEntity
 		}
 		
 		ItemStack stackTest1 = getStackInSlot(1);
-		if (stackTest1 != ItemStack.EMPTY)
+		if (!stackTest1.isEmpty())
 		{
 			cuirass = true;
 		}
@@ -60,7 +60,7 @@ public class TileEntityArmorStand extends BiblioTileEntity
 		}
 		
 		ItemStack stackTest2 = getStackInSlot(2);
-		if (stackTest2 != ItemStack.EMPTY)
+		if (!stackTest2.isEmpty())
 		{
 			greaves = true;
 		}
@@ -70,7 +70,7 @@ public class TileEntityArmorStand extends BiblioTileEntity
 		}
 		
 		ItemStack stackTest3 = getStackInSlot(3);
-		if (stackTest3 != ItemStack.EMPTY)
+		if (!stackTest3.isEmpty())
 		{
 			boots = true;
 		}
@@ -105,34 +105,39 @@ public class TileEntityArmorStand extends BiblioTileEntity
     
     public boolean addArmor(ItemStack stack, EntityEquipmentSlot armorType)
     {
+		if (stack == null || stack.isEmpty() || armorType == null)
+		{
+			return false;
+		}
+
     	checkArmorSlots();
     	switch (armorType)
     	{
 	    	case HEAD:{
 	    		if (!helm)
 	    		{
-	    			setInventorySlotContents(0, stack);
+					setInventorySlotContents(0, stack.copy());
 	    			return true;
 	    		}
 	    		break;}
 	    	case CHEST:{
 	       		if (!cuirass)
 	    		{
-	    			setInventorySlotContents(1, stack);
+					setInventorySlotContents(1, stack.copy());
 	    			return true;
 	    		}
 	    		break;}
 	    	case LEGS:{
 	       		if (!greaves)
 	    		{
-	    			setInventorySlotContents(2, stack);
+					setInventorySlotContents(2, stack.copy());
 	    			return true;
 	    		}
 	    		break;}
 	    	case FEET:{
 	       		if (!boots)
 	    		{
-	    			setInventorySlotContents(3, stack);
+					setInventorySlotContents(3, stack.copy());
 	    			return true;
 	    		}
 	    		break;}

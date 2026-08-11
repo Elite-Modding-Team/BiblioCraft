@@ -5,11 +5,10 @@ import jds.bibliocraft.tileentities.BiblioTileEntity;
 import jds.bibliocraft.tileentities.TileEntityArmorStand;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -72,19 +71,22 @@ public class BlockArmorStand extends BiblioWoodBlock {
 				return true;
 			}
 
-			if (playerhand != ItemStack.EMPTY) {
-				Item stackItem = playerhand.getItem();
-				if (stackItem instanceof ItemArmor) {
-					ItemArmor armorItem = (ItemArmor) stackItem;
-					EntityEquipmentSlot armorType = armorItem.armorType;
-					if ((yCheck == 0 && armorType == EntityEquipmentSlot.FEET) ||
-							(yCheck == 1 && armorType == EntityEquipmentSlot.LEGS) ||
-							(yCheck == 2 && armorType == EntityEquipmentSlot.CHEST) ||
-							(yCheck == 3 && armorType == EntityEquipmentSlot.HEAD)) {
-						if (tile.addArmor(playerhand, armorType)) {
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
-							return true;
+			if (!playerhand.isEmpty()) {
+				EntityEquipmentSlot armorType = EntityLiving.getSlotForItemStack(playerhand);
+				if (armorType.getSlotType() == EntityEquipmentSlot.Type.ARMOR &&
+						((yCheck == 0 && armorType == EntityEquipmentSlot.FEET) ||
+						 (yCheck == 1 && armorType == EntityEquipmentSlot.LEGS) ||
+						 (yCheck == 2 && armorType == EntityEquipmentSlot.CHEST) ||
+						 (yCheck == 3 && armorType == EntityEquipmentSlot.HEAD))) {
+					if (tile.addArmor(playerhand, armorType)) {
+						if (!player.isCreative()) {
+							playerhand.shrink(1);
+							if (playerhand.isEmpty()) {
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+							}
 						}
+						player.inventory.markDirty();
+						return true;
 					}
 				}
 			}
@@ -127,44 +129,16 @@ public class BlockArmorStand extends BiblioWoodBlock {
 				break;
 		}
 		if (atilearmor != -1 && armortype >= 0 && armortype < 4) {
-			if (EnchantmentHelper.hasBindingCurse(playerArmor) && !player.isCreative()) return;
+			if (!playerArmor.isEmpty() && EnchantmentHelper.hasBindingCurse(playerArmor) && !player.isCreative()) return;
 			ItemStack standArmor = armorTile.getStackInSlot(atilearmor);// getArmor(atilearmor);
-			// ItemStack plegcopy = null;
-			// ItemStack alegcopy = null;
-			/*
-			 * if (playerArmor != null)
-			 * {
-			 * plegcopy = playerArmor.copy();
-			 * }
-			 * if (standArmor != null)
-			 * {
-			 * alegcopy = standArmor.copy();
-			 * }
-			 */
-			if (standArmor != ItemStack.EMPTY) {
-				player.inventory.armorInventory.set(armortype, standArmor);
-				// sendPlayerArmorPacket(player, alegcopy, armortype);
-			} else {
-				player.inventory.armorInventory.set(armortype, ItemStack.EMPTY);
-			}
 
-			if (playerArmor != ItemStack.EMPTY) {
-				armorTile.setInventorySlotContents(atilearmor, playerArmor);
-			} else {
-				armorTile.setInventorySlotContents(atilearmor, ItemStack.EMPTY);
-			}
-			/*
-			 * if (alegcopy == null)
-			 * {
-			 * player.inventory.armorInventory[armortype] = null;
-			 * //sendPlayerArmorPacket(player, alegcopy, armortype); // I'm not sure I
-			 * actually need these packets to the client anymore
-			 * }
-			 * if (playerArmor == null)
-			 * {
-			 * armorTile.setInventorySlotContents(atilearmor, null);
-			 * }
-			 */
+			// Keep the two inventories independent. ItemStack is mutable, so sharing
+			// the object makes later damage or synchronisation mutate both slots.
+			ItemStack playerArmorCopy = playerArmor.isEmpty() ? ItemStack.EMPTY : playerArmor.copy();
+			ItemStack standArmorCopy = standArmor.isEmpty() ? ItemStack.EMPTY : standArmor.copy();
+			player.inventory.setInventorySlotContents(36 + armortype, standArmorCopy);
+			armorTile.setInventorySlotContents(atilearmor, playerArmorCopy);
+			player.inventory.markDirty();
 		}
 	}
 
