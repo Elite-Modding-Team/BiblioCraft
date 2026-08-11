@@ -549,12 +549,12 @@ public abstract class BiblioTileEntity extends TileEntity implements IInventory,
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
 	{
-		if (stack.isEmpty() || slot >= getSlots() || !isItemValidForSlot(slot, stack)) {
+		if (stack.isEmpty() || slot < 0 || slot >= getSlots() || !isItemValidForSlot(slot, stack)) {
 			return stack;
 		}
 
 		ItemStack existing = getStackInSlot(slot);
-		int limit = getSlotLimit(slot);
+		int limit = Math.min(getSlotLimit(slot), stack.getMaxStackSize());
 
 		if (!existing.isEmpty()) {
 			if (!ItemStack.areItemsEqual(stack, existing) || !ItemStack.areItemStackTagsEqual(stack, existing)) {
@@ -571,26 +571,29 @@ public abstract class BiblioTileEntity extends TileEntity implements IInventory,
 
 		if (!simulate) {
 			if (existing.isEmpty()) {
-				setInventorySlotContents(slot, stack.splitStack(toInsert));
+				ItemStack inserted = stack.copy();
+				inserted.setCount(toInsert);
+				setInventorySlotContents(slot, inserted);
 			} else {
-				existing.grow(toInsert);
-				// setInventorySlotContents is already called inside grow, but we call it again to ensure updates
-				setInventorySlotContents(slot, existing);
+				ItemStack inserted = existing.copy();
+				inserted.grow(toInsert);
+				setInventorySlotContents(slot, inserted);
 			}
 		}
 
 		if (toInsert == stack.getCount()) {
 			return ItemStack.EMPTY;
 		} else {
-			stack.shrink(toInsert);
-			return stack;
+			ItemStack remainder = stack.copy();
+			remainder.shrink(toInsert);
+			return remainder;
 		}
 	}
 
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate)
 	{
-		if (amount == 0 || slot >= getSlots()) {
+		if (amount <= 0 || slot < 0 || slot >= getSlots()) {
 			return ItemStack.EMPTY;
 		}
 
@@ -600,19 +603,19 @@ public abstract class BiblioTileEntity extends TileEntity implements IInventory,
 			return ItemStack.EMPTY;
 		}
 
-		int toExtract = Math.min(amount, existing.getMaxStackSize());
+		int toExtract = Math.min(amount, existing.getCount());
 
-		if (existing.getCount() <= toExtract) {
-			if (!simulate) {
+		ItemStack extracted = existing.copy();
+		extracted.setCount(toExtract);
+		if (!simulate) {
+			if (existing.getCount() == toExtract) {
 				setInventorySlotContents(slot, ItemStack.EMPTY);
+			} else {
+				existing.shrink(toExtract);
+				setInventorySlotContents(slot, existing);
 			}
-			return existing;
-		} else {
-			if (!simulate) {
-				setInventorySlotContents(slot, existing.splitStack(existing.getCount() - toExtract));
-			}
-			return existing.splitStack(toExtract);
 		}
+		return extracted;
 	}
 
 	@Override
