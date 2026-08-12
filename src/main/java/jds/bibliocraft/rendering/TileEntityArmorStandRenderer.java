@@ -6,35 +6,39 @@ import jds.bibliocraft.entity.ModelDummy;
 import jds.bibliocraft.tileentities.TileEntityArmorStand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityArmorStandRenderer extends TileEntitySpecialRenderer
 {
-	private AbstractClientPlayer steve;
+	private AbtractSteve steve;
+	private World renderWorld;
 	private RenderManager renderManager;
+	private RenderPlayer armorRenderer;
 	private ModelDummy modelDummy= new ModelDummy();
 	
 	@Override
 	public void render(TileEntity tile, double x, double y, double z, float partialTicks, int destroyStage, float what)
 	{
-		if (steve == null)
-		{
-			renderManager = Minecraft.getMinecraft().getRenderManager();
-			steve = new AbtractSteve(getWorld());
-			renderManager.setRenderPosition(0,0,0);
-			steve.posX = 0;
-			steve.posY = 0;
-			steve.posZ = 0;
-		}
 		if (tile != null && tile instanceof TileEntityArmorStand)
 		{
 			TileEntityArmorStand stand = (TileEntityArmorStand)tile;
-			if (stand.getIsBottomStand())
+			World world = getWorld();
+			if (stand.getIsBottomStand() && world != null)
 			{
+				ensureRenderObjects(world);
+
 				float degreeAngle = 0.0f;
 				switch (stand.getAngle())
 				{
@@ -55,21 +59,31 @@ public class TileEntityArmorStandRenderer extends TileEntitySpecialRenderer
 					}
 					default:break;
 				}
-				steve.inventory.armorInventory.set(3, stand.getStackInSlot(0));
-				steve.inventory.armorInventory.set(2, stand.getStackInSlot(1));
-				steve.inventory.armorInventory.set(1, stand.getStackInSlot(2));
-				steve.inventory.armorInventory.set(0, stand.getStackInSlot(3));	
-				steve.renderYawOffset = degreeAngle;
-				steve.rotationYawHead = degreeAngle;
+				// Render copies so the client-only fake player never shares mutable
+				// stacks with the tile entity.
+				steve.inventory.armorInventory.set(3, copyStack(stand.getStackInSlot(0)));
+				steve.inventory.armorInventory.set(2, copyStack(stand.getStackInSlot(1)));
+				steve.inventory.armorInventory.set(1, copyStack(stand.getStackInSlot(2)));
+				steve.inventory.armorInventory.set(0, copyStack(stand.getStackInSlot(3)));
+				double worldX = stand.getPos().getX() + 0.5D;
+				double worldY = stand.getPos().getY() + 0.07D;
+				double worldZ = stand.getPos().getZ() + 0.5D;
+				steve.setPosition(worldX, worldY, worldZ);
+				steve.lastTickPosX = steve.prevPosX = worldX;
+				steve.lastTickPosY = steve.prevPosY = worldY;
+				steve.lastTickPosZ = steve.prevPosZ = worldZ;
+				steve.renderYawOffset = steve.prevRenderYawOffset = degreeAngle;
+				steve.rotationYaw = steve.prevRotationYaw = degreeAngle;
+				steve.rotationYawHead = steve.prevRotationYawHead = degreeAngle;
+				steve.rotationPitch = steve.prevRotationPitch = 0.0F;
 				GlStateManager.pushMatrix();
 				GlStateManager.enableLighting();
 		        GlStateManager.enableBlend();
-		        double xPos = tile.getPos().getX() + 0.5 - this.rendererDispatcher.entityX;
-		        double yPos = tile.getPos().getY() + 0.07 - this.rendererDispatcher.entityY;
-		        double zPos = tile.getPos().getZ() + 0.5 - this.rendererDispatcher.entityZ;
-		        float yaw = degreeAngle;
-		        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				renderManager.renderEntity(steve, xPos, yPos, zPos, degreeAngle, 1.0f, false);
+				double xPos = worldX - this.rendererDispatcher.entityX;
+				double yPos = worldY - this.rendererDispatcher.entityY;
+				double zPos = worldZ - this.rendererDispatcher.entityZ;
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				armorRenderer.doRender(steve, xPos, yPos, zPos, degreeAngle, partialTicks);
 		        GlStateManager.disableBlend();
 				GlStateManager.popMatrix();
 				
@@ -86,6 +100,81 @@ public class TileEntityArmorStandRenderer extends TileEntitySpecialRenderer
 				//enchant(2);
 				//GlStateManager.popMatrix();
 			}
+		}
+	}
+
+	private void ensureRenderObjects(World world)
+	{
+		if (steve == null || renderWorld != world)
+		{
+			renderWorld = world;
+			renderManager = Minecraft.getMinecraft().getRenderManager();
+			steve = new AbtractSteve(world);
+			armorRenderer = new ArmorOnlyRenderPlayer(renderManager);
+		}
+	}
+
+	private ItemStack copyStack(ItemStack stack)
+	{
+		return stack.isEmpty() ? ItemStack.EMPTY : stack.copy();
+	}
+
+	/** Uses the normal player armor layers while suppressing the player model itself. */
+	private static class ArmorOnlyRenderPlayer extends RenderPlayer
+	{
+		private ArmorOnlyRenderPlayer(RenderManager renderManager)
+		{
+			super(renderManager);
+			// RenderPlayer normally also renders the fake player's skin, held item,
+			// cape and other layers. Armor stands only need the armor layer.
+			this.layerRenderers.clear();
+			this.addLayer(new ArmorOnlyLayer(this));
+		}
+
+		@Override
+		protected void renderModel(AbstractClientPlayer entity, float limbSwing, float limbSwingAmount,
+				float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+		{
+			// RenderLivingBase invokes armor layers after this method.
+		}
+
+		@Override
+		protected boolean canRenderName(AbstractClientPlayer entity)
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * Gives Forge armor integrations the same invisible-entity hint they use for
+	 * selecting an armor-stand model, while leaving the selected model visible
+	 * when it is actually rendered.
+	 */
+	private static class ArmorOnlyLayer extends LayerBipedArmor
+	{
+		private ArmorOnlyLayer(ArmorOnlyRenderPlayer renderer)
+		{
+			super(renderer);
+		}
+
+		@Override
+		protected ModelBiped getArmorModelHook(EntityLivingBase entity, ItemStack itemStack,
+				EntityEquipmentSlot slot, ModelBiped model)
+		{
+			if (entity instanceof AbtractSteve)
+			{
+				AbtractSteve fakePlayer = (AbtractSteve) entity;
+				fakePlayer.setArmorModelLookup(true);
+				try
+				{
+					return ForgeHooksClient.getArmorModel(entity, itemStack, slot, model);
+				}
+				finally
+				{
+					fakePlayer.setArmorModelLookup(false);
+				}
+			}
+			return super.getArmorModelHook(entity, itemStack, slot, model);
 		}
 	}
 	

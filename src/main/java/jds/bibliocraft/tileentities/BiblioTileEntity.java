@@ -269,6 +269,7 @@ public abstract class BiblioTileEntity extends TileEntity implements IInventory,
 				stack.setCount(getInventoryStackLimit());
 			}
 			setInventorySlotContentsAdditionalCommands(slot, stack);
+			markDirty();
 			getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
 		}
 	}

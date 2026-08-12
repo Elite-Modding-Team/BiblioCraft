@@ -2,6 +2,7 @@ package jds.bibliocraft.network.packet.server;
 
 import io.netty.buffer.ByteBuf;
 import jds.bibliocraft.network.packet.Utils;
+import jds.bibliocraft.blocks.BlockClipboard;
 import jds.bibliocraft.tileentities.TileEntityClipboard;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
@@ -41,10 +42,21 @@ public class BiblioClipboard implements IMessage {
         public IMessage onMessage(BiblioClipboard message, MessageContext ctx) {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayerMP player = ctx.getServerHandler().player;
-                if (Utils.hasPointLoaded(player, message.pos)) {
+                if (message.pos != null
+                        && ((message.updatePos >= 0 && message.updatePos <= 8)
+                        || message.updatePos == 10 || message.updatePos == 11)) {
+                    if (!Utils.hasPointLoaded(player, message.pos)
+                            || player.getDistanceSq(message.pos) > 64.0D) {
+                        return;
+                    }
                     TileEntity tile = player.world.getTileEntity(message.pos);
-                    if (tile != null && tile instanceof TileEntityClipboard) {
+                    if (tile instanceof TileEntityClipboard
+                            && player.world.getBlockState(message.pos).getBlock() == BlockClipboard.instance) {
                         TileEntityClipboard clipboard = (TileEntityClipboard) tile;
+                        if (clipboard.isLocked()
+                                && !player.getDisplayNameString().contains(clipboard.getLockee())) {
+                            return;
+                        }
                         clipboard.updateClipboardFromPlayerSelection(message.updatePos);
                     }
                 }

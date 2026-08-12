@@ -61,6 +61,7 @@ public class GuiBiblioTextField extends Gui
 
     /** True if this textbox is visible */
     private boolean visible = true;
+    private boolean centered;
     
     @SideOnly(Side.CLIENT)
 	public GuiBiblioTextField(FontRenderer par1FontRenderer, int par2, int par3, int par4, int par5) 
@@ -469,8 +470,13 @@ public class GuiBiblioTextField extends Gui
                 l -= 4;
             }
 
-            String s = this.fontRenderer.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
-            this.setCursorPosition(this.fontRenderer.trimStringToWidth(s, l).length() + this.lineScrollOffset);
+            int textStart = Math.min(Math.max(this.lineScrollOffset, 0), this.text.length());
+            String s = this.fontRenderer.trimStringToWidth(this.text.substring(textStart), this.getWidth());
+            if (this.centered)
+            {
+                l -= (this.getWidth() - this.fontRenderer.getStringWidth(s)) / 2;
+            }
+            this.setCursorPosition(this.fontRenderer.trimStringToWidth(s, Math.max(l, 0)).length() + textStart);
             return true;
         }
         return false;
@@ -489,6 +495,12 @@ public class GuiBiblioTextField extends Gui
             {
                 drawRect(this.xPos - 1, this.yPos - 1, this.xPos + this.width + 1, this.yPos + this.height + 1, -6250336);
                 drawRect(this.xPos, this.yPos, this.xPos + this.width, this.yPos + this.height, -16777216);
+            }
+
+            if (this.centered)
+            {
+                drawCenteredTextBox();
+                return;
             }
 
             int i = this.isEnabled ? this.enabledColor : this.disabledColor;
@@ -552,6 +564,62 @@ public class GuiBiblioTextField extends Gui
         }
     }
 
+    /** Draws a title as a centered single-line field so its left edge moves as it grows. */
+    private void drawCenteredTextBox()
+    {
+        int color = this.isEnabled ? this.enabledColor : this.disabledColor;
+        int textStart = Math.min(Math.max(this.lineScrollOffset, 0), this.text.length());
+        int visibleCursor = this.cursorPosition - textStart;
+        int visibleSelection = this.selectionEnd - textStart;
+        String visibleText = this.fontRenderer.trimStringToWidth(
+                this.text.substring(textStart), this.getWidth());
+        int textWidth = this.fontRenderer.getStringWidth(visibleText);
+        int textX = this.xPos + (this.width - textWidth) / 2;
+        int textY = this.enableBackgroundDrawing ? this.yPos + (this.height - 8) / 2 : this.yPos;
+        boolean cursorVisible = visibleCursor >= 0 && visibleCursor <= visibleText.length();
+        boolean drawCursor = this.isFocused && this.cursorCounter / 6 % 2 == 0 && cursorVisible;
+
+        if (visibleSelection > visibleText.length())
+        {
+            visibleSelection = visibleText.length();
+        }
+        if (visibleSelection < 0)
+        {
+            visibleSelection = 0;
+        }
+
+        int cursorX = textX;
+        if (visibleText.length() > 0)
+        {
+            String beforeCursor = cursorVisible ? visibleText.substring(0, visibleCursor) : visibleText;
+            cursorX = this.fontRenderer.drawString(beforeCursor, textX, textY, color);
+            if (cursorVisible && visibleCursor < visibleText.length())
+            {
+                this.fontRenderer.drawString(visibleText.substring(visibleCursor), cursorX, textY, color);
+            }
+        }
+
+        if (drawCursor)
+        {
+            if (this.cursorPosition < this.text.length() || this.text.length() >= this.getMaxStringLength())
+            {
+                Gui.drawRect(cursorX - 1, textY - 1, cursorX + 1,
+                        textY + 1 + this.fontRenderer.FONT_HEIGHT, -3092272);
+            }
+            else
+            {
+                this.fontRenderer.drawString("_", cursorX, textY, color);
+            }
+        }
+
+        if (visibleSelection != visibleCursor)
+        {
+            int selectionX = textX + this.fontRenderer.getStringWidth(visibleText.substring(0, visibleSelection));
+            this.drawCursorVertical(cursorX, textY - 1, selectionX - 1,
+                    textY + 1 + this.fontRenderer.FONT_HEIGHT);
+        }
+    }
+
     /**
      * draws the vertical line cursor in the textbox
      */
@@ -596,6 +664,9 @@ public class GuiBiblioTextField extends Gui
         if ((this.text.length()) > par1)
         {
             this.text = this.text.substring(0, par1);
+            this.cursorPosition = Math.min(this.cursorPosition, this.text.length());
+            this.selectionEnd = Math.min(this.selectionEnd, this.text.length());
+            this.lineScrollOffset = Math.min(this.lineScrollOffset, this.text.length());
         }
     }
 
@@ -637,6 +708,12 @@ public class GuiBiblioTextField extends Gui
     public void setTextColor(int par1)
     {
         this.enabledColor = par1;
+    }
+
+    /** Enables centered rendering for fields such as the clipboard title. */
+    public void setCentered(boolean centered)
+    {
+        this.centered = centered;
     }
 
     public void setDisabledTextColour(int par1)
@@ -766,4 +843,3 @@ public class GuiBiblioTextField extends Gui
         this.visible = par1;
     }
 }
-

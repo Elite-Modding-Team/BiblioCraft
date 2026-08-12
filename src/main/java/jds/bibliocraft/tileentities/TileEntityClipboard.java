@@ -5,9 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.util.Constants;
 
 public class TileEntityClipboard extends BiblioTileEntity
 {
+	public static final int MAX_PAGES = 50;
+	private static final int TASK_COUNT = 9;
 	public int button0state = 0;
 	public int button1state = 0;
 	public int button2state = 0;
@@ -53,7 +56,10 @@ public class TileEntityClipboard extends BiblioTileEntity
 			// next page
 			changePage(true);
 		}
-		this.getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
+		if (this.getWorld() != null)
+		{
+			this.getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
+		}
 	}
 	
 	public void checkCheckBox(int box)
@@ -72,116 +78,143 @@ public class TileEntityClipboard extends BiblioTileEntity
 		}
 		
 		ItemStack clipStack = getStackInSlot(0);
-		if (clipStack != ItemStack.EMPTY)
+		if (!clipStack.isEmpty())
 		{
 			NBTTagCompound cliptags = clipStack.getTagCompound();
 	    	if (cliptags != null)
 	    	{
-	    		String pagenum = "page"+cliptags.getInteger("currentPage");
-	    		NBTTagCompound pagetag = cliptags.getCompoundTag(pagenum);
-	    		if (pagetag != null)
-	    		{
-	    			int[] taskstat = pagetag.getIntArray("taskStates");
-	    			
-	    			taskstat[0] = this.button0state;
-	    			taskstat[1] = this.button1state;
-	    			taskstat[2] = this.button2state;
-	    			taskstat[3] = this.button3state;
-	    			taskstat[4] = this.button4state;
-	    			taskstat[5] = this.button5state;
-	    			taskstat[6] = this.button6state;
-	    			taskstat[7] = this.button7state;
-	    			taskstat[8] = this.button8state;
-	    			
-	    			pagetag.setIntArray("taskStates", taskstat);
-	    			clipStack.setTagCompound(cliptags);
-	    			setInventorySlotContents(0, clipStack);
-	    			getNBTData();
-	    			getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
-	    		}
+	    		NBTTagCompound pagetag = getOrCreatePage(cliptags, this.currentPage);
+	    		int[] taskstat = getTaskStates(pagetag);
+	    		taskstat[0] = this.button0state;
+	    		taskstat[1] = this.button1state;
+	    		taskstat[2] = this.button2state;
+	    		taskstat[3] = this.button3state;
+	    		taskstat[4] = this.button4state;
+	    		taskstat[5] = this.button5state;
+	    		taskstat[6] = this.button6state;
+	    		taskstat[7] = this.button7state;
+	    		taskstat[8] = this.button8state;
+	    		pagetag.setIntArray("taskStates", taskstat);
+	    		clipStack.setTagCompound(cliptags);
+	    		setInventorySlotContents(0, clipStack);
+	    		getNBTData();
 	    	}
 		}
 	}
 	
 	public void changePage(boolean nextPage)
 	{
-		if (nextPage)
-		{
-			if (this.currentPage < this.totalPages)
-			{
-				this.currentPage++;
-			}
-		}
-		else
-		{
-			if (this.currentPage > 1)
-			{
-				this.currentPage--;
-			}
-		}
-		
 		ItemStack clipStack = getStackInSlot(0);
-		if (clipStack != ItemStack.EMPTY)
+		if (!clipStack.isEmpty())
 		{
 	    	NBTTagCompound cliptags = clipStack.getTagCompound();
-	    	if (cliptags != null)
+	    	if (cliptags == null)
 	    	{
-	    		String pagenum = "page"+this.currentPage;
-	    		NBTTagCompound pagetag = cliptags.getCompoundTag(pagenum);
-	    		if (pagetag != null)
-	    		{
-	    			cliptags.setInteger("currentPage", currentPage);
-	    			clipStack.setTagCompound(cliptags);
-	    			setInventorySlotContents(0, clipStack);
-	    			getNBTData();
-	    			getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
-	    		}
+	    		return;
 	    	}
+
+	    	getNBTData();
+	    	int targetPage = nextPage ? this.currentPage + 1 : this.currentPage - 1;
+	    	if (targetPage < 1 || targetPage > MAX_PAGES)
+	    	{
+	    		return;
+	    	}
+
+	    	if (targetPage > this.totalPages)
+	    	{
+	    		this.totalPages = targetPage;
+	    	}
+	    	getOrCreatePage(cliptags, targetPage);
+	    	this.currentPage = targetPage;
+	    	cliptags.setInteger("currentPage", this.currentPage);
+	    	cliptags.setInteger("totalPages", this.totalPages);
+	    	clipStack.setTagCompound(cliptags);
+	    	setInventorySlotContents(0, clipStack);
+	    	getNBTData();
 		}
 	}
 	
 	public void getNBTData()
     {
 		ItemStack clipStack = getStackInSlot(0);
-		if (clipStack != ItemStack.EMPTY)
+		if (!clipStack.isEmpty())
 		{
 	    	NBTTagCompound cliptags = clipStack.getTagCompound();
 	    	if (cliptags != null)
 	    	{
-	    		this.currentPage = cliptags.getInteger("currentPage");
-	    		this.totalPages = cliptags.getInteger("totalPages");
-	    		String pagenum = "page"+currentPage;
-	    		NBTTagCompound pagetag = cliptags.getCompoundTag(pagenum);
-	    		if (pagetag != null)
-	    		{
-	    			int[] taskstat = pagetag.getIntArray("taskStates");
-	    			if (taskstat.length > 0)
-	    			{
-	    				this.button0state = taskstat[0];
-	    				this.button1state = taskstat[1];
-	    				this.button2state = taskstat[2];
-	    				this.button3state = taskstat[3];
-	    				this.button4state = taskstat[4];
-	    				this.button5state = taskstat[5];
-		    			this.button6state = taskstat[6];
-		    			this.button7state = taskstat[7];
-		    			this.button8state = taskstat[8];
-	    			}
-	    			NBTTagCompound tasks = pagetag.getCompoundTag("tasks");
-	    			this.button0text = tasks.getString("task1");
-	    			this.button1text = tasks.getString("task2");
-	    			this.button2text = tasks.getString("task3");
-	    			this.button3text = tasks.getString("task4");
-	    			this.button4text = tasks.getString("task5");
-	    			this.button5text = tasks.getString("task6");
-	    			this.button6text = tasks.getString("task7");
-	    			this.button7text = tasks.getString("task8");
-	    			this.button8text = tasks.getString("task9");
-	    			this.titletext = pagetag.getString("title");
-	    		}
+	    	int savedTotalPages = cliptags.getInteger("totalPages");
+	    	this.totalPages = clampPage(savedTotalPages <= 0 ? 1 : savedTotalPages);
+	    	this.currentPage = clampPage(cliptags.getInteger("currentPage"));
+	    	if (this.currentPage > this.totalPages)
+	    	{
+	    		this.totalPages = this.currentPage;
+	    	}
+	    	NBTTagCompound pagetag = getOrCreatePage(cliptags, this.currentPage);
+	    	cliptags.setInteger("currentPage", this.currentPage);
+	    	cliptags.setInteger("totalPages", this.totalPages);
+
+	    	int[] taskstat = getTaskStates(pagetag);
+	    	this.button0state = taskstat[0];
+	    	this.button1state = taskstat[1];
+	    	this.button2state = taskstat[2];
+	    	this.button3state = taskstat[3];
+	    	this.button4state = taskstat[4];
+	    	this.button5state = taskstat[5];
+	    	this.button6state = taskstat[6];
+	    	this.button7state = taskstat[7];
+	    	this.button8state = taskstat[8];
+	    	NBTTagCompound tasks = pagetag.getCompoundTag("tasks");
+	    	this.button0text = tasks.getString("task1");
+	    	this.button1text = tasks.getString("task2");
+	    	this.button2text = tasks.getString("task3");
+	    	this.button3text = tasks.getString("task4");
+	    	this.button4text = tasks.getString("task5");
+	    	this.button5text = tasks.getString("task6");
+	    	this.button6text = tasks.getString("task7");
+	    	this.button7text = tasks.getString("task8");
+	    	this.button8text = tasks.getString("task9");
+	    	this.titletext = pagetag.getString("title");
 	    	}
 		}
     }
+
+	private int clampPage(int page)
+	{
+		return Math.max(1, Math.min(MAX_PAGES, page));
+	}
+
+	private NBTTagCompound getOrCreatePage(NBTTagCompound clipboard, int pageNumber)
+	{
+		String pageName = "page" + clampPage(pageNumber);
+		if (!clipboard.hasKey(pageName, Constants.NBT.TAG_COMPOUND))
+		{
+			clipboard.setTag(pageName, createEmptyPage());
+		}
+		return clipboard.getCompoundTag(pageName);
+	}
+
+	private int[] getTaskStates(NBTTagCompound page)
+	{
+		int[] storedStates = page.getIntArray("taskStates");
+		int[] taskStates = new int[TASK_COUNT];
+		System.arraycopy(storedStates, 0, taskStates, 0, Math.min(storedStates.length, TASK_COUNT));
+		page.setIntArray("taskStates", taskStates);
+		return taskStates;
+	}
+
+	public static NBTTagCompound createEmptyPage()
+	{
+		NBTTagCompound page = new NBTTagCompound();
+		NBTTagCompound tasks = new NBTTagCompound();
+		page.setIntArray("taskStates", new int[TASK_COUNT]);
+		for (int i = 1; i <= TASK_COUNT; i++)
+		{
+			tasks.setString("task" + i, "");
+		}
+		page.setTag("tasks", tasks);
+		page.setString("title", "");
+		return page;
+	}
 
 	@Override
 	public int getInventoryStackLimit()

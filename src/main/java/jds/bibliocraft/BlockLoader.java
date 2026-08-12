@@ -222,7 +222,7 @@ public class BlockLoader
 		}
 		if (Config.enableClipboard)
 		{
-			event.getRegistry().register(new ItemBlock(BlockClipboard.instance).setRegistryName(BlockClipboard.name)); 
+			event.getRegistry().register(BlockItemClipboard.instance);
 		}
 		
 		if (Config.enableLantern)
