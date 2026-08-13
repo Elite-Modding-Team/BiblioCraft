@@ -263,7 +263,7 @@ public class ModelClipboard implements IBakedModel// ISmartBlockModel, ISmartIte
 			{ 
 				transform = new TRSRTransformation(new Vector3f(-0.05f, 0.25f, 0.3f), 
 												   new Quat4f(0.0f, -1.0f, 0.0f, 1.0f), 
-												   new Vector3f(0.5f, 0.5f, 0.5f), 
+													   new Vector3f(0.25f, 0.25f, 0.25f),
 												   new Quat4f(0.0f, 0.0f, 0.0f, 1.0f));
 				break; 
 			}
@@ -271,7 +271,7 @@ public class ModelClipboard implements IBakedModel// ISmartBlockModel, ISmartIte
 			{ 
 				transform = new TRSRTransformation(new Vector3f(0.0f, 0.25f, 0.3f), 
 												   new Quat4f(0.0f, 1.0f, 0.0f, 1.0f), 
-												   new Vector3f(0.5f, 0.5f, 0.5f), 
+													   new Vector3f(0.25f, 0.25f, 0.25f),
 												   new Quat4f(0.0f, 0.0f, 0.0f, 1.0f));
 				break; 
 			}
