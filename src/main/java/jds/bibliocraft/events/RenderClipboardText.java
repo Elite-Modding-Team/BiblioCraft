@@ -2,99 +2,140 @@ package jds.bibliocraft.events;
 
 import jds.bibliocraft.Config;
 import jds.bibliocraft.items.ItemClipboard;
+import jds.bibliocraft.rendering.ClipboardTextLayout;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class RenderClipboardText 
+public class RenderClipboardText
 {
-	// thanks to Vazkii and https://github.com/Vazkii/Botania/blob/master/src/main/java/vazkii/botania/client/core/handler/RenderLexicon.java for figuring this out
 	private static final float HAND_TEXT_SCALE = 0.0036F;
-	private static final double TEXT_SPACING = -0.0658D;
-	
+	private static final double HAND_TEXT_Y_OFFSET = -0.44D;
+	private static final double HAND_TEXT_Z_OFFSET = 0.20D;
+
 	@SubscribeEvent
 	public void renderItem(RenderSpecificHandEvent event)
 	{
-		// this only ever runs in first person mode
 		Minecraft mc = Minecraft.getMinecraft();
-		boolean is1stperson = mc.gameSettings.thirdPersonView == 0;
-		ItemStack stack = mc.player.getHeldItem(event.getHand());
-		if (Config.enableClipboard && stack.getItem() == ItemClipboard.instance && is1stperson)
+		ItemStack stack = event.getItemStack();
+		if (!Config.enableClipboard || mc.player == null || mc.gameSettings.thirdPersonView != 0
+				|| stack.isEmpty() || stack.getItem() != ItemClipboard.instance)
 		{
-			try
-			{
-				render(mc, event, stack);
-			}
-			catch (Throwable throwable) 
-			{
-				System.out.println("Failed to render text on clipboard");
-			}
+			return;
+		}
+
+		try
+		{
+			render(mc, event, stack);
+		}
+		catch (Throwable throwable)
+		{
+			System.err.println("Failed to render text on clipboard");
+			throwable.printStackTrace();
 		}
 	}
-	
-	private void render(Minecraft mc, RenderSpecificHandEvent event, ItemStack stack) throws Throwable
+
+	private void render(Minecraft mc, RenderSpecificHandEvent event, ItemStack stack)
 	{
-		boolean isRightHand = (event.getHand() == EnumHand.MAIN_HAND) == (Minecraft.getMinecraft().player.getPrimaryHand() == EnumHandSide.RIGHT);
-		NBTTagCompound cliptags = stack.getTagCompound();
-    	if (cliptags != null)
-    	{
-    		int currentPage = cliptags.getInteger("currentPage");
-    		String pagenum = "page"+currentPage;
-    		NBTTagCompound pagetag = cliptags.getCompoundTag(pagenum);
-    		if (pagetag != null)
-			{
-				NBTTagCompound tasks = pagetag.getCompoundTag("tasks");
-				if (tasks != null && event.getEquipProgress() == 0.0 && event.getSwingProgress() == 0.0)
-				{
-					renderText(mc, event, stack, pagetag.getString("title"), isRightHand, 0);
-					renderText(mc, event, stack, tasks.getString("task1"), isRightHand, 1);
-					renderText(mc, event, stack, tasks.getString("task2"), isRightHand, 2);
-					renderText(mc, event, stack, tasks.getString("task3"), isRightHand, 3);
-					renderText(mc, event, stack, tasks.getString("task4"), isRightHand, 4);
-					renderText(mc, event, stack, tasks.getString("task5"), isRightHand, 5);
-					renderText(mc, event, stack, tasks.getString("task6"), isRightHand, 6);
-					renderText(mc, event, stack, tasks.getString("task7"), isRightHand, 7);
-					renderText(mc, event, stack, tasks.getString("task8"), isRightHand, 8);
-					renderText(mc, event, stack, tasks.getString("task9"), isRightHand, 9);
-				}
-			}
+		boolean isRightHand = (event.getHand() == EnumHand.MAIN_HAND)
+				== (mc.player.getPrimaryHand() == EnumHandSide.RIGHT);
+		ClipboardTextLayout textLayout = getTextLayout(stack);
+		for (int row = 0; row < ClipboardTextLayout.ROW_COUNT; row++)
+		{
+			renderText(mc, event, stack, textLayout.getText(row),
+					textLayout.getModelY(row) + HAND_TEXT_Y_OFFSET,
+					textLayout.getHandModelZ(row) + HAND_TEXT_Z_OFFSET, isRightHand);
 		}
 	}
-	
+
+	private ClipboardTextLayout getTextLayout(ItemStack stack)
+	{
+		NBTTagCompound clipboardTags = stack.getTagCompound();
+		if (clipboardTags == null)
+		{
+			return ClipboardTextLayout.fromPage(null);
+		}
+
+		int currentPage = Math.max(1, clipboardTags.getInteger("currentPage"));
+		return ClipboardTextLayout.fromPage(clipboardTags.getCompoundTag("page" + currentPage));
+	}
+
 	private void renderText(Minecraft mc, RenderSpecificHandEvent event, ItemStack stack, String text,
-			boolean isRightHand, int verticalPos)
+			double y, double z, boolean isRightHand)
 	{
 		GlStateManager.pushMatrix();
-		applyFirstPersonItemTransform(mc, event, stack, isRightHand);
-		double y = verticalPos == 0 ? 0.825D : 0.76D + TEXT_SPACING * (verticalPos - 1);
-		double z = verticalPos == 0 ? 0.5D : 0.222D;
-		GlStateManager.translate(0.037D, y, z);
-		GlStateManager.rotate(270.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-		GlStateManager.scale(HAND_TEXT_SCALE, HAND_TEXT_SCALE, HAND_TEXT_SCALE);
-		int textX = verticalPos == 0 ? -mc.fontRenderer.getStringWidth(text) / 2 : 0;
-		mc.fontRenderer.drawString(text, textX, 0, 0x000000, false); 
-		GlStateManager.popMatrix();
+		try
+		{
+			applyFirstPersonItemTransform(mc, event, stack, isRightHand);
+			GlStateManager.translate(ClipboardTextLayout.MODEL_TEXT_X, y, z);
+			GlStateManager.depthMask(false);
+			GlStateManager.rotate(270.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.scale(HAND_TEXT_SCALE, HAND_TEXT_SCALE, HAND_TEXT_SCALE);
+			mc.fontRenderer.drawString(text, 0, 0, 0x000000, false);
+		}
+		finally
+		{
+			GlStateManager.depthMask(true);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.popMatrix();
+		}
 	}
 
 	private void applyFirstPersonItemTransform(Minecraft mc, RenderSpecificHandEvent event, ItemStack stack,
 			boolean isRightHand)
 	{
-		int handSign = isRightHand ? 1 : -1;
-		GlStateManager.translate(handSign * 0.56F, -0.52F + event.getEquipProgress() * -0.6F, -0.72F);
+		EnumHandSide handSide = isRightHand ? EnumHandSide.RIGHT : EnumHandSide.LEFT;
+		boolean activelyUsingClipboard = mc.player.isHandActive()
+				&& mc.player.getItemInUseCount() > 0
+				&& mc.player.getActiveHand() == event.getHand()
+				&& stack.getItemUseAction() == EnumAction.NONE;
+		if (activelyUsingClipboard)
+		{
+			transformSideFirstPerson(handSide, event.getEquipProgress());
+		}
+		else
+		{
+			float swingProgress = event.getSwingProgress();
+			float swingX = -0.4F * MathHelper.sin(MathHelper.sqrt(swingProgress) * (float)Math.PI);
+			float swingY = 0.2F * MathHelper.sin(MathHelper.sqrt(swingProgress) * ((float)Math.PI * 2F));
+			float swingZ = -0.2F * MathHelper.sin(swingProgress * (float)Math.PI);
+			int handSign = isRightHand ? 1 : -1;
+			GlStateManager.translate(handSign * swingX, swingY, swingZ);
+			transformSideFirstPerson(handSide, event.getEquipProgress());
+			transformFirstPerson(handSide, swingProgress);
+		}
 
 		IBakedModel model = mc.getRenderItem().getItemModelWithOverrides(stack, mc.world, mc.player);
-		ItemCameraTransforms.TransformType transformType = isRightHand
-				? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND
-				: ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND;
+		TransformType transformType = isRightHand ? TransformType.FIRST_PERSON_RIGHT_HAND
+				: TransformType.FIRST_PERSON_LEFT_HAND;
 		ForgeHooksClient.handleCameraTransforms(model, transformType, !isRightHand);
+	}
+
+	private void transformSideFirstPerson(EnumHandSide hand, float equipProgress)
+	{
+		int handSign = hand == EnumHandSide.RIGHT ? 1 : -1;
+		GlStateManager.translate(handSign * 0.56F, -0.52F + equipProgress * -0.6F, -0.72F);
+	}
+
+	private void transformFirstPerson(EnumHandSide hand, float swingProgress)
+	{
+		int handSign = hand == EnumHandSide.RIGHT ? 1 : -1;
+		float swing = MathHelper.sin(swingProgress * swingProgress * (float)Math.PI);
+		GlStateManager.rotate(handSign * (45.0F + swing * -20.0F), 0.0F, 1.0F, 0.0F);
+		float swingRoot = MathHelper.sin(MathHelper.sqrt(swingProgress) * (float)Math.PI);
+		GlStateManager.rotate(handSign * swingRoot * -20.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(swingRoot * -80.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(handSign * -45.0F, 0.0F, 1.0F, 0.0F);
 	}
 }
