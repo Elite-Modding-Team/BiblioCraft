@@ -7,11 +7,14 @@ import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.client.model.BakedModelWrapper;
 import org.lwjgl.opengl.GL11;
 
 public class ClipboardItemStackRenderer extends TileEntityItemStackRenderer
 {
 	private static ItemStack pendingHandStack;
+	private IBakedModel modelToRender;
+	private IBakedModel nonBuiltInModel;
 
 	public static void renderTextForNextHand(ItemStack stack)
 	{
@@ -27,12 +30,45 @@ public class ClipboardItemStackRenderer extends TileEntityItemStackRenderer
 		boolean renderText = pendingHandStack != null && ItemStack.areItemStacksEqual(pendingHandStack, stack);
 		pendingHandStack = null;
 
-		/* RenderItem has already applied the camera transform and -0.5 model offset. */
-		renderItem.renderModel(model, stack);
+		/*
+		 * RenderItem has already applied the camera transform and -0.5 model offset
+		 * before entering this method.  ModelClipboard is a built-in model, so
+		 * calling renderItem(stack, model) directly would call this renderer again.
+		 * Wrap it as a regular model instead.  This keeps the actual model data and
+		 * lets RenderItem invoke its private model drawing code from inside Minecraft,
+		 * rather than linking this class to that private method.
+		 */
+		GlStateManager.pushMatrix();
+		try
+		{
+			GlStateManager.translate(0.5D, 0.5D, 0.5D);
+			renderItem.renderItem(stack, getNonBuiltInModel(model));
+		}
+		finally
+		{
+			GlStateManager.popMatrix();
+		}
 		if (renderText)
 		{
 			renderText(mc, stack);
 		}
+	}
+
+	private IBakedModel getNonBuiltInModel(IBakedModel model)
+	{
+		if (modelToRender != model)
+		{
+			modelToRender = model;
+			nonBuiltInModel = new BakedModelWrapper<IBakedModel>(model)
+			{
+				@Override
+				public boolean isBuiltInRenderer()
+				{
+					return false;
+				}
+			};
+		}
+		return nonBuiltInModel;
 	}
 
 	private void renderText(Minecraft mc, ItemStack stack)
