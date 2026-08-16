@@ -237,7 +237,12 @@ public class TileEntityClipboard extends BiblioTileEntity
 	@Override
 	public void setInventorySlotContentsAdditionalCommands(int slot, ItemStack stack) 
 	{
-
+		if (slot == 0)
+		{
+			// Load the item NBT before BiblioTileEntity sends its block update so
+			// the client receives the current page and text fields in that update.
+			getNBTData();
+		}
 	}
 
 	@Override
