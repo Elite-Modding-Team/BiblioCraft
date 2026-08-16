@@ -227,7 +227,7 @@ public class ModelClipboard implements IBakedModel// ISmartBlockModel, ISmartIte
 	@Override
 	public boolean isBuiltInRenderer() 
 	{
-		return false;
+		return true;
 	}
 
 	@Override

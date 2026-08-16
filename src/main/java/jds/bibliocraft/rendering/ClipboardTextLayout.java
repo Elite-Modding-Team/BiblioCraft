@@ -17,8 +17,15 @@ public final class ClipboardTextLayout
 	public static final double MODEL_TITLE_Y = 0.825D;
 	public static final double MODEL_TASK_Y = 0.76D;
 	public static final double MODEL_TITLE_Z = 0.27D;
-	public static final double HAND_TITLE_Z = 0.27D;
 	public static final double MODEL_TASK_Z = 0.222D;
+	/*
+	 * First-person item transforms turn the clipboard's Z axis around.  These
+	 * coordinates are therefore deliberately separate from the block renderer
+	 * coordinates above.
+	 */
+	public static final double HAND_TITLE_CENTER_Z = 0.5D;
+	public static final double HAND_TASK_Z = 0.70D;
+	public static final double HAND_ITEM_SCALE = 0.5D;
 	public static final double MODEL_TEXT_SPACING = -0.0658D;
 	public static final float MODEL_TEXT_SCALE = 0.0045F;
 
@@ -89,14 +96,20 @@ public final class ClipboardTextLayout
 		return row == 0 ? MODEL_TITLE_Z : MODEL_TASK_Z;
 	}
 
-	public double getHandModelZ(int row)
+	/**
+	 * Returns the first-person Z coordinate for a text row.  The title's
+	 * origin is moved by half its rendered width so that it remains centered
+	 * when its contents change; task rows stay aligned with the GUI checkbox
+	 * column.
+	 */
+	public double getHandModelZ(int row, int textWidth)
 	{
-		return row == 0 ? HAND_TITLE_Z : MODEL_TASK_Z;
-	}
-
-	public boolean isTitle(int row)
-	{
-		return row == 0;
+		if (row == 0)
+		{
+			return HAND_TITLE_CENTER_Z
+					+ textWidth * MODEL_TEXT_SCALE * HAND_ITEM_SCALE / 2.0D;
+		}
+		return HAND_TASK_Z;
 	}
 
 	public static int getGuiTaskY(int taskIndex)
