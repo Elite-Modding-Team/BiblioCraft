@@ -16,7 +16,6 @@ public final class ClipboardTextLayout
 	public static final double MODEL_TEXT_X = 0.037D;
 	public static final double MODEL_TITLE_Y = 0.825D;
 	public static final double MODEL_TASK_Y = 0.76D;
-	public static final double MODEL_TITLE_Z = 0.27D;
 	public static final double MODEL_TASK_Z = 0.222D;
 	/*
 	 * First-person item transforms turn the clipboard's Z axis around.  These
@@ -29,12 +28,20 @@ public final class ClipboardTextLayout
 	public static final double MODEL_TEXT_SPACING = -0.0658D;
 	public static final float MODEL_TEXT_SCALE = 0.0045F;
 
+	/*
+	 * These are pixel widths, not character limits.  A character limit cannot
+	 * keep the rendered text inside the paper because Minecraft fonts have
+	 * different widths for different characters and languages.
+	 */
+	public static final int DISPLAY_TITLE_WIDTH = 125;
+	public static final int DISPLAY_TASK_WIDTH = 115;
+
 	public static final int GUI_TITLE_X = 34;
 	public static final int GUI_TITLE_Y = 14;
-	public static final int GUI_TITLE_WIDTH = 125;
+	public static final int GUI_TITLE_WIDTH = DISPLAY_TITLE_WIDTH;
 	public static final int GUI_TASK_X = 44;
 	public static final int GUI_TASK_Y = 29;
-	public static final int GUI_TASK_WIDTH = 115;
+	public static final int GUI_TASK_WIDTH = DISPLAY_TASK_WIDTH;
 	public static final int GUI_ROW_SPACING = 15;
 
 	private final String title;
@@ -91,9 +98,44 @@ public final class ClipboardTextLayout
 		return row == 0 ? MODEL_TITLE_Y : MODEL_TASK_Y + MODEL_TEXT_SPACING * (row - 1);
 	}
 
-	public double getModelZ(int row)
+	/**
+	 * Returns the Z origin used by the wall-mounted clipboard.  The title is
+	 * centered in the paper using its final, scaled width; task rows retain
+	 * their fixed left alignment beside their checkboxes.
+	 */
+	public double getModelZ(int row, double renderedTextWidth)
 	{
-		return row == 0 ? MODEL_TITLE_Z : MODEL_TASK_Z;
+		if (row == 0)
+		{
+			/*
+			 * renderText() starts at the model's centre and rotates the font's
+			 * horizontal axis towards decreasing Z.  Moving the origin forward by
+			 * half the rendered width therefore places the title's centre exactly
+			 * at the centre of the paper.
+			 */
+			return renderedTextWidth * MODEL_TEXT_SCALE / 2.0D;
+		}
+		return MODEL_TASK_Z;
+	}
+
+	public static int getDisplayWidth(int row)
+	{
+		return row == 0 ? DISPLAY_TITLE_WIDTH : DISPLAY_TASK_WIDTH;
+	}
+
+	/**
+	 * Returns a scale that makes a text row fit its paper area without changing
+	 * the text stored in NBT.  Short text keeps the normal size; long text is
+	 * scaled down just enough to fit.
+	 */
+	public static float getDisplayScale(int row, int textWidth)
+	{
+		int displayWidth = getDisplayWidth(row);
+		if (textWidth <= 0 || textWidth <= displayWidth)
+		{
+			return 1.0F;
+		}
+		return (float)displayWidth / (float)textWidth;
 	}
 
 	/**
@@ -102,12 +144,12 @@ public final class ClipboardTextLayout
 	 * when its contents change; task rows stay aligned with the GUI checkbox
 	 * column.
 	 */
-	public double getHandModelZ(int row, int textWidth)
+	public double getHandModelZ(int row, double renderedTextWidth)
 	{
 		if (row == 0)
 		{
 			return HAND_TITLE_CENTER_Z
-					+ textWidth * MODEL_TEXT_SCALE * HAND_ITEM_SCALE / 2.0D;
+					+ renderedTextWidth * MODEL_TEXT_SCALE * HAND_ITEM_SCALE / 2.0D;
 		}
 		return HAND_TASK_Z;
 	}

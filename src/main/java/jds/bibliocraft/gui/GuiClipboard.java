@@ -180,19 +180,24 @@ public class GuiClipboard extends GuiScreen
     	this.textField5.setTextColor(0x404040);
     	this.textField6.setTextColor(0x404040);
     	this.textField7.setTextColor(0x404040);
-    	this.textField8.setTextColor(0x404040);
-    	this.textFieldTitle.setTextColor(0x404040);
+	    this.textField8.setTextColor(0x404040);
+	    this.textFieldTitle.setTextColor(0x404040);
+
+	    // The title has no fixed character count: CJK and Latin glyphs have
+	    // different widths.  Limit it to the actual title line width instead.
+	    this.textFieldTitle.setMaxStringLength(Integer.MAX_VALUE);
+	    this.textFieldTitle.setMaxStringPixelWidth(this.textFieldTitle.getWidth());
     	
-    	this.textField0.setText(button0text);
+	    this.textField0.setText(button0text);
     	this.textField1.setText(button1text);
     	this.textField2.setText(button2text);
     	this.textField3.setText(button3text);
     	this.textField4.setText(button4text);
     	this.textField5.setText(button5text);
     	this.textField6.setText(button6text);
-    	this.textField7.setText(button7text);
-    	this.textField8.setText(button8text);
-    	this.textFieldTitle.setText(titletext);
+	    this.textField7.setText(button7text);
+	    this.textField8.setText(button8text);
+	    this.textFieldTitle.setText(titletext);
     	
     	this.textField0.setMaxStringLength(fieldCharLimit);
     	this.textField1.setMaxStringLength(fieldCharLimit);
@@ -203,7 +208,6 @@ public class GuiClipboard extends GuiScreen
     	this.textField6.setMaxStringLength(fieldCharLimit);
     	this.textField7.setMaxStringLength(fieldCharLimit);
     	this.textField8.setMaxStringLength(fieldCharLimit);
-    	this.textFieldTitle.setMaxStringLength(26);
     	//buttonList.add(new GuiTextField(fontRenderer, sidex2, 27, 109, 10));
     	// I also need to render the current page number at the bottom in the center of the page
         int var1 = (this.width - this.bookImageWidth) / 2;
@@ -481,7 +485,7 @@ public class GuiClipboard extends GuiScreen
     			tasks.setString("task7", textField6.getText());
     			tasks.setString("task8", textField7.getText());
     			tasks.setString("task9", textField8.getText());
-    			pagetag.setString("title", textFieldTitle.getText());
+			pagetag.setString("title", textFieldTitle.getText());
     			pagetag.setTag("tasks", tasks);
     			cliptags.setTag(pagenum, pagetag);
     			clipStack.setTagCompound(cliptags);

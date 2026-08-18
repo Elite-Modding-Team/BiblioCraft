@@ -17,8 +17,12 @@ public class TileEntityClipboardRenderer extends TileEntityBiblioRenderer
 					tile.button8text);
 			for (int row = 0; row < ClipboardTextLayout.ROW_COUNT; row++)
 			{
-				renderText(textLayout.getText(row), ClipboardTextLayout.MODEL_TEXT_X,
-						textLayout.getModelY(row), textLayout.getModelZ(row));
+				String text = textLayout.getText(row);
+				int textWidth = getFontRenderer().getStringWidth(text);
+				float textScale = ClipboardTextLayout.getDisplayScale(row, textWidth);
+				renderText(text, ClipboardTextLayout.MODEL_TEXT_X,
+						textLayout.getModelY(row), textLayout.getModelZ(row,
+								textWidth * (double)textScale), textScale);
 			}
 			String pageNum = ""+tile.currentPage;
 			if (tile.currentPage > 9)

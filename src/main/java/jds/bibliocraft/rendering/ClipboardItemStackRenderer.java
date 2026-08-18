@@ -86,12 +86,14 @@ public class ClipboardItemStackRenderer extends TileEntityItemStackRenderer
 				try
 				{
 					String text = textLayout.getText(row);
+					int textWidth = mc.fontRenderer.getStringWidth(text);
+					float textScale = ClipboardTextLayout.getDisplayScale(row, textWidth);
 					GlStateManager.translate(0.0D, textLayout.getModelY(row),
-							textLayout.getHandModelZ(row, mc.fontRenderer.getStringWidth(text)));
+							textLayout.getHandModelZ(row, textWidth * (double)textScale));
 					GlStateManager.rotate(270.0F, 0.0F, 1.0F, 0.0F);
 					GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-					GlStateManager.scale(ClipboardTextLayout.MODEL_TEXT_SCALE,
-							ClipboardTextLayout.MODEL_TEXT_SCALE, ClipboardTextLayout.MODEL_TEXT_SCALE);
+					float renderScale = ClipboardTextLayout.MODEL_TEXT_SCALE * textScale;
+					GlStateManager.scale(renderScale, renderScale, renderScale);
 					mc.fontRenderer.drawString(text, 0, 0, 0x000000, false);
 				}
 				finally
