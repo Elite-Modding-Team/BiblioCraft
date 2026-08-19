@@ -24,7 +24,6 @@ public final class ClipboardTextLayout
 	 */
 	public static final double HAND_TITLE_CENTER_Z = 0.5D;
 	public static final double HAND_TASK_Z = 0.70D;
-	public static final double HAND_ITEM_SCALE = 0.5D;
 	public static final double MODEL_TEXT_SPACING = -0.0658D;
 	public static final float MODEL_TEXT_SCALE = 0.0045F;
 
@@ -148,8 +147,14 @@ public final class ClipboardTextLayout
 	{
 		if (row == 0)
 		{
+			/*
+			 * The first-person camera transform scales the clipboard and this
+			 * text together after this position has been applied.  Therefore the
+			 * origin must use the complete model-space width here; multiplying it
+			 * by the hand item's scale places long titles too far to the right.
+			 */
 			return HAND_TITLE_CENTER_Z
-					+ renderedTextWidth * MODEL_TEXT_SCALE * HAND_ITEM_SCALE / 2.0D;
+					+ renderedTextWidth * MODEL_TEXT_SCALE / 2.0D;
 		}
 		return HAND_TASK_Z;
 	}
