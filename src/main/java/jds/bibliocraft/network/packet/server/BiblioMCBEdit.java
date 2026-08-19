@@ -1,7 +1,6 @@
 package jds.bibliocraft.network.packet.server;
 
 import io.netty.buffer.ByteBuf;
-import jds.bibliocraft.Config;
 import jds.bibliocraft.blocks.BlockClipboard;
 import jds.bibliocraft.items.ItemClipboard;
 import jds.bibliocraft.network.packet.Utils;
@@ -76,10 +75,16 @@ public class BiblioMCBEdit implements IMessage {
                     return;
                 }
 
-                if (tile instanceof TileEntityDesk && Config.testBookValidity(message.book)) {
+                if (tile instanceof TileEntityDesk) {
                     TileEntityDesk deskTile = (TileEntityDesk) tile;
-                    deskTile.overwriteWrittenBook(message.book);
-                    deskTile.setCurrentPage(message.currentPage);
+                    ItemStack storedBook = deskTile.getStackInSlot(0);
+                    if (!storedBook.isEmpty()
+                            && ItemStack.areItemsEqual(storedBook, message.book)
+                            && storedBook.getCount() == message.book.getCount()
+                            && deskTile.isItemValidForSlot(0, message.book)) {
+                        deskTile.overwriteWrittenBook(message.book);
+                        deskTile.setCurrentPage(message.currentPage);
+                    }
                 }
             });
             return null;
