@@ -183,8 +183,6 @@ public class GuiClipboard extends GuiScreen
 	    this.textField8.setTextColor(0x404040);
 	    this.textFieldTitle.setTextColor(0x404040);
 
-	    // The title has no fixed character count: CJK and Latin glyphs have
-	    // different widths.  Limit it to the actual title line width instead.
 	    this.textFieldTitle.setMaxStringLength(Integer.MAX_VALUE);
 	    this.textFieldTitle.setMaxStringPixelWidth(this.textFieldTitle.getWidth());
     	

@@ -91,10 +91,6 @@ public class GuiBiblioTextField extends Gui
         this.setCursorPositionEnd();
     }
 
-    /**
-     * Applies both supported input limits.  Pixel width is optional so the
-     * existing text fields retain their original character-count behaviour.
-     */
     private String limitText(String value)
     {
         String limited = value == null ? "" : value;
@@ -110,7 +106,6 @@ public class GuiBiblioTextField extends Gui
         return limited;
     }
 
-    /** Keeps the cursor, selection, and scroll offset valid after a limit changes. */
     private void limitCurrentText()
     {
         this.text = this.limitText(this.text);
@@ -675,11 +670,6 @@ public class GuiBiblioTextField extends Gui
         this.limitCurrentText();
     }
 
-    /**
-     * Limits input by the width Minecraft will actually render, rather than
-     * by a fixed number of characters.  This is needed for CJK and other
-     * variable-width text.
-     */
     public void setMaxStringPixelWidth(int width)
     {
         this.maxStringPixelWidth = Math.max(0, width);

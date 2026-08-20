@@ -18,11 +18,6 @@ public class RenderClipboardText
 		if (Config.enableClipboard && mc.player != null && mc.gameSettings.thirdPersonView == 0
 				&& !stack.isEmpty() && stack.getItem() == ItemClipboard.instance)
 		{
-			/*
-			 * Vanilla fires this event immediately before rendering the hand.  The
-			 * item renderer consumes this marker and draws the text after the model,
-			 * while retaining all vanilla hand animation and camera transforms.
-			 */
 			ClipboardItemStackRenderer.renderTextForNextHand(stack);
 		}
 	}

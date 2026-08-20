@@ -124,7 +124,6 @@ public abstract class BiblioLightBlock extends BiblioBlock
 	{
 		if (placementFacing == null)
 		{
-			/* Compatibility fallback for blocks created by non-ItemBlock code. */
 			setVerticalPositionFromPitch(biblioTile, player);
 		}
 		else if (placementFacing.getAxis() == EnumFacing.Axis.Y)

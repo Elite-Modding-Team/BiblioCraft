@@ -53,12 +53,6 @@ import java.util.Random;
 
 public abstract class BiblioBlock extends BlockContainer 
 {
-	/*
-	 * ItemBlock supplies the face that was clicked to getStateForPlacement,
-	 * while Minecraft calls onBlockPlacedBy after the block has been created.
-	 * Keep that face across the two callbacks so blocks that need it can make a
-	 * reliable attachment decision instead of inferring it from player pitch.
-	 */
 	private final ThreadLocal<EnumFacing> pendingPlacementFacing = new ThreadLocal<EnumFacing>();
 
 	//private boolean hasCustomWoods = false;
@@ -379,11 +373,6 @@ public abstract class BiblioBlock extends BlockContainer
     /** Called when the block is placed  */
     public abstract void additionalPlacementCommands(BiblioTileEntity biblioTile, EntityLivingBase player);
 
-	/**
-	 * Placement hook with the actual face clicked by the player. Existing blocks
-	 * keep their old behavior; blocks with face-dependent placement can override
-	 * this overload.
-	 */
 	public void additionalPlacementCommands(BiblioTileEntity biblioTile, EntityLivingBase player,
 			EnumFacing placementFacing)
 	{

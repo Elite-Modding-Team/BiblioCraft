@@ -252,9 +252,6 @@ public class Config
 		boolean haveMatch = false;
 		if (stack != ItemStack.EMPTY)
 		{
-			// Classify the underlying item, not a title supplied by the player. This
-			// keeps renamed books valid while preventing another item from being
-			// accepted merely because it was renamed to include a book keyword.
 			ItemStack uncustomNamedStack = stack.copy();
 			uncustomNamedStack.clearCustomName();
 			//System.out.println(itemName); // turn this off before release

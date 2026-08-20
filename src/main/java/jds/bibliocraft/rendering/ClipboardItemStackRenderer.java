@@ -30,14 +30,6 @@ public class ClipboardItemStackRenderer extends TileEntityItemStackRenderer
 		boolean renderText = pendingHandStack != null && ItemStack.areItemStacksEqual(pendingHandStack, stack);
 		pendingHandStack = null;
 
-		/*
-		 * RenderItem has already applied the camera transform and -0.5 model offset
-		 * before entering this method.  ModelClipboard is a built-in model, so
-		 * calling renderItem(stack, model) directly would call this renderer again.
-		 * Wrap it as a regular model instead.  This keeps the actual model data and
-		 * lets RenderItem invoke its private model drawing code from inside Minecraft,
-		 * rather than linking this class to that private method.
-		 */
 		GlStateManager.pushMatrix();
 		try
 		{

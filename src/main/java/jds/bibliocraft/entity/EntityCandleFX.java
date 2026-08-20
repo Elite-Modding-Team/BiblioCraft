@@ -34,16 +34,10 @@ public class EntityCandleFX extends Particle
     {
         float var8 = (this.particleAge + par2) / this.particleMaxAge;
         var8 = MathHelper.clamp(var8, 0.0F, 1.0F);
-        /* Keep the lantern flame small, but visible throughout its lifetime. */
         this.particleScale = this.flameScale * 0.3F * (1.0F - var8 * var8 * 0.5F);
         super.renderParticle(renderer, entityIn, par2, par3, par4, par5, par6, par7);
     }
 
-    /**
-     * Uses the same packed-light calculation as the vanilla flame particle.
-     * The old implementation interpolated the packed integer as a float,
-     * which made the flame render almost black during part of its lifetime.
-     */
     @Override
 	public int getBrightnessForRender(float par1)
     {
